@@ -1,5 +1,11 @@
+###
 # 测试首次的api
 GET http://localhost:8080/member/1
 Accept: application/json
 
+# 测试访问网关
 ###
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+
+

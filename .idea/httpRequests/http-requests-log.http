@@ -1,3 +1,108 @@
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T220051-1.200.json
+
+###
+
+GET http://localhost:8080/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T220051.200.json
+
+###
+
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T215758.200.json
+
+###
+
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T215757.200.json
+
+###
+
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T215755.200.json
+
+###
+
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T215741.500.json
+
+###
+
+GET http://localhost:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T215629.500.json
+
+###
+
+GET http://localhost:8080/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T215628.200.json
+
+###
+
+GET http://localhost:8080/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-22T215625.200.json
+
+###
+
+GET http://localhost:8080/member/1
+Accept: application/json
+Content-Length: 59
+Content-Type: */*; charset=UTF-8
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+GET http://localhost:8000/member/1
+Accept: application/json
+
+<> 2023-09-22T215520.200.json
+
+###
+
 GET http://localhost:8080/member/1
 Accept: application/json
 Connection: Keep-Alive
