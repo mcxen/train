@@ -1,9 +1,8 @@
-package com.mcxgroup.member.aspect;
+package com.mcxgroup.common.aspect;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.support.spring.PropertyPreFilters;
-//这里的javax在java17中没有了，改成了jakarta
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,13 +21,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Random;
-
 @Aspect
 @Component
 public class LogAspect {
     public LogAspect() {
-        System.out.println("Common LogAspect");
+//        初始化的时候输出
+        System.out.println("Common pack LogAspect");
     }
 
     private final static Logger LOG = LoggerFactory.getLogger(LogAspect.class);
