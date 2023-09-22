@@ -78,6 +78,7 @@
                 <executions>
                     <execution>
                         <id>repackage</id>
+<!--                        有package-->
                         <goals>
                             <goal>repackage</goal>
                         </goals>
