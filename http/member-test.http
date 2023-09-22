@@ -1,0 +1,5 @@
+# 测试首次的api
+GET http://localhost:8080/member/1
+Accept: application/json
+
+###

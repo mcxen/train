@@ -15,5 +15,6 @@ public class MemberApplication {
     public static void main(String[] args) {
         SpringApplication.run(MemberApplication.class, args);
         log.info("member模块启动成功");
+        log.info("测试地址: \t http://localhost:8080/member/1");
     }
 }
