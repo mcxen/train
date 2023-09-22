@@ -49,6 +49,7 @@
                 <version>5.8.11</version>
             </dependency>
 
+<!--            下面通过导入common，直接就可以在这里管理所有的模块导入这个的版本号了-->
             <dependency>
                 <groupId>com.mcxgroup</groupId>
                 <artifactId>common</artifactId>
