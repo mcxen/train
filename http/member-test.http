@@ -11,3 +11,10 @@ Accept: application/json
 ###
 GET http://127.0.0.1:8080/member/member/count
 Accept: application/json
+
+###
+
+POST http://127.0.0.1:8080/member/member/register
+Content-Type: application/x-www-form-urlencoded
+
+mobile=1231213545

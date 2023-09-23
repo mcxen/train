@@ -3,8 +3,11 @@ package com.mcxgroup.member.mapper;
 import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface MemberMapper {
     long countByExample(MemberExample example);
 
