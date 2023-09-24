@@ -1,6 +1,9 @@
 package com.mcxgroup.member.controller;
 import com.mcxgroup.common.dto.CommonResp;
+import com.mcxgroup.member.dto.MemberLoginDto;
+import com.mcxgroup.member.dto.MemberLoginRespDto;
 import com.mcxgroup.member.dto.MemberRegisterDto;
+import com.mcxgroup.member.dto.MemberSendCodeDto;
 import com.mcxgroup.member.service.MemberService;
 import jakarta.annotation.Resource;
 //import com.mcxgroup.member.service.MemberService;
@@ -32,5 +35,16 @@ public class MemberController {
 //        commonResp.setContent(register);
 //        return commonResp;
         return new CommonResp<>(register);
+    }
+
+    @PostMapping("/send-code")
+    public CommonResp<Long> sendCode(@Valid MemberSendCodeDto dto){
+        memberService.sendCode(dto);
+        return new CommonResp<>();
+    }
+    @PostMapping("/login")
+    public CommonResp<MemberLoginRespDto> login(@Valid MemberLoginDto dto){
+        MemberLoginRespDto login = memberService.login(dto);
+        return new CommonResp<>(login);
     }
 }

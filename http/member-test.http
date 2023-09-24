@@ -18,3 +18,10 @@ POST http://127.0.0.1:8000/member/member/register
 Content-Type: application/x-www-form-urlencoded
 
 mobile=1123131121
+
+###
+
+POST http://127.0.0.1:8080/member/member/login
+Content-Type: application/x-www-form-urlencoded
+
+mobile=13113131313
