@@ -6,9 +6,10 @@ import com.mcxgroup.member.domain.MemberExample;
 import com.mcxgroup.member.dto.MemberRegisterDto;
 import com.mcxgroup.member.mapper.MemberMapper;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MemberService {
     @Resource
     private MemberMapper memberMapper;

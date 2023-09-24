@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
-//@ComponentScan("com.mcxgroup")
+@ComponentScan("com.mcxgroup")
 //Scan不加的扫描不到隔壁目录的TestController
 @MapperScan("com.mcxgroup.member.mapper")
 //@Configuration

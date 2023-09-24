@@ -1,4 +1,5 @@
 package com.mcxgroup.member.controller;
+import com.mcxgroup.common.dto.CommonResp;
 import com.mcxgroup.member.dto.MemberRegisterDto;
 import com.mcxgroup.member.service.MemberService;
 import jakarta.annotation.Resource;
@@ -16,12 +17,19 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping("/count")
-    public int count(){
-        return memberService.count();
+    public CommonResp<Integer> count(){
+        int count = memberService.count();
+        CommonResp<Integer> commonResp = new CommonResp<>();
+        commonResp.setContent(count);
+        return commonResp;
     }
 
     @PostMapping("/register")
-    public Long register(MemberRegisterDto dto){
-        return memberService.register(dto);
+    public CommonResp<Long> register(MemberRegisterDto dto){
+        Long register = memberService.register(dto);
+//        CommonResp<Long> commonResp = new CommonResp<>();
+//        commonResp.setContent(register);
+//        return commonResp;
+        return new CommonResp<>(register);
     }
 }

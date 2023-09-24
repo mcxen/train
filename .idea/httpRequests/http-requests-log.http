@@ -1,3 +1,187 @@
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 14
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=2121212
+
+<> 2023-09-24T112146.200.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1231213545
+
+<> 2023-09-24T112132.500.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1231213545
+
+<> 2023-09-24T111316.500.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1231213545
+
+<> 2023-09-24T111314.500.json
+
+###
+
+GET http://127.0.0.1:8000/member/member/count
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T111311.200.json
+
+###
+
+GET http://localhost:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T105054.404.json
+
+###
+
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T105020.404.json
+
+###
+
+GET http://127.0.0.1:8000/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T105017.404.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1231213545
+
+<> 2023-09-24T105009.404.json
+
+###
+
+GET http://127.0.0.1:8000/member/member/count
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T104957.404.json
+
+###
+
+GET http://127.0.0.1:8000/member/member/count
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T104948.404.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1231213545
+
+<> 2023-09-24T104917.404.json
+
+###
+
+POST http://127.0.0.1:8080/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1231213545
+
+<> 2023-09-24T104838.404.json
+
+###
+
+GET http://127.0.0.1:8080/member/count
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T104823.404.json
+
+###
+
+GET http://127.0.0.1:8080/member/member/count
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-09-24T104808.404.json
+
+###
+
+POST http://127.0.0.1:8080/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1231213545
+
+<> 2023-09-24T104800.404.json
+
+###
+
 GET http://127.0.0.1:8080/member/member/count
 Accept: application/json
 Connection: Keep-Alive
@@ -367,96 +551,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-09-22T210005.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T205958.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T205940.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T205724.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T204425.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T204422.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T204416.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T204233.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T204231.200.json
-
-###
-
-GET http://localhost:8080/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-22T204223.200.json
 
 ###
 

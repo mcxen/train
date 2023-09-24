@@ -1,6 +1,6 @@
 ###
 # 测试首次的api
-GET http://localhost:8080/member/1
+GET http://localhost:8000/member/1
 Accept: application/json
 
 # 测试访问网关
@@ -9,12 +9,12 @@ GET http://127.0.0.1:8000/member/1
 Accept: application/json
 
 ###
-GET http://127.0.0.1:8080/member/member/count
+GET http://127.0.0.1:8000/member/member/count
 Accept: application/json
 
 ###
 
-POST http://127.0.0.1:8080/member/member/register
+POST http://127.0.0.1:8000/member/member/register
 Content-Type: application/x-www-form-urlencoded
 
-mobile=1231213545
+mobile=2121212
