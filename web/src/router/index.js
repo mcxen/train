@@ -12,8 +12,12 @@ const routes = [
     name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    // which is lazy-loaded when the route is visited.懒加载，就是你需要再去编译，前面那个是快加载
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  },
+  {
+    path: '/login',
+    component: ()=>import('../views/LoginView.vue')
   }
 ]
 
