@@ -1,5 +1,57 @@
 POST http://127.0.0.1:8000/member/member/register
 Content-Type: application/x-www-form-urlencoded
+Content-Length: 17
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=1123131121
+
+<> 2023-09-24T134112.200.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=112313112121
+
+<> 2023-09-24T134105.500.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=112313123
+
+<> 2023-09-24T134101.200.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+mobile=112313123
+
+<> 2023-09-24T134057.200.json
+
+###
+
+POST http://127.0.0.1:8000/member/member/register
+Content-Type: application/x-www-form-urlencoded
 Content-Length: 7
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
@@ -536,46 +588,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-09-23T192353.200.json
-
-###
-
-GET http://127.0.0.1:8080/member/member/count
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-23T192351.200.json
-
-###
-
-GET http://127.0.0.1:8080/member/member/count
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-23T192216.200.json
-
-###
-
-GET http://127.0.0.1:8000/member/member/count
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-23T112823.404.json
-
-###
-
-GET http://127.0.0.1:8000/member/member/count
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-23T112820.404.json
 
 ###
 

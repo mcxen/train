@@ -1,8 +1,10 @@
 package com.mcxgroup.member.service;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.IdUtil;
 import com.mcxgroup.common.exception.BusinessException;
 import com.mcxgroup.common.exception.BusinessExceptionEnum;
+import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
 import com.mcxgroup.member.dto.MemberRegisterDto;
@@ -31,7 +33,8 @@ public class MemberService {
         }
 
         Member member = new Member();
-        member.setId(System.currentTimeMillis());
+        //导入雪花算法
+        member.setId(SnowUtil.getSnowflakeNextId());
         member.setMobile(mobile);
 
         memberMapper.insert(member);
