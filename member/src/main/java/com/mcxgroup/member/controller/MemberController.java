@@ -4,6 +4,7 @@ import com.mcxgroup.member.dto.MemberRegisterDto;
 import com.mcxgroup.member.service.MemberService;
 import jakarta.annotation.Resource;
 //import com.mcxgroup.member.service.MemberService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,7 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public CommonResp<Long> register(MemberRegisterDto dto){
+    public CommonResp<Long> register(@Valid MemberRegisterDto dto){
         Long register = memberService.register(dto);
 //        CommonResp<Long> commonResp = new CommonResp<>();
 //        commonResp.setContent(register);
