@@ -9,10 +9,7 @@ import jakarta.annotation.Resource;
 //import com.mcxgroup.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member")
@@ -38,12 +35,13 @@ public class MemberController {
     }
 
     @PostMapping("/send-code")
-    public CommonResp<Long> sendCode(@Valid MemberSendCodeDto dto){
+//    requestBody就是改成了用Json传递，不是用的Form表单传递
+    public CommonResp<Long> sendCode(@Valid @RequestBody MemberSendCodeDto dto){
         memberService.sendCode(dto);
         return new CommonResp<>();
     }
     @PostMapping("/login")
-    public CommonResp<MemberLoginRespDto> login(@Valid MemberLoginDto dto){
+    public CommonResp<MemberLoginRespDto> login(@Valid @RequestBody MemberLoginDto dto){
         MemberLoginRespDto login = memberService.login(dto);
         return new CommonResp<>(login);
     }
