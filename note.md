@@ -114,3 +114,17 @@ npm install -g @vue/cli
 - vue这个vue文件又可以当作是组件又可以当作是views
 - ![image-20230924164843451](https://cdn.jsdelivr.net/gh/52chen/imagebed2023@main/image-20230924164843451.png)
 - 这个放在哪里都可以，vue主要是三个部分，tmplate和script
+
+
+
+
+
+### 2023年9月27日
+
+增加Axios开发的这句话
+
+![image-20230927204222157](https://cdn.jsdelivr.net/gh/52chen/imagebed2023@main/image-20230927204222157.png)
+
+系统会自动带上这个server
+
+![image-20230927204204988](https://cdn.jsdelivr.net/gh/52chen/imagebed2023@main/image-20230927204204988.png)
