@@ -128,3 +128,10 @@ npm install -g @vue/cli
 系统会自动带上这个server
 
 ![image-20230927204204988](https://cdn.jsdelivr.net/gh/52chen/imagebed2023@main/image-20230927204204988.png)
+
+
+
+### 2023年9月29日
+
+- 加入头部的导航栏，分区分块vue设计
+- 
