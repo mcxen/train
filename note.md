@@ -134,4 +134,5 @@ npm install -g @vue/cli
 ### 2023年9月29日
 
 - 加入头部的导航栏，分区分块vue设计
+- 在macos打开，得注意用系统的terminal去安装vue cli和在外面npm Install就可以
 - 
