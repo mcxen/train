@@ -7,7 +7,7 @@
         mode="horizontal"
         :style="{ lineHeight: '64px' }"
     >
-      <a-menu-item key="1">nav 1</a-menu-item>
+      <a-menu-item key="1">nav 111</a-menu-item>
       <a-menu-item key="2">nav 2</a-menu-item>
       <a-menu-item key="3">nav 3</a-menu-item>
     </a-menu>
@@ -24,7 +24,7 @@ export default defineComponent({
   setup() {
 
     return {
-        selectedKeys1: ref(['2']),
+        selectedKeys1: ref(['1']),
     };
   },
 });

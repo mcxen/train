@@ -135,4 +135,7 @@ npm install -g @vue/cli
 
 - 加入头部的导航栏，分区分块vue设计
 - 在macos打开，得注意用系统的terminal去安装vue cli和在外面npm Install就可以
+- 下面的git，因为使用了代理，所以显示报错，需要修改
+- 
+- <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-09-29%2010.40.38.png" alt="截屏2023-09-29 10.40.38" style="zoom: 50%;" />
 - 
