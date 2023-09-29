@@ -2,7 +2,7 @@
   <a-layout-header class="header">
     <div class="logo">
       <router-link to="/welcome" style="color: white; font-size: 18px">
-        甲蛙12306
+        脉冲星火车售票
       </router-link>
     </div>
     <div style="float: right; color: white;">
@@ -68,6 +68,7 @@ export default defineComponent({
       selectedKeys.value.push(newValue);
     }, {immediate: true});
     return {
+        // selectedKeys1: ref(['2']),
       member,
       selectedKeys
     };

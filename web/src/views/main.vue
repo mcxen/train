@@ -1,6 +1,7 @@
 <template>
     <a-layout id="components-layout-demo-top-side-2">
-
+<!--       导入头部导航栏 -->
+        <the-header-view></the-header-view>
         <a-layout>
             <a-layout-sider width="200" style="background: #fff">
                 <a-menu
@@ -65,15 +66,17 @@
 <script>
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import TheHeaderView from "@/components/the-header.vue";
 export default defineComponent({
     components: {
+        TheHeaderView,
         UserOutlined,
         LaptopOutlined,
         NotificationOutlined,
     },
     setup() {
         return {
-            selectedKeys1: ref(['2']),
+
             selectedKeys2: ref(['1']),
             collapsed: ref(false),
             openKeys: ref(['sub1']),
