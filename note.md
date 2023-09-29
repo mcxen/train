@@ -138,4 +138,6 @@ npm install -g @vue/cli
 - 下面的git，因为使用了代理，所以显示报错，需要修改
 - 
 - <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-09-29%2010.40.38.png" alt="截屏2023-09-29 10.40.38" style="zoom: 50%;" />
+- 使用JWT完成单点登录，
+- <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20230929111133502.png" alt="image-20230929111133502" style="zoom:50%;" />、
 - 

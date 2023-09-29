@@ -6,9 +6,7 @@ import com.mcxgroup.member.dto.MemberRegisterDto;
 import com.mcxgroup.member.dto.MemberSendCodeDto;
 import com.mcxgroup.member.service.MemberService;
 import jakarta.annotation.Resource;
-//import com.mcxgroup.member.service.MemberService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

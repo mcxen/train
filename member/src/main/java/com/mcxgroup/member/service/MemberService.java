@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.jwt.JWTUtil;
 import com.mcxgroup.common.exception.BusinessException;
 import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.util.SnowUtil;
@@ -20,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @Service
 public class MemberService {
@@ -83,7 +86,12 @@ public class MemberService {
             //抛出验证码错误
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
-        return BeanUtil.copyProperties(memberByMobile,MemberLoginRespDto.class);
+        MemberLoginRespDto loginRespDto = BeanUtil.copyProperties(memberByMobile, MemberLoginRespDto.class);
+        Map<String, Object> map = BeanUtil.beanToMap(loginRespDto);
+        String key = "MCXGROUP";
+        String token = JWTUtil.createToken(map, key.getBytes());
+        loginRespDto.setToken(token);
+        return loginRespDto;
     }
 
     private Member selectByMobile(String mobile) {
