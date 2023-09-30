@@ -1,3 +1,68 @@
+POST http://localhost:8000/member/member/login
+Content-Type: application/json
+{:
+ "mobile": "13088880000",
+ "code": "8888"
+}:
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+POST http://localhost:8000/member/member/login
+Content-Type: application/json
+{:
+ "mobile": "13088880000",
+ "code": "8888"
+}:
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+POST http://localhost:8000/member/member/login
+Content-Type: application/json
+{:
+ "mobile": "13088880000",
+ "code": "8888"
+}:
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+POST http://localhost:8000/member/member/login
+Content-Type: application/json
+{:
+ "mobile": "13088880000",
+ "code": "8888"
+}:
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
+POST http://localhost:8000/member/member/login
+Content-Type: application/json
+{:
+ "mobile": "13088880000",
+ "code": "8888"
+}:
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+###
+
 POST http://127.0.0.1:8080/member/register
 Accept: application/x-www-form-urlencoded
 mobile=12212341234:
@@ -546,67 +611,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 }
 
 <> 2023-09-29T143320.200.json
-
-###
-
-POST http://127.0.0.1:8080/member/member/login
-Content-Type: application/json
-{:
-"mobile": "13088880000",
-"code": "888"
-}:
-Content-Length: 0
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-29T143252.400.html
-
-###
-
-POST http://127.0.0.1:8000/member/member/register
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 17
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-mobile=1123131121
-
-<> 2023-09-29T143222.500.json
-
-###
-
-GET http://127.0.0.1:8000/member/member/count
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-29T143202.500.json
-
-###
-
-GET http://127.0.0.1:8000/member/1
-Accept: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-29T143139.200.json
-
-###
-
-POST http://127.0.0.1:8000/member/member/login
-Content-Type: application/json
-{:
-"mobile": "13088880000",
-"code": "888"
-}:
-Content-Length: 0
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
 
 ###
 

@@ -8,6 +8,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.jwt.JWTUtil;
 import com.mcxgroup.common.exception.BusinessException;
 import com.mcxgroup.common.exception.BusinessExceptionEnum;
+import com.mcxgroup.common.util.JwtUtil;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
@@ -87,10 +88,7 @@ public class MemberService {
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
         MemberLoginRespDto loginRespDto = BeanUtil.copyProperties(memberByMobile, MemberLoginRespDto.class);
-        Map<String, Object> map = BeanUtil.beanToMap(loginRespDto);
-        String key = "MCXGROUP";
-        String token = JWTUtil.createToken(map, key.getBytes());
-        loginRespDto.setToken(token);
+        loginRespDto.setToken(JwtUtil.createToken(loginRespDto.getId(), loginRespDto.getMobile()));
         return loginRespDto;
     }
 
