@@ -2,11 +2,10 @@
 # 测试首次的api
 GET http://localhost:8080/member/1
 Accept: application/json
-# 测试访问网关
-###
-GET http://localhost:8080/member/1
+#
+###测试访问网关
+GET http://localhost:8000/member/member/1
 Accept: application/x-www-form-urlencoded
-mobile=12212341234
 
 # 测试访问网关
 ###
