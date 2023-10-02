@@ -17,42 +17,37 @@ mobile=12212341234
 GET http://127.0.0.1:8000/member/member/count
 Accept: application/json
 
-###
+### register
 
 POST http://127.0.0.1:8080/member/member/register
 Content-Type: application/json
+
 {
  "mobile":"13088880000"
 # "code":"8888"
 }
 
-###
-
-POST http://127.0.0.1:8080/member/login
+### 登录member
+POST http://127.0.0.1:8000/member/member/login
 Content-Type: application/json
+
 {
  "mobile":"13088880000",
  "code":"8888"
 }
 
-###
+
+> {%
+    client.log(JSON.stringify(response.body));
+    client.log(JSON.stringify(response.body.content.token));
+    client.global.set("token", response.body.content.token);
+%}
+
+### sendcode
 POST http://localhost:8000/member/member/send-code
 Content-Type: application/json
+
 {
-"mobile":"13088880000"
+  "mobile":"13088880000"
 }
 
-
-### Send POST request with Mobile
-POST http://localhost:8000/member/member/send-code
-Content-Type: application/x-www-form-urlencoded
-mobile=12212341234
-
-### 测试token
-
-POST http://localhost:8000/member/member/login
-Content-Type: application/json
-{
- "mobile":"13088880000",
- "code":"8888"
-}

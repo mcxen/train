@@ -1,10 +1,22 @@
 ### 测试成员信息
 POST http://127.0.0.1:8080/member/passenger/save
 Content-Type: application/json
+token:{{token}}
+#获取缓存的token
 
 {
   "memberId":"1",
   "name":"passengerOne",
   "idCard":"3231123123123",
   "type":"1"
+}
+
+### 登录member
+
+POST http://127.0.0.1:8000/member/member/login
+Content-Type: application/json
+
+{
+  "mobile":"13088880000",
+  "code":"8888"
 }
