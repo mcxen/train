@@ -1,3 +1,37 @@
+POST http://127.0.0.1:8080/member/passenger/save
+Content-Type: application/json
+Content-Length: 87
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "memberId":"1",
+  "name":"passengerOne",
+  "idCard":"3231123123123",
+  "type":"1"
+}
+
+<> 2023-10-02T202253.200.json
+
+###
+
+POST http://127.0.0.1:8000/member/passenger/save
+Content-Type: application/json
+Content-Length: 87
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "memberId":"1",
+  "name":"passengerOne",
+  "idCard":"3231123123123",
+  "type":"1"
+}
+
+###
+
 POST http://localhost:8000/member/member/send-code
 Content-Type: application/json
 {:
@@ -559,29 +593,6 @@ User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-09-29T152201.400.html
-
-###
-
-GET http://127.0.0.1:8080/member/register
-Accept: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-###
-
-POST http://127.0.0.1:8080/member/login
-Content-Type: application/json
-{:
- "mobile": "13088880000",
- "code": "8888"
-}:
-Content-Length: 0
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-09-29T151002.400.html
 
 ###
 

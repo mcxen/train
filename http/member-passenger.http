@@ -1,0 +1,10 @@
+### 测试成员信息
+POST http://127.0.0.1:8080/member/passenger/save
+Content-Type: application/json
+
+{
+  "memberId":"1",
+  "name":"passengerOne",
+  "idCard":"3231123123123",
+  "type":"1"
+}
