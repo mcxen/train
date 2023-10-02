@@ -140,4 +140,25 @@ npm install -g @vue/cli
 - <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-09-29%2010.40.38.png" alt="截屏2023-09-29 10.40.38" style="zoom: 50%;" />
 - 使用JWT完成单点登录，
 - <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20230929111133502.png" alt="image-20230929111133502" style="zoom:50%;" />、
-- 
+
+
+
+### 2023年10月2号
+
+- 解决全屏覆盖导致程序崩溃
+
+- ![img](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/bb93b75fb6884e6e8d82e2a2a1c0bfc5.png)
+
+- 在vue.config.js加入devServer那个代码
+
+- ```js
+  const { defineConfig } = require('@vue/cli-service')
+  module.exports = defineConfig({
+    transpileDependencies: true,
+    devServer: {
+      client: {
+        overlay: false
+      }
+    }
+  })
+  ```
