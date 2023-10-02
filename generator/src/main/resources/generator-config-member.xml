@@ -21,13 +21,18 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
+<!--        &lt;!&ndash; 配置数据源，需要根据自己的项目修改 &ndash;&gt;-->
+<!--        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"-->
+<!--                        connectionURL="jdbc:mysql://192.168.161.18:3306/train_member?serverTimezone=Asia/Shanghai"-->
+<!--                        userId="train_member"-->
+<!--                        password="train_member">-->
+<!--        </jdbcConnection>-->
         <!-- 配置数据源，需要根据自己的项目修改 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.161.18:3306/train_member?serverTimezone=Asia/Shanghai"
-                        userId="train_member"
-                        password="train_member">
+                        connectionURL="jdbc:mysql://localhost:3306/train_member?serverTimezone=Asia/Shanghai"
+                        userId="root"
+                        password="Mysql2486">
         </jdbcConnection>
-
         <!-- domain类的位置 targetProject是相对pom.xml的路径-->
         <javaModelGenerator targetProject="../member/src/main/java"
                             targetPackage="com.mcxgroup.member.domain"/>
@@ -42,8 +47,8 @@
                              type="XMLMAPPER"/>
 
 <!--        下面是哪一个表就是哪一个生产-->
-        <table tableName="member" domainObjectName="Member"/>
-        <!--<table tableName="passenger" domainObjectName="Passenger"/>-->
+<!--        <table tableName="member" domainObjectName="Member"/>-->
+        <table tableName="passenger" domainObjectName="Passenger"/>
 <!--        <table tableName="ticket" domainObjectName="Ticket"/>-->
     </context>
 </generatorConfiguration>
