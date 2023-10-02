@@ -5,7 +5,6 @@ token:{{token}}
 #获取缓存的token
 
 {
-  "memberId":"1",
   "name":"passengerOne",
   "idCard":"3231123123123",
   "type":"1"

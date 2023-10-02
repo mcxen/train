@@ -169,3 +169,53 @@ npm install -g @vue/cli
 - ![截屏2023-10-02 20.23.18](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-02%2020.23.18.png)
 - 来来的，那个http测试，必须要空一行才可以。注意：接口8000的话会被没有token拦截，可以测试8080
 
+
+
+- 前置拦截器
+
+- ```java
+  @Slf4j
+  public class MemberIntercepto implements HandlerInterceptor {
+      //前置拦截器，获取header的token，然后保存到LocalThread.
+      @Override
+      public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+          String token = request.getHeader("token");
+          if (StrUtil.isNotBlank(token)){
+              log.info("拦截器获取登录的token：{}",token);
+              JSONObject memberJson = JwtUtil.getJSONObject(token);
+              log.info("拦截器获取登录的JSONObject：{}",memberJson);
+              LoginMemberContext.setMember(JSONUtil.toBean(memberJson, MemberLoginRespDto.class));
+          }
+          return true;
+      }
+  }
+  ```
+
+- ```java
+  //LoginMemberContext.java
+  public class LoginMemberContext {
+      private static final Logger LOG = LoggerFactory.getLogger(LoginMemberContext.class);
+  
+      private static ThreadLocal<MemberLoginRespDto> member = new ThreadLocal<>();
+  
+      public static MemberLoginRespDto getMember() {
+          return member.get();
+      }
+  
+      public static void setMember(MemberLoginRespDto member) {
+          LoginMemberContext.member.set(member);
+      }
+  
+      public static Long getId() {
+          try {
+              return member.get().getId();
+          } catch (Exception e) {
+              LOG.error("获取登录会员信息异常", e);
+              throw e;
+          }
+      }
+  
+  }
+  ```
+
+- 

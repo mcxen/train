@@ -6,6 +6,7 @@ import cn.hutool.core.util.ObjectUtil;
 //import com.github.pagehelper.PageHelper;
 //import com.github.pagehelper.PageInfo;
 
+import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
@@ -40,7 +41,8 @@ public class PassengerService {
         DateTime now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(req, Passenger.class);
         if (ObjectUtil.isNull(passenger.getId())) {
-//            passenger.setMemberId(LoginMemberContext.getId());
+            //根据ThreadLocal获取登录的MemberId
+            passenger.setMemberId(LoginMemberContext.getId());
             passenger.setId(SnowUtil.getSnowflakeNextId());
             passenger.setCreateTime(now);
             passenger.setUpdateTime(now);
