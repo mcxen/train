@@ -73,8 +73,10 @@ export default defineComponent({
                 let data = response.data;
                 if (data.success) {
                     notification.success({ description: '登录成功！' });
-                    // 登录成功，跳到控台主页
-                    router.push("/");
+                    // // 登录成功，跳到控台主页
+                    // router.push("/");
+                    // 登录成功，跳到welcome主页
+                    router.push("/welcome");
                     // 写入Token
                     store.commit("setMember", data.content);
                 } else {

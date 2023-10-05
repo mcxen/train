@@ -15,8 +15,21 @@ const routes = [
     component: ()=>import('../views/main.vue'),
     meta: {
       loginRequire: true
-    }
-  }
+    },
+    // 增加二级路由，拼接/和welcom
+    children:[{
+      path: 'welcome',
+      component: ()=>import('../views/main/welcome.vue'),
+    },{
+      path: 'passenger',
+      component: ()=>import('../views/main/passenger.vue'),
+    }],
+  },
+  {
+    // 默认如果你访问空白的'/'就直接跳转到welcome
+    path: '',
+    redirect: '/welcome'
+  },
 
 ]
 
