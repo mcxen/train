@@ -12,6 +12,8 @@ import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
 import com.mcxgroup.member.domain.Passenger;
 import com.mcxgroup.member.domain.PassengerExample;
+import com.mcxgroup.member.dto.PassengerQueryDto;
+import com.mcxgroup.member.dto.PassengerRespDto;
 import com.mcxgroup.member.dto.PassengerSaveReqDto;
 import com.mcxgroup.member.enums.PassengerTypeEnum;
 import com.mcxgroup.member.mapper.MemberMapper;
@@ -85,14 +87,24 @@ public class PassengerService {
 //    /**
 //     * 查询我的所有乘客
 //     */
-//    public List<PassengerQueryResp> queryMine() {
+//    public List<PassengerQueryDto> queryMine() {
 //        PassengerExample passengerExample = new PassengerExample();
 //        passengerExample.setOrderByClause("name asc");
 //        PassengerExample.Criteria criteria = passengerExample.createCriteria();
 //        criteria.andMemberIdEqualTo(LoginMemberContext.getId());
 //        List<Passenger> list = passengerMapper.selectByExample(passengerExample);
-//        return BeanUtil.copyToList(list, PassengerQueryResp.class);
+//        return BeanUtil.copyToList(list, PassengerQueryDto.class);
 //    }
+    public List<PassengerRespDto> queryList(PassengerQueryDto req){
+        PassengerExample passengerExample = new PassengerExample();
+        PassengerExample.Criteria criteria = passengerExample.createCriteria();
+        if (ObjectUtil.isNotNull(req.getMemberId())){
+            criteria.andMemberIdEqualTo(req.getMemberId());
+        }
+        List<Passenger> passengers = passengerMapper.selectByExample(passengerExample);
+        List<PassengerRespDto> passengerRespDtoList = BeanUtil.copyToList(passengers, PassengerRespDto.class);
+        return passengerRespDtoList;
+    }
 
     /**
      * 初始化乘客，如果没有张三，就增加乘客张三，李四、王五同理，防止线上体验时乘客被删光

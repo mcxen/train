@@ -1,4 +1,4 @@
-### 测试成员信息
+### 测试插入成员信息
 POST http://127.0.0.1:8080/member/passenger/save
 Content-Type: application/json
 token:{{token}}
@@ -9,6 +9,13 @@ token:{{token}}
   "idCard":"3231123123123",
   "type":"1"
 }
+
+### 测试获取成员信息
+GET http://127.0.0.1:8080/member/passenger/query-list
+Content-Type: application/json
+token:{{token}}
+#获取缓存的token
+
 
 ### 登录member
 
