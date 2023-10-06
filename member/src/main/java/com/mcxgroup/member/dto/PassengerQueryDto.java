@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 public class PassengerQueryDto extends PageReq {
-
+//    不只是查询需要分页，因此可以设置一个父类，来继承
     /**
      * id
      */
