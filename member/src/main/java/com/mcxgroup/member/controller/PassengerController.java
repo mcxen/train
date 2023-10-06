@@ -3,6 +3,7 @@ package com.mcxgroup.member.controller;
 
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.dto.CommonResp;
+import com.mcxgroup.common.dto.PageResp;
 import com.mcxgroup.member.dto.PassengerQueryDto;
 import com.mcxgroup.member.dto.PassengerRespDto;
 import com.mcxgroup.member.dto.PassengerSaveReqDto;
@@ -29,9 +30,9 @@ public class PassengerController {
 
 //    查询的用Get请求，更新用Post
     @GetMapping("/query-list")
-    public CommonResp<List<PassengerRespDto>> queryList(@Valid PassengerQueryDto req) {
+    public CommonResp<PageResp<PassengerRespDto>> queryList(@Valid PassengerQueryDto req) {
         req.setMemberId(LoginMemberContext.getId());
-        List<PassengerRespDto> list = passengerService.queryList(req);
+        PageResp<PassengerRespDto> list = passengerService.queryList(req);
         return new CommonResp<>(list);
     }
  /*

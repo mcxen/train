@@ -6,7 +6,10 @@ import cn.hutool.core.util.ObjectUtil;
 //import com.github.pagehelper.PageHelper;
 //import com.github.pagehelper.PageInfo;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mcxgroup.common.context.LoginMemberContext;
+import com.mcxgroup.common.dto.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
@@ -55,30 +58,43 @@ public class PassengerService {
         }
     }
 
-//    public PageResp<PassengerQueryResp> queryList(PassengerQueryReq req) {
-//        PassengerExample passengerExample = new PassengerExample();
-//        passengerExample.setOrderByClause("id desc");
-//        PassengerExample.Criteria criteria = passengerExample.createCriteria();
-//        if (ObjectUtil.isNotNull(req.getMemberId())) {
-//            criteria.andMemberIdEqualTo(req.getMemberId());
-//        }
-//
-//        LOG.info("查询页码：{}", req.getPage());
-//        LOG.info("每页条数：{}", req.getSize());
-//        PageHelper.startPage(req.getPage(), req.getSize());
-//        List<Passenger> passengerList = passengerMapper.selectByExample(passengerExample);
-//
-//        PageInfo<Passenger> pageInfo = new PageInfo<>(passengerList);
-//        LOG.info("总行数：{}", pageInfo.getTotal());
-//        LOG.info("总页数：{}", pageInfo.getPages());
-//
-//        List<PassengerQueryResp> list = BeanUtil.copyToList(passengerList, PassengerQueryResp.class);
-//
-//        PageResp<PassengerQueryResp> pageResp = new PageResp<>();
-//        pageResp.setTotal(pageInfo.getTotal());
-//        pageResp.setList(list);
-//        return pageResp;
-//    }
+    /*
+    //手动的返回全部的乘客信息，
+    public List<PassengerRespDto> queryList(PassengerQueryDto req){
+        PassengerExample passengerExample = new PassengerExample();
+        PassengerExample.Criteria criteria = passengerExample.createCriteria();
+        if (ObjectUtil.isNotNull(req.getMemberId())){
+            criteria.andMemberIdEqualTo(req.getMemberId());
+        }
+        List<Passenger> passengers = passengerMapper.selectByExample(passengerExample);
+        List<PassengerRespDto> passengerRespDtoList = BeanUtil.copyToList(passengers, PassengerRespDto.class);
+        return passengerRespDtoList;
+    }
+     */
+    public PageResp<PassengerRespDto> queryList(PassengerQueryDto req) {
+        PassengerExample passengerExample = new PassengerExample();
+        passengerExample.setOrderByClause("id desc");
+        PassengerExample.Criteria criteria = passengerExample.createCriteria();
+        if (ObjectUtil.isNotNull(req.getMemberId())) {
+            criteria.andMemberIdEqualTo(req.getMemberId());
+        }
+
+        LOG.info("查询页码：{}", req.getPage());
+        LOG.info("每页条数：{}", req.getSize());
+        PageHelper.startPage(req.getPage(), req.getSize());
+        List<Passenger> passengerList = passengerMapper.selectByExample(passengerExample);
+
+        PageInfo<Passenger> pageInfo = new PageInfo<>(passengerList);
+        LOG.info("总行数：{}", pageInfo.getTotal());
+        LOG.info("总页数：{}", pageInfo.getPages());
+
+        List<PassengerRespDto> list = BeanUtil.copyToList(passengerList, PassengerRespDto.class);
+
+        PageResp<PassengerRespDto> pageResp = new PageResp<>();
+        pageResp.setTotal(pageInfo.getTotal());
+        pageResp.setList(list);
+        return pageResp;
+    }
 
     public void delete(Long id) {
         passengerMapper.deleteByPrimaryKey(id);
@@ -95,16 +111,7 @@ public class PassengerService {
 //        List<Passenger> list = passengerMapper.selectByExample(passengerExample);
 //        return BeanUtil.copyToList(list, PassengerQueryDto.class);
 //    }
-    public List<PassengerRespDto> queryList(PassengerQueryDto req){
-        PassengerExample passengerExample = new PassengerExample();
-        PassengerExample.Criteria criteria = passengerExample.createCriteria();
-        if (ObjectUtil.isNotNull(req.getMemberId())){
-            criteria.andMemberIdEqualTo(req.getMemberId());
-        }
-        List<Passenger> passengers = passengerMapper.selectByExample(passengerExample);
-        List<PassengerRespDto> passengerRespDtoList = BeanUtil.copyToList(passengers, PassengerRespDto.class);
-        return passengerRespDtoList;
-    }
+
 
     /**
      * 初始化乘客，如果没有张三，就增加乘客张三，李四、王五同理，防止线上体验时乘客被删光
