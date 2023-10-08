@@ -13,6 +13,7 @@
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
         <a-space>
+<!--          删除按钮，增加确认的框-->
           <a-popconfirm
               title="删除后不可恢复，确认删除?"
               @confirm="onDelete(record)"
@@ -116,6 +117,7 @@ export default defineComponent({
       visible.value = true;
     };
 
+    // delete方法
     const onDelete = (record) => {
       axios.delete("/member/passenger/delete/" + record.id).then((response) => {
         const data = response.data;
