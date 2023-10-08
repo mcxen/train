@@ -22,6 +22,7 @@ public class MemberInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         if (StrUtil.isNotBlank(token)){
             log.info("拦截器获取登录的token：{}",token);
+            System.out.println("token = " + token);
             JSONObject memberJson = JwtUtil.getJSONObject(token);
             log.info("拦截器获取登录的JSONObject：{}",memberJson);
             LoginMemberContext.setMember(JSONUtil.toBean(memberJson, MemberLoginRespDto.class));

@@ -48,7 +48,7 @@
 <!--          基本的下拉框-->
           <a-select-option value = "1">成人</a-select-option>
           <a-select-option value = "2">儿童</a-select-option>
-          <a-select-option value = "2">学生</a-select-option>
+          <a-select-option value = "3">学生</a-select-option>
         </a-select>
       </a-form-item>
     </a-form>
@@ -66,6 +66,7 @@ export default defineComponent({
     const PASSENGER_TYPE_ARRAY = window.PASSENGER_TYPE_ARRAY;
     // 初始的时候这个模态框是false的，如果是true就显示出来了。
     const visible = ref(false);
+    //ref来表示数组
     let passenger = ref({
       id: undefined,
       memberId: undefined,
@@ -76,11 +77,11 @@ export default defineComponent({
       updateTime: undefined,
     });
     const passengers = ref([]);
-    // 分页的三个属性名是固定的
+    // 分页的三个属性名是固定的，不能更改，是vue的ref的固定的
     const pagination = ref({
       total: 0,
       current: 1,
-      pageSize: 10,
+      pageSize: 6,
     });
     let loading = ref(false);
     const columns = [
@@ -147,6 +148,7 @@ export default defineComponent({
       });
     };
 
+    //如果没有初值的话就增加一个初始的参数首页为1页
     const handleQuery = (param) => {
       if (!param) {
         param = {
@@ -175,6 +177,7 @@ export default defineComponent({
     };
 
     const handleTableChange = (pagination) => {
+      //增加点击的事件
       // console.log("看看自带的分页参数都有啥：" + pagination);
       handleQuery({
         page: pagination.current,
