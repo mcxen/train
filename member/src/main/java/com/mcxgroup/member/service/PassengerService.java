@@ -45,6 +45,7 @@ public class PassengerService {
         //保存传进来的乘客信息
         DateTime now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(req, Passenger.class);
+//        id为空就是新增保存
         if (ObjectUtil.isNull(passenger.getId())) {
             //根据ThreadLocal获取登录的MemberId
             passenger.setMemberId(LoginMemberContext.getId());
@@ -53,6 +54,7 @@ public class PassengerService {
             passenger.setUpdateTime(now);
             passengerMapper.insert(passenger);
         } else {
+            //否则就是更新保存
             passenger.setUpdateTime(now);
             passengerMapper.updateByPrimaryKey(passenger);
         }

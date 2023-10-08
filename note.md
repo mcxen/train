@@ -219,3 +219,9 @@ npm install -g @vue/cli
   ```
 
 - 
+
+### 2023年10月8号
+
+- 解决id序列化
+- <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E5%BA%8F%E5%88%97%E5%8C%96.gif" alt="序列化" style="zoom: 67%;" />
+- 
