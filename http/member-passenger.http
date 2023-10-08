@@ -22,7 +22,11 @@ Content-Type: application/json
 token:{{token}}
 #获取缓存的token
 
-
+### 测试删除乘车人 !!记得重启服务
+DELETE http://localhost:8000/member/passenger/delete/1708858936981065728
+Content-Type: application/json
+token:{{token}}
+#获取缓存的token
 
 
 ### 登录member
