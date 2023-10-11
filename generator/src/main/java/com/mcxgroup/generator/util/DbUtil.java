@@ -11,9 +11,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 读取表的各个字段用来实现FreeMarker
+ */
 public class DbUtil {
 
-    public static String url = "jdbc:mysql://localhost:3306/train_member?serverTimezone=Asia/Shanghai";
+//    下面的三个值是在需要用DbUtil的位置去手动赋予的，不用在这里固定写死
+    public static String url = "";
     public static String user = "";
     public static String password = "";
 
@@ -34,7 +38,7 @@ public class DbUtil {
     }
 
     /**
-     * 获得表注释
+     * JDBC 获得表注释
      * @param tableName
      * @return
      * @throws Exception
@@ -112,6 +116,7 @@ public class DbUtil {
         rs.close();
         stmt.close();
         conn.close();
+//        格式化的Field信息
         System.out.println("列信息：" + JSONUtil.toJsonPrettyStr(fieldList));
         return fieldList;
     }
