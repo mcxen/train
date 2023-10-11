@@ -2,6 +2,7 @@ package com.mcxgroup.common.controller;
 
 
 import com.mcxgroup.common.exception.BusinessException;
+import com.mcxgroup.common.resp.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;

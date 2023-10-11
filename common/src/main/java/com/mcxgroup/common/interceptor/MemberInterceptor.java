@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.mcxgroup.common.context.LoginMemberContext;
+import com.mcxgroup.common.resp.MemberLoginResp;
 import com.mcxgroup.common.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class MemberInterceptor implements HandlerInterceptor {
             System.out.println("token = " + token);
             JSONObject memberJson = JwtUtil.getJSONObject(token);
             log.info("拦截器获取登录的JSONObject：{}",memberJson);
-            LoginMemberContext.setMember(JSONUtil.toBean(memberJson, MemberLoginRespDto.class));
+            LoginMemberContext.setMember(JSONUtil.toBean(memberJson, MemberLoginResp.class));
         }
         return true;
     }

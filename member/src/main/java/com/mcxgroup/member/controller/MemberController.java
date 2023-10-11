@@ -1,4 +1,5 @@
 package com.mcxgroup.member.controller;
+import com.mcxgroup.common.resp.CommonResp;
 import com.mcxgroup.member.req.MemberLoginReq;
 import com.mcxgroup.member.req.MemberRegisterReq;
 import com.mcxgroup.member.req.MemberSendCodeReq;

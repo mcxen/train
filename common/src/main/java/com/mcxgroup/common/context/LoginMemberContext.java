@@ -1,18 +1,19 @@
 package com.mcxgroup.common.context;
 
+import com.mcxgroup.common.resp.MemberLoginResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LoginMemberContext {
     private static final Logger LOG = LoggerFactory.getLogger(LoginMemberContext.class);
 
-    private static ThreadLocal<MemberLoginRespDto> member = new ThreadLocal<>();
+    private static ThreadLocal<MemberLoginResp> member = new ThreadLocal<>();
 
-    public static MemberLoginRespDto getMember() {
+    public static MemberLoginResp getMember() {
         return member.get();
     }
 
-    public static void setMember(MemberLoginRespDto member) {
+    public static void setMember(MemberLoginResp member) {
         LoginMemberContext.member.set(member);
     }
 
