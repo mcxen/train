@@ -1,20 +1,14 @@
-package com.mcxgroup.common.dto;
+package com.mcxgroup.member.resp;
 
-public class MemberLoginRespDto {
+/**
+ * @author johnconstantine
+ */
+public class MemberLoginResp {
     private Long id;
 
     private String mobile;
 
     private String token;
-
-    @Override
-    public String toString() {
-        return "MemberLoginRespDto{" +
-                "id=" + id +
-                ", mobile='" + mobile + '\'' +
-                ", token='" + token + '\'' +
-                '}';
-    }
 
     public String getToken() {
         return token;
@@ -40,4 +34,13 @@ public class MemberLoginRespDto {
         this.mobile = mobile;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("MemberLoginResp{");
+        sb.append("id=").append(id);
+        sb.append(", mobile='").append(mobile).append('\'');
+        sb.append(", token='").append(token).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

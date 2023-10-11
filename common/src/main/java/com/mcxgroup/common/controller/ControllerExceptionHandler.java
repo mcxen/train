@@ -1,7 +1,6 @@
 package com.mcxgroup.common.controller;
 
 
-import com.mcxgroup.common.dto.CommonResp;
 import com.mcxgroup.common.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

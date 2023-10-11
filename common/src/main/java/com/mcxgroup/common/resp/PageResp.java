@@ -1,8 +1,11 @@
-package com.mcxgroup.common.dto;
+package com.mcxgroup.common.resp;
 
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author johnconstantine
+ */
 public class PageResp<T> implements Serializable {
 
     /**
@@ -33,9 +36,10 @@ public class PageResp<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "PageResp{" +
-                "total=" + total +
-                ", list=" + list +
-                '}';
+        final StringBuffer sb = new StringBuffer("PageResp{");
+        sb.append("total=").append(total);
+        sb.append(", list=").append(list);
+        sb.append('}');
+        return sb.toString();
     }
 }

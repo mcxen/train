@@ -2,17 +2,15 @@ package com.mcxgroup.member.controller;
 
 
 import com.mcxgroup.common.context.LoginMemberContext;
-import com.mcxgroup.common.dto.CommonResp;
-import com.mcxgroup.common.dto.PageResp;
-import com.mcxgroup.member.dto.PassengerQueryDto;
-import com.mcxgroup.member.dto.PassengerRespDto;
-import com.mcxgroup.member.dto.PassengerSaveReqDto;
+import com.mcxgroup.common.resp.CommonResp;
+import com.mcxgroup.common.resp.PageResp;
+import com.mcxgroup.member.req.PassengerQueryReq;
+import com.mcxgroup.member.req.PassengerSaveReq;
+import com.mcxgroup.member.resp.PassengerQueryResp;
 import com.mcxgroup.member.service.PassengerService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/passenger")
@@ -22,7 +20,7 @@ public class PassengerController {
     private PassengerService passengerService;
 
     @PostMapping("/save")
-    public CommonResp<Object> save(@Valid @RequestBody PassengerSaveReqDto req) {
+    public CommonResp<Object> save(@Valid @RequestBody PassengerSaveReq req) {
         passengerService.save(req);
         return new CommonResp<>();
     }
@@ -30,9 +28,9 @@ public class PassengerController {
 
 //    查询的用Get请求，更新用Post
     @GetMapping("/query-list")
-    public CommonResp<PageResp<PassengerRespDto>> queryList(@Valid PassengerQueryDto req) {
+    public CommonResp<PageResp<PassengerQueryResp>> queryList(@Valid PassengerQueryReq req) {
         req.setMemberId(LoginMemberContext.getId());
-        PageResp<PassengerRespDto> list = passengerService.queryList(req);
+        PageResp<PassengerQueryResp> list = passengerService.queryList(req);
         return new CommonResp<>(list);
     }
     @DeleteMapping("/delete/{id}")

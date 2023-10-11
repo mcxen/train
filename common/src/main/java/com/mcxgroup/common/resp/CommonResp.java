@@ -1,7 +1,9 @@
-package com.mcxgroup.common.dto;
+package com.mcxgroup.common.resp;
 
+/**
+ * @author johnconstantine
+ */
 public class CommonResp<T> {
-
     /**
      * 业务上的成功或失败
      */
@@ -18,12 +20,6 @@ public class CommonResp<T> {
     private T content;
 
     public CommonResp() {
-    }
-
-    public CommonResp(boolean success, String message, T content) {
-        this.success = success;
-        this.message = message;
-        this.content = content;
     }
 
     public CommonResp(T content) {
@@ -64,3 +60,4 @@ public class CommonResp<T> {
         return sb.toString();
     }
 }
+

@@ -1,12 +1,13 @@
-package com.mcxgroup.member.dto;
+package com.mcxgroup.member.req;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
 
-@Data
-public class MemberSendCodeDto {
-    @NotBlank(message = "[手机号]不能为空")
+/**
+ * @author johnconstantine
+ */
+public class MemberSendCodeReq {
+    @NotBlank(message = "【手机号】不可以为空")
     @Pattern(regexp = "^1\\d{10}$", message = "手机号码格式错误")
     private String mobile;
 
@@ -16,5 +17,12 @@ public class MemberSendCodeDto {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberSendCodeReq{" +
+                "mobile='" + mobile + '\'' +
+                '}';
     }
 }

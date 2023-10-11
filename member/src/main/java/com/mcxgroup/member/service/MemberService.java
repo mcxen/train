@@ -2,27 +2,23 @@ package com.mcxgroup.member.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.jwt.JWTUtil;
 import com.mcxgroup.common.exception.BusinessException;
 import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.util.JwtUtil;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
-import com.mcxgroup.member.dto.MemberLoginDto;
-import com.mcxgroup.member.dto.MemberLoginRespDto;
-import com.mcxgroup.member.dto.MemberRegisterDto;
-import com.mcxgroup.member.dto.MemberSendCodeDto;
 import com.mcxgroup.member.mapper.MemberMapper;
+import com.mcxgroup.member.req.MemberLoginReq;
+import com.mcxgroup.member.req.MemberRegisterReq;
+import com.mcxgroup.member.req.MemberSendCodeReq;
+import com.mcxgroup.member.resp.MemberLoginResp;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -33,7 +29,7 @@ public class MemberService {
         return Math.toIntExact(memberMapper.countByExample(null));
         //返回的是lOng转成int
     }
-    public Long register(MemberRegisterDto dto){
+    public Long register(MemberRegisterReq dto){
         String mobile = dto.getMobile();
         Member members = selectByMobile(mobile);
 
@@ -50,7 +46,7 @@ public class MemberService {
         memberMapper.insert(member);
         return member.getId();
     }
-    public void sendCode(MemberSendCodeDto dto){
+    public void sendCode(MemberSendCodeReq dto){
         String mobile = dto.getMobile();
         Member members = selectByMobile(mobile);
 
@@ -75,7 +71,7 @@ public class MemberService {
         //对接
 
     }
-    public MemberLoginRespDto login(MemberLoginDto dto){
+    public MemberLoginResp login(MemberLoginReq dto){
         String mobile = dto.getMobile();
         Member memberByMobile = selectByMobile(mobile);
 
@@ -87,7 +83,7 @@ public class MemberService {
             //抛出验证码错误
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
-        MemberLoginRespDto loginRespDto = BeanUtil.copyProperties(memberByMobile, MemberLoginRespDto.class);
+        MemberLoginResp loginRespDto = BeanUtil.copyProperties(memberByMobile, MemberLoginResp.class);
         loginRespDto.setToken(JwtUtil.createToken(loginRespDto.getId(), loginRespDto.getMobile()));
         return loginRespDto;
     }

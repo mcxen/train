@@ -9,18 +9,18 @@ import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mcxgroup.common.context.LoginMemberContext;
-import com.mcxgroup.common.dto.PageResp;
+import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.member.domain.Member;
 import com.mcxgroup.member.domain.MemberExample;
 import com.mcxgroup.member.domain.Passenger;
 import com.mcxgroup.member.domain.PassengerExample;
-import com.mcxgroup.member.dto.PassengerQueryDto;
-import com.mcxgroup.member.dto.PassengerRespDto;
-import com.mcxgroup.member.dto.PassengerSaveReqDto;
 import com.mcxgroup.member.enums.PassengerTypeEnum;
 import com.mcxgroup.member.mapper.MemberMapper;
 import com.mcxgroup.member.mapper.PassengerMapper;
+import com.mcxgroup.member.req.PassengerQueryReq;
+import com.mcxgroup.member.req.PassengerSaveReq;
+import com.mcxgroup.member.resp.PassengerQueryResp;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public class PassengerService {
     @Resource
     private MemberMapper memberMapper;
 
-    public void save(PassengerSaveReqDto req) {
+    public void save(PassengerSaveReq req) {
         //保存传进来的乘客信息
         DateTime now = DateTime.now();
         Passenger passenger = BeanUtil.copyProperties(req, Passenger.class);
@@ -60,20 +60,8 @@ public class PassengerService {
         }
     }
 
-    /*
-    //手动的返回全部的乘客信息，
-    public List<PassengerRespDto> queryList(PassengerQueryDto req){
-        PassengerExample passengerExample = new PassengerExample();
-        PassengerExample.Criteria criteria = passengerExample.createCriteria();
-        if (ObjectUtil.isNotNull(req.getMemberId())){
-            criteria.andMemberIdEqualTo(req.getMemberId());
-        }
-        List<Passenger> passengers = passengerMapper.selectByExample(passengerExample);
-        List<PassengerRespDto> passengerRespDtoList = BeanUtil.copyToList(passengers, PassengerRespDto.class);
-        return passengerRespDtoList;
-    }
-     */
-    public PageResp<PassengerRespDto> queryList(PassengerQueryDto req) {
+
+    public PageResp<PassengerQueryResp> queryList(PassengerQueryReq req) {
         PassengerExample passengerExample = new PassengerExample();
         passengerExample.setOrderByClause("id desc");
         PassengerExample.Criteria criteria = passengerExample.createCriteria();
@@ -90,9 +78,9 @@ public class PassengerService {
         LOG.info("总行数：{}", pageInfo.getTotal());
         LOG.info("总页数：{}", pageInfo.getPages());
 
-        List<PassengerRespDto> list = BeanUtil.copyToList(passengerList, PassengerRespDto.class);
+        List<PassengerQueryResp> list = BeanUtil.copyToList(passengerList, PassengerQueryResp.class);
 
-        PageResp<PassengerRespDto> pageResp = new PageResp<>();
+        PageResp<PassengerQueryResp> pageResp = new PageResp<>();
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(list);
         return pageResp;

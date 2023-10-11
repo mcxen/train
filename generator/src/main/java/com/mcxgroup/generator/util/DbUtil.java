@@ -4,6 +4,7 @@ package com.mcxgroup.generator.util;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class DbUtil {
 
-    public static String url = "";
+    public static String url = "jdbc:mysql://localhost:3306/train_member?serverTimezone=Asia/Shanghai";
     public static String user = "";
     public static String password = "";
 
@@ -62,58 +63,58 @@ public class DbUtil {
      * @return
      * @throws Exception
      */
-//    public static List<Field> getColumnByTableName(String tableName) throws Exception {
-//        List<Field> fieldList = new ArrayList<>();
-//        Connection conn = getConnection();
-//        Statement stmt = conn.createStatement();
-//        ResultSet rs = stmt.executeQuery("show full columns from `" + tableName + "`");
-//        if (rs != null) {
-//            while(rs.next()) {
-//                String columnName = rs.getString("Field");
-//                String type = rs.getString("Type");
-//                String comment = rs.getString("Comment");
-//                String nullAble = rs.getString("Null"); //YES NO
-//                Field field = new Field();
-//                field.setName(columnName);
-//                field.setNameHump(lineToHump(columnName));
-//                field.setNameBigHump(lineToBigHump(columnName));
-//                field.setType(type);
-//                field.setJavaType(DbUtil.sqlTypeToJavaType(rs.getString("Type")));
-//                field.setComment(comment);
-//                if (comment.contains("|")) {
-//                    field.setNameCn(comment.substring(0, comment.indexOf("|")));
-//                } else {
-//                    field.setNameCn(comment);
-//                }
-//                field.setNullAble("YES".equals(nullAble));
-//                if (type.toUpperCase().contains("varchar".toUpperCase())) {
-//                    String lengthStr = type.substring(type.indexOf("(") + 1, type.length() - 1);
-//                    field.setLength(Integer.valueOf(lengthStr));
-//                } else {
-//                    field.setLength(0);
-//                }
-//                if (comment.contains("枚举")) {
-//                    field.setEnums(true);
-//
-//                    // 以课程等级为例：从注释中的“枚举[CourseLevelEnum]”，得到enumsConst = COURSE_LEVEL
-//                    int start = comment.indexOf("[");
-//                    int end = comment.indexOf("]");
-//                    String enumsName = comment.substring(start + 1, end); // CourseLevelEnum
-//                    String enumsConst = StrUtil.toUnderlineCase(enumsName)
-//                            .toUpperCase().replace("_ENUM", "");
-//                    field.setEnumsConst(enumsConst);
-//                } else {
-//                    field.setEnums(false);
-//                }
-//                fieldList.add(field);
-//            }
-//        }
-//        rs.close();
-//        stmt.close();
-//        conn.close();
-//        System.out.println("列信息：" + JSONUtil.toJsonPrettyStr(fieldList));
-//        return fieldList;
-//    }
+    public static List<Field> getColumnByTableName(String tableName) throws Exception {
+        List<Field> fieldList = new ArrayList<>();
+        Connection conn = getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("show full columns from `" + tableName + "`");
+        if (rs != null) {
+            while(rs.next()) {
+                String columnName = rs.getString("Field");
+                String type = rs.getString("Type");
+                String comment = rs.getString("Comment");
+                String nullAble = rs.getString("Null"); //YES NO
+                Field field = new Field();
+                field.setName(columnName);
+                field.setNameHump(lineToHump(columnName));
+                field.setNameBigHump(lineToBigHump(columnName));
+                field.setType(type);
+                field.setJavaType(DbUtil.sqlTypeToJavaType(rs.getString("Type")));
+                field.setComment(comment);
+                if (comment.contains("|")) {
+                    field.setNameCn(comment.substring(0, comment.indexOf("|")));
+                } else {
+                    field.setNameCn(comment);
+                }
+                field.setNullAble("YES".equals(nullAble));
+                if (type.toUpperCase().contains("varchar".toUpperCase())) {
+                    String lengthStr = type.substring(type.indexOf("(") + 1, type.length() - 1);
+                    field.setLength(Integer.valueOf(lengthStr));
+                } else {
+                    field.setLength(0);
+                }
+                if (comment.contains("枚举")) {
+                    field.setEnums(true);
+
+                    // 以课程等级为例：从注释中的“枚举[CourseLevelEnum]”，得到enumsConst = COURSE_LEVEL
+                    int start = comment.indexOf("[");
+                    int end = comment.indexOf("]");
+                    String enumsName = comment.substring(start + 1, end); // CourseLevelEnum
+                    String enumsConst = StrUtil.toUnderlineCase(enumsName)
+                            .toUpperCase().replace("_ENUM", "");
+                    field.setEnumsConst(enumsConst);
+                } else {
+                    field.setEnums(false);
+                }
+                fieldList.add(field);
+            }
+        }
+        rs.close();
+        stmt.close();
+        conn.close();
+        System.out.println("列信息：" + JSONUtil.toJsonPrettyStr(fieldList));
+        return fieldList;
+    }
 
     /**
      * 下划线转小驼峰：member_id 转成 memberId
