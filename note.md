@@ -1,5 +1,11 @@
 # Getting Started
 
+参考Git路线：
+
+https://github.com/JohnConstantion/train/commits/master
+
+
+
 ## 子模块设置
 
 新建module之后 Idea就会自动加一个Module加一个packaging

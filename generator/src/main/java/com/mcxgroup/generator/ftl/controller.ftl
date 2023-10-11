@@ -1,20 +1,20 @@
-package com.mcxgroup.${module}.controller.admin;
+package com.mcxgroup.member.controller;
 
-import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.CommonResp;
 import com.mcxgroup.common.resp.PageResp;
-import com.mcxgroup.${module}.req.${Domain}QueryReq;
-import com.mcxgroup.${module}.req.${Domain}SaveReq;
-import com.mcxgroup.${module}.resp.${Domain}QueryResp;
-import com.mcxgroup.${module}.service.${Domain}Service;
+import com.mcxgroup.member.req.${Domain}QueryReq;
+import com.mcxgroup.member.req.${Domain}SaveReq;
+import com.mcxgroup.member.resp.${Domain}QueryResp;
+import com.mcxgroup.member.service.${Domain}Service;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/${do_main}")
 public class ${Domain}Controller {
-
     @Resource
     private ${Domain}Service ${domain}Service;
 
@@ -25,8 +25,8 @@ public class ${Domain}Controller {
     }
 
     @GetMapping("/query-list")
-    public CommonResp<PageResp<${Domain}QueryResp>> queryList(@Valid ${Domain}QueryReq req) {
-        PageResp<${Domain}QueryResp> list = ${domain}Service.queryList(req);
+    public CommonResp<PageResp<${Domain}QueryResp>> queryResps(@Valid ${Domain}QueryReq req) {
+        PageResp<${Domain}QueryResp> list = ${domain}Service.queryResp(req);
         return new CommonResp<>(list);
     }
 
@@ -35,5 +35,4 @@ public class ${Domain}Controller {
         ${domain}Service.delete(id);
         return new CommonResp<>();
     }
-
 }
