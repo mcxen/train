@@ -1,11 +1,11 @@
-package com.mcxgroup.member.controller;
+package com.mcxgroup.${module}.controller;
 
 import com.mcxgroup.common.resp.CommonResp;
 import com.mcxgroup.common.resp.PageResp;
-import com.mcxgroup.member.req.${Domain}QueryReq;
-import com.mcxgroup.member.req.${Domain}SaveReq;
-import com.mcxgroup.member.resp.${Domain}QueryResp;
-import com.mcxgroup.member.service.${Domain}Service;
+import com.mcxgroup.${module}.req.${Domain}QueryReq;
+import com.mcxgroup.${module}.req.${Domain}SaveReq;
+import com.mcxgroup.${module}.resp.${Domain}QueryResp;
+import com.mcxgroup.${module}.service.${Domain}Service;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

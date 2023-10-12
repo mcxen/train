@@ -1,4 +1,4 @@
-package com.mcxgroup.member.req;
+package com.mcxgroup.${module}.req;
 
 <#list typeSet as type>
 <#if type=='Date'>

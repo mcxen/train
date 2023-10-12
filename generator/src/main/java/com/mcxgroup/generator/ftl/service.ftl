@@ -1,4 +1,4 @@
-package com.mcxgroup.member.service;
+package com.mcxgroup.${module}.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
@@ -8,12 +8,12 @@ import com.github.pagehelper.PageInfo;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
-import com.mcxgroup.member.domain.${Domain};
-import com.mcxgroup.member.domain.${Domain}Example;
-import com.mcxgroup.member.mapper.${Domain}Mapper;
-import com.mcxgroup.member.req.${Domain}QueryReq;
-import com.mcxgroup.member.req.${Domain}SaveReq;
-import com.mcxgroup.member.resp.${Domain}QueryResp;
+import com.mcxgroup.${module}.domain.${Domain};
+import com.mcxgroup.${module}.domain.${Domain}Example;
+import com.mcxgroup.${module}.mapper.${Domain}Mapper;
+import com.mcxgroup.${module}.req.${Domain}QueryReq;
+import com.mcxgroup.${module}.req.${Domain}SaveReq;
+import com.mcxgroup.${module}.resp.${Domain}QueryResp;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
