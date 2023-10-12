@@ -231,3 +231,24 @@ npm install -g @vue/cli
 - 解决id序列化
 - <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E5%BA%8F%E5%88%97%E5%8C%96.gif" alt="序列化" style="zoom: 67%;" />
 - 
+
+
+
+### 2023年10月11日
+
+- FTL实现实体类模版
+
+- ```java
+  <#list typeSet as type>
+  <#if type=='Date'>
+  import java.util.Date;
+  import com.fasterxml.jackson.annotation.JsonFormat;
+  </#if>
+  <#if type=='BigDecimal'>
+  import java.math.BigDecimal;
+  </#if>
+  </#list>
+  ```
+
+- 
+
