@@ -1,24 +1,24 @@
 <template>
     <a-row class="login">
         <a-col :span="8" :offset="8" class="login-main">
-            <h1 style="text-align: center"><rocket-two-tone />&nbsp;脉冲星火车售票系统</h1>
+            <h1 style="text-align: center"><rocket-two-tone />脉冲星 12306售票系统</h1>
             <a-form
-                :model="loginForm"
-                name="basic"
-                autocomplete="off"
+                    :model="loginForm"
+                    name="basic"
+                    autocomplete="off"
             >
                 <a-form-item
-                    label=""
-                    name="mobile"
-                    :rules="[{ required: true, message: '请输入手机号!' }]"
+                        label=""
+                        name="mobile"
+                        :rules="[{ required: true, message: '请输入手机号!' }]"
                 >
                     <a-input v-model:value="loginForm.mobile" placeholder="手机号"/>
                 </a-form-item>
 
                 <a-form-item
-                    label=""
-                    name="code"
-                    :rules="[{ required: true, message: '请输入验证码!' }]"
+                        label=""
+                        name="code"
+                        :rules="[{ required: true, message: '请输入验证码!' }]"
                 >
                     <a-input v-model:value="loginForm.code">
                         <template #addonAfter>
@@ -50,7 +50,7 @@ export default defineComponent({
         const router = useRouter();
 
         const loginForm = reactive({
-            mobile: '13088880000',
+            mobile: '13000000000',
             code: '',
         });
 
@@ -73,11 +73,8 @@ export default defineComponent({
                 let data = response.data;
                 if (data.success) {
                     notification.success({ description: '登录成功！' });
-                    // // 登录成功，跳到控台主页
-                    // router.push("/");
-                    // 登录成功，跳到welcome主页
+                    // 登录成功，跳到控台主页
                     router.push("/welcome");
-                    // 写入Token
                     store.commit("setMember", data.content);
                 } else {
                     notification.error({ description: data.message });
@@ -107,4 +104,3 @@ export default defineComponent({
     background-color: #fcfcfc;
 }
 </style>
-

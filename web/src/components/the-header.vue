@@ -1,6 +1,10 @@
 <template>
   <a-layout-header class="header">
-    <div class="logo" />
+    <div class="logo" >
+      <router-link to="/welcome" style="color: white; font-size: 18px">
+        脉冲星售票系统
+      </router-link>
+    </div>
     <div style="float: right; color: white;">
       您好：{{member.mobile}} &nbsp;&nbsp;
       <router-link to="/login" style="color: white;">
