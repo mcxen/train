@@ -1,4 +1,4 @@
-package com.mcxgroup.generator.server;
+package com.mcxgroup.generator.gen;
 
 import com.mcxgroup.generator.util.DbUtil;
 import com.mcxgroup.generator.util.Field;
