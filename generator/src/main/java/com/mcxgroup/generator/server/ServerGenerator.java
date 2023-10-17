@@ -17,6 +17,8 @@ import java.util.*;
  * @author McXen Cool
  */
 public class ServerGenerator {
+    static boolean readOnly = false;//表示这个界面是不是只读的界面
+    static String vuePath = "web/src/views/main/";
     static String serverPath = "[module]/src/main/java/com/mcxgroup/[module]/";
     static String pomPath = "generator/pom.xml";
 
@@ -77,15 +79,23 @@ public class ServerGenerator {
         param.put("tableNameCn",tableNameCn);
         param.put("fieldList",fieldList);
         param.put("typeSet",typeSet);
-
+        param.put("readOnly", readOnly);
         System.out.println("组装参数：" + param);
 
         //下面的target就是目标的地址
 //        gen(Domain, param, "service", "service");
 //        gen(Domain, param, "controller", "controller");
-        gen(Domain, param, "req", "queryReq");
-        gen(Domain, param, "resp", "queryResp");
+//        gen(Domain, param, "req", "queryReq");
+//        gen(Domain, param, "resp", "queryResp");
+        genVue(do_main, param);
 
+    }
+    private static void genVue(String do_main, Map<String, Object> param) throws IOException, TemplateException {
+        FreemarkerUtil.initConfig("vue.ftl");
+        new File(vuePath).mkdirs();
+        String fileName = vuePath + do_main + ".vue";//path and file name
+        System.out.println("开始生成Vue：" + fileName);
+        FreemarkerUtil.generator(fileName, param);// use generator
     }
     private static void gen(String Domain, Map<String, Object> param,String packageName,String target) throws IOException, TemplateException {
         FreemarkerUtil.initConfig(target + ".ftl");
@@ -93,7 +103,7 @@ public class ServerGenerator {
         new File(toPath).mkdirs();
         String Target = target.substring(0, 1).toUpperCase() + target.substring(1);
         String fileName = toPath + Domain + Target + ".java";
-        System.out.println("开始生成：" + fileName);
+        System.out.println("开始生成Class：" + fileName);
         FreemarkerUtil.generator(fileName, param);
     }
     /**
