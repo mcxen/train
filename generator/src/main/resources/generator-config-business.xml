@@ -47,8 +47,8 @@
                              type="XMLMAPPER"/>
 
 <!--        下面是哪一个表就是哪一个生产-->
-        <table tableName="member" domainObjectName="Member"/>
-<!--        <table tableName="passenger" domainObjectName="Passenger"/>-->
+<!--        <table tableName="member" domainObjectName="Member"/>-->
+        <table tableName="station" domainObjectName="Station"/>
 <!--        <table tableName="ticket" domainObjectName="Ticket"/>-->
     </context>
 </generatorConfiguration>

@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class ServerGenerator {
     static boolean readOnly = false;//表示这个界面是不是只读的界面
-    static String vuePath = "web/src/views/main/";
+    static String vuePath = "admin/src/views/main/";
     static String serverPath = "[module]/src/main/java/com/mcxgroup/[module]/";
     static String pomPath = "generator/pom.xml";
 
@@ -83,10 +83,11 @@ public class ServerGenerator {
         System.out.println("组装参数：" + param);
 
         //下面的target就是目标的地址
-//        gen(Domain, param, "service", "service");
-//        gen(Domain, param, "controller", "controller");
-//        gen(Domain, param, "req", "queryReq");
-//        gen(Domain, param, "resp", "queryResp");
+        gen(Domain, param, "service", "service");
+        gen(Domain, param, "controller", "controller");
+        gen(Domain, param, "req", "queryReq");
+        gen(Domain, param, "req", "saveReq");
+        gen(Domain, param, "resp", "queryResp");
         genVue(do_main, param);
 
     }

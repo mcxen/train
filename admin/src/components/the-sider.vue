@@ -11,11 +11,16 @@
                     <coffee-outlined/> &nbsp; 欢迎
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="/about">
-                <router-link to="/about">
-                    <user-outlined/> &nbsp; 关于
+            <a-menu-item key="/station">
+                <router-link to="/station">
+                    <user-outlined/> &nbsp;车展管理
                 </router-link>
             </a-menu-item>
+          <a-menu-item key="/about">
+            <router-link to="/about">
+              <user-outlined/> &nbsp; 关于
+            </router-link>
+          </a-menu-item>
         </a-menu>
     </a-layout-sider>
 </template>
