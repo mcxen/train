@@ -35,3 +35,4 @@ build/
 
 ### Log File 添加忽略文件夹
 log/
+/admin/node_modules/
