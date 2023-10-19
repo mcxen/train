@@ -1,6 +1,7 @@
 package com.mcxgroup.generator.gen;
 
 import cn.hutool.core.util.StrUtil;
+import com.mcxgroup.business.enums.TrainTypeEnum;
 import com.mcxgroup.member.enums.PassengerTypeEnum;
 
 import java.io.FileOutputStream;
@@ -10,14 +11,16 @@ import java.lang.reflect.Method;
  * @author johnconstantine
  */
 public class EnumGenerator {
-    static String path = "web/src/assets/js/enums.js";
+    static String path = "admin/src/assets/js/enums.js";
+//    static String path = "web/src/assets/js/enums.js";
 
     public static void main(String[] args) {
         StringBuffer bufferObject = new StringBuffer();
         StringBuffer bufferArray = new StringBuffer();
         long begin = System.currentTimeMillis();
         try {
-            toJson(PassengerTypeEnum.class, bufferObject, bufferArray);
+//            toJson(PassengerTypeEnum.class, bufferObject, bufferArray);
+            toJson(TrainTypeEnum.class, bufferObject, bufferArray);//生成Train的EnumsJs，存到系统里面
 
             StringBuffer buffer = bufferObject.append("\r\n").append(bufferArray);
             writeJs(buffer);

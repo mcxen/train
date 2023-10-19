@@ -1,6 +1,10 @@
 <template>
     <a-layout-header class="header">
-        <div class="logo"/>
+      <div class="logo">
+        <router-link to="/welcome" style="color: white; ">
+
+        </router-link>
+      </div>
         <div style="float: right; color: white;">
             欢迎使用管理控台
         </div>
