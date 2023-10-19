@@ -1,4 +1,4 @@
-package com.mcxgroup.business.controller;
+package com.mcxgroup.business.controller.admin;
 
 import com.mcxgroup.common.resp.CommonResp;
 import com.mcxgroup.common.resp.PageResp;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/station")
-public class StationController {
+@RequestMapping("/admin/station")
+public class StationAdminController {
     @Resource
     private StationService stationService;
 

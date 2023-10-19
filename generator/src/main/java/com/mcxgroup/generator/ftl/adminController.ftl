@@ -1,4 +1,4 @@
-package com.mcxgroup.${module}.controller;
+package com.mcxgroup.${module}.controller.admin;
 
 import com.mcxgroup.common.resp.CommonResp;
 import com.mcxgroup.common.resp.PageResp;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/${do_main}")
-public class ${Domain}Controller {
+@RequestMapping("/admin/${do_main}")
+public class ${Domain}AdminController {
     @Resource
     private ${Domain}Service ${domain}Service;
 
