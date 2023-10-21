@@ -259,3 +259,11 @@ npm install -g @vue/cli
 - 这里必须一块生成这个toJson到Enum。js不然这个js里面就一个Array
 - ![截屏2023-10-21 18.36.41](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-21%2018.36.41.png)
 
+自动获取火车车次：vue代码：
+
+
+
+![截屏2023-10-21 21.39.10](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-21%2021.39.10.png)
+
+<img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231021214033780.png" alt="image-20231021214033780" style="zoom:50%;" />
+

@@ -172,12 +172,24 @@ export default defineComponent({
         size: pagination.pageSize
       });
     };
-
+    const queryTrainCode = () =>{
+      axios.get("/business/admin/train/query-all").then((response)=>{
+        loading.value=false;
+        let data = response.data;
+        if(data.success){
+          // 如果得到了数据
+          console.log(data.content);
+        }else {
+          notification.error({description:data.message});
+        }
+      })
+    };
     onMounted(() => {
       handleQuery({
         page: 1,
         size: pagination.value.pageSize
       });
+      queryTrainCode();
     });
 
     return {
