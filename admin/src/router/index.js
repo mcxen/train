@@ -15,6 +15,9 @@ const routes = [
             path: 'train',
             component: () => import('../views/main/train.vue')
         },{
+            path: 'train-carriage',
+            component: () => import('../views/main/train-carriage.vue')
+        },{
             path: 'about',
             component: () => import('../views/main/about.vue')
         }]

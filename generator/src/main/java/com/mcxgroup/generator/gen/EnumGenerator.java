@@ -1,6 +1,7 @@
 package com.mcxgroup.generator.gen;
 
 import cn.hutool.core.util.StrUtil;
+import com.mcxgroup.business.enums.SeatTypeEnum;
 import com.mcxgroup.business.enums.TrainTypeEnum;
 import com.mcxgroup.member.enums.PassengerTypeEnum;
 
@@ -20,7 +21,8 @@ public class EnumGenerator {
         long begin = System.currentTimeMillis();
         try {
 //            toJson(PassengerTypeEnum.class, bufferObject, bufferArray);
-            toJson(TrainTypeEnum.class, bufferObject, bufferArray);//生成Train的EnumsJs，存到系统里面
+//            toJson(TrainTypeEnum.class, bufferObject, bufferArray);//生成Train的EnumsJs，存到系统里面
+            toJson(SeatTypeEnum.class, bufferObject, bufferArray);//生成座位的EnumsJs，存到系统里面
 
             StringBuffer buffer = bufferObject.append("\r\n").append(bufferArray);
             writeJs(buffer);

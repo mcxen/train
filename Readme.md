@@ -23,3 +23,17 @@
 
 
 ![截屏2023-10-05 22.14.56](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-05%2022.14.56.png)
+
+
+
+Mapper生成器：
+
+
+
+![image-20231021172941466](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231021172941466.png)
+
+
+
+Enum.js生成：
+
+![image-20231021173159353](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231021173159353.png)

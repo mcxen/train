@@ -47,7 +47,8 @@
                              type="XMLMAPPER"/>
 
 <!--        下面是哪一个表就是哪一个生产-->
-        <table tableName="train" domainObjectName="Train"/>
+<!--        <table tableName="train" domainObjectName="Train"/>-->
+        <table tableName="train_carriage" domainObjectName="TrainCarriage"/>
 <!--        <table tableName="station" domainObjectName="Station"/>-->
 <!--        <table tableName="ticket" domainObjectName="Ticket"/>-->
     </context>
