@@ -252,3 +252,10 @@ npm install -g @vue/cli
 
 - 
 
+
+
+### 2023年10月21日
+
+- 这里必须一块生成这个toJson到Enum。js不然这个js里面就一个Array
+- ![截屏2023-10-21 18.36.41](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-21%2018.36.41.png)
+

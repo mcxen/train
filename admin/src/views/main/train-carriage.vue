@@ -25,7 +25,7 @@
       </template>
       <template v-else-if="column.dataIndex === 'seatType'">
         <span v-for="item in SEAT_TYPE_ARRAY" :key="item.code">
-          <span v-if="item.key === record.seatType">
+          <span v-if="item.code === record.seatType">
             {{item.desc}}
           </span>
         </span>
