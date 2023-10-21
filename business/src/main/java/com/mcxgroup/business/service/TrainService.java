@@ -68,10 +68,10 @@ public class TrainService {
 
     /**
      * 查询所有的车次
-     * @param req
+     * @param
      * @return
      */
-    public List<TrainQueryResp> queryAll(TrainQueryReq req) {
+    public List<TrainQueryResp> queryAll() {
         TrainExample example = new TrainExample();
         example.setOrderByClause("code desc");
         TrainExample.Criteria criteria = example.createCriteria();
