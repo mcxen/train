@@ -21,8 +21,8 @@ public class EnumGenerator {
         StringBuffer bufferArray = new StringBuffer();
         long begin = System.currentTimeMillis();
         try {
-//            toJson(PassengerTypeEnum.class, bufferObject, bufferArray);
-//            toJson(TrainTypeEnum.class, bufferObject, bufferArray);//生成Train的EnumsJs，存到系统里面
+            toJson(PassengerTypeEnum.class, bufferObject, bufferArray);
+            toJson(TrainTypeEnum.class, bufferObject, bufferArray);//生成Train的EnumsJs，存到系统里面
             toJson(SeatTypeEnum.class, bufferObject, bufferArray);//生成座位的EnumsJs，存到系统里面
             toJson(SeatColEnum.class, bufferObject, bufferArray);//生成座位的EnumsJs，存到系统里面
 

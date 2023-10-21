@@ -30,6 +30,11 @@ public class TrainAdminController {
         return new CommonResp<>(list);
     }
 
+    @GetMapping("/query-all")
+    public CommonResp<List<TrainQueryResp>> queryAll(@Valid TrainQueryReq req) {
+        List<TrainQueryResp> queryAll = trainService.queryAll(req);
+        return new CommonResp<>(queryAll);
+    }
     @DeleteMapping("/delete/{id}")
     public CommonResp<Object> delete(@PathVariable Long id) {
         trainService.delete(id);

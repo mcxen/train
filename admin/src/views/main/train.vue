@@ -25,7 +25,7 @@
       </template>
       <template v-else-if="column.dataIndex === 'type'">
         <span v-for="item in TRAIN_TYPE_ARRAY" :key="item.code">
-          <span v-if="item.key === record.type">
+          <span v-if="item.code === record.type">
             {{item.desc}}
           </span>
         </span>
@@ -49,7 +49,7 @@
         <a-input v-model:value="train.start" />
       </a-form-item>
       <a-form-item label="始发站拼音">
-        <a-input v-model:value="train.startPinyin" />
+        <a-input v-model:value="train.startPinyin" disabled/>
       </a-form-item>
       <a-form-item label="出发时间">
         <a-time-picker v-model:value="train.startTime" valueFormat="HH:mm:ss" placeholder="请选择时间" />
@@ -58,7 +58,7 @@
         <a-input v-model:value="train.end" />
       </a-form-item>
       <a-form-item label="终点站拼音">
-        <a-input v-model:value="train.endPinyin" />
+        <a-input v-model:value="train.endPinyin" disabled/>
       </a-form-item>
       <a-form-item label="到站时间">
         <a-time-picker v-model:value="train.endTime" valueFormat="HH:mm:ss" placeholder="请选择时间" />
@@ -68,9 +68,10 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue';
+import {defineComponent, ref, onMounted, watch} from 'vue';
 import {notification} from "ant-design-vue";
 import axios from "axios";
+import {pinyin} from "pinyin-pro";
 
 export default defineComponent({
   name: "train-view",
@@ -146,6 +147,16 @@ export default defineComponent({
     }
     ];
 
+    watch(()=>train.value.start,()=>{
+      if(Tool.isNotEmpty(train.value.start)){
+        train.value.startPinyin=pinyin(train.value.start,{toneType:'none'}).replaceAll(" ","").toUpperCase();
+      }
+    },{immediate:true})
+    watch(()=>train.value.end,()=>{
+      if(Tool.isNotEmpty(train.value.end)){
+        train.value.endPinyin=pinyin(train.value.end,{toneType:'none'}).replaceAll(" ","").toUpperCase();
+      }
+    },{immediate:true})
     const onAdd = () => {
       train.value = {};
       visible.value = true;

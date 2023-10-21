@@ -66,6 +66,18 @@ public class TrainService {
         return pageResp;
     }
 
+    /**
+     * 查询所有的车次
+     * @param req
+     * @return
+     */
+    public List<TrainQueryResp> queryAll(TrainQueryReq req) {
+        TrainExample example = new TrainExample();
+        example.setOrderByClause("code desc");
+        TrainExample.Criteria criteria = example.createCriteria();
+        List<Train> trainList = trainMapper.selectByExample(example);
+        return BeanUtil.copyToList(trainList, TrainQueryResp.class);
+    }
     public void delete(Long id) {
         trainMapper.deleteByPrimaryKey(id);
     }
