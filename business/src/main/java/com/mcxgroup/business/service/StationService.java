@@ -5,7 +5,6 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.business.domain.Station;
@@ -66,6 +65,12 @@ public class StationService {
         return pageResp;
     }
 
+    public List<StationQueryResp> queryAll() {
+        StationExample example = new StationExample();
+        example.setOrderByClause("name_pinyin asc");
+        List<Station> list = stationMapper.selectByExample(example);
+        return BeanUtil.copyToList(list, StationQueryResp.class);
+    }
     public void delete(Long id) {
         stationMapper.deleteByPrimaryKey(id);
     }
