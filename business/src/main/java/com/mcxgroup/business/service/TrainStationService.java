@@ -53,7 +53,7 @@ public class TrainStationService {
         LOG.info("每页条数：{}", req.getSize());
         PageHelper.startPage(req.getPage(), req.getSize());
 
-        if (ObjectUtil.isNotNull(req.getTrainCode())){
+        if (ObjectUtil.isNotEmpty(req.getTrainCode())){
             //如果trainCode有传进来的树枝就按照传进来的查询，没有的话就不加这个条件
             criteria.andTrainCodeEqualTo(req.getTrainCode());
 //            System.out.println("req.getTrainCode() = " + req.getTrainCode());

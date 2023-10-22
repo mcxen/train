@@ -47,13 +47,17 @@ public class TrainCarriageService {
 
     public PageResp<TrainCarriageQueryResp> queryList(TrainCarriageQueryReq req) {
         TrainCarriageExample example = new TrainCarriageExample();
-        example.setOrderByClause("id desc");
+        example.setOrderByClause("train_code asc,`index` asc");
         TrainCarriageExample.Criteria criteria = example.createCriteria();
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
         PageHelper.startPage(req.getPage(), req.getSize());
+        if (ObjectUtil.isNotEmpty(req.getTrainCode())){
+            //如果trainCode有传进来的树枝就按照传进来的查询，没有的话就不加这个条件
+            criteria.andTrainCodeEqualTo(req.getTrainCode());
+//            System.out.println("req.getTrainCode() = " + req.getTrainCode());
+        }
         List<TrainCarriage> trainCarriageList = trainCarriageMapper.selectByExample(example);
-
         PageInfo<TrainCarriage> pageInfo = new PageInfo<>(trainCarriageList);
         LOG.info("总行数：{}", pageInfo.getTotal());
         LOG.info("总页数：{}", pageInfo.getPages());
