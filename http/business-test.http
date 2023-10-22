@@ -11,3 +11,6 @@ Content-Type: application/json
   "namePinyin": "WUHAN",
   "namePy": "WH"
 }
+### Generate Train Seat
+GET http://127.0.0.1:8081/business/admin/train/gen-seat/G1
+Content-Type: application/x-www-form-urlencoded

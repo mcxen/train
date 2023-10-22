@@ -3,8 +3,13 @@ package com.mcxgroup.business.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.business.domain.TrainCarriage;
+import com.mcxgroup.business.domain.TrainCarriageExample;
+import com.mcxgroup.business.enums.SeatColEnum;
+import com.mcxgroup.business.mapper.TrainCarriageMapper;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
@@ -18,6 +23,7 @@ import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +36,8 @@ public class TrainSeatService {
 
     @Resource
     private TrainSeatMapper trainSeatMapper;
+    @Resource
+    private TrainCarriageService trainCarriageService;
 
     public void save(TrainSeatSaveReq req) {
         DateTime now = DateTime.now();
@@ -72,5 +80,41 @@ public class TrainSeatService {
 
     public void delete(Long id) {
         trainSeatMapper.deleteByPrimaryKey(id);
+    }
+
+    @Transactional
+    public void genTrainSeat(String trainCode){
+        DateTime now = DateTime.now();
+        TrainSeatExample example = new TrainSeatExample();
+        TrainSeatExample.Criteria criteria = example.createCriteria();
+        criteria.andTrainCodeEqualTo(trainCode);
+        // 先晴空再生产
+        trainSeatMapper.deleteByExample(example);
+        //查找当前车次的车厢
+        List<TrainCarriage> carriageList = trainCarriageService.selectByTrainCode(trainCode);
+        //循环生成每个车厢的座位
+        for (TrainCarriage carriage : carriageList) {
+            int rowCount = carriage.getRowCount();
+            String seatType = carriage.getSeatType();
+            int seatIndex = 1;
+            List<SeatColEnum> colEnumList = SeatColEnum.getColsByType(seatType);
+            for (int row = 1; row <= rowCount; row++) {
+                for (SeatColEnum seatColEnum : colEnumList) {
+                    //构造座椅
+                    TrainSeat trainSeat = new TrainSeat();
+                    trainSeat.setId(SnowUtil.getSnowflakeNextId());
+                    trainSeat.setCreateTime(now);
+                    trainSeat.setUpdateTime(now);
+                    trainSeat.setTrainCode(trainCode);
+                    trainSeat.setCarriageIndex(carriage.getIndex());
+                    trainSeat.setRow(StrUtil.fillBefore(String.valueOf(row), '0', 2));
+                    trainSeat.setCol(seatColEnum.getCode());
+                    trainSeat.setSeatType(seatType);
+                    trainSeat.setCarriageSeatIndex(seatIndex++);
+                    trainSeatMapper.insert(trainSeat);
+                }
+            }
+        }
+        //根据座位类型，筛选所有的类
     }
 }

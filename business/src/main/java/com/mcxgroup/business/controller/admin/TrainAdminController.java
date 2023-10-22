@@ -1,5 +1,6 @@
 package com.mcxgroup.business.controller.admin;
 
+import com.mcxgroup.business.service.TrainSeatService;
 import com.mcxgroup.common.resp.CommonResp;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.business.req.TrainQueryReq;
@@ -17,6 +18,8 @@ import java.util.List;
 public class TrainAdminController {
     @Resource
     private TrainService trainService;
+    @Resource
+    private TrainSeatService trainSeatService;
 
     @PostMapping("/save")
     public CommonResp<Object> save(@Valid @RequestBody TrainSaveReq req) {
@@ -38,6 +41,11 @@ public class TrainAdminController {
     @DeleteMapping("/delete/{id}")
     public CommonResp<Object> delete(@PathVariable Long id) {
         trainService.delete(id);
+        return new CommonResp<>();
+    }
+    @GetMapping("/gen-seat/{trainCode}")
+    public CommonResp<Object> genSeat(@PathVariable String trainCode) {
+        trainSeatService.genTrainSeat(trainCode);
         return new CommonResp<>();
     }
 }

@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.business.domain.TrainSeatExample;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
@@ -72,5 +73,18 @@ public class TrainCarriageService {
 
     public void delete(Long id) {
         trainCarriageMapper.deleteByPrimaryKey(id);
+    }
+
+    public List<TrainCarriage> selectByTrainCode(String trainCode){
+        /**
+         * 对于一些简单的SQL查询，可以直接使用Example来构造查询条件；
+         * 而对于一些相对复杂的查询，则需要使用Criteria进行细粒度的约束设置。
+         */
+        TrainCarriageExample example = new TrainCarriageExample();
+        TrainCarriageExample.Criteria criteria = example.createCriteria();
+        example.setOrderByClause("`index` asc");
+        criteria.andTrainCodeEqualTo(trainCode);
+        List<TrainCarriage> list = trainCarriageMapper.selectByExample(example);
+        return list;
     }
 }
