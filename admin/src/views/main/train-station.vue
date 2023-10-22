@@ -1,7 +1,8 @@
 <template>
   <p>
     <a-space>
-      <a-button type="primary" @click="handleQuery()">刷新</a-button>
+      <train-select-view v-model="codeParam.trainCode" width="200px"/>
+      <a-button type="primary" @click="handleQuery()">查找</a-button>
       <a-button type="primary" @click="onAdd">新增</a-button>
     </a-space>
   </p>
@@ -35,7 +36,7 @@
         <a-input v-model:value="trainStation.index" />
       </a-form-item>
       <a-form-item label="站名">
-        <a-input v-model:value="trainStation.name" />
+        <station-select-view v-model:value="trainStation.name" />
       </a-form-item>
       <a-form-item label="站名拼音">
         <a-input v-model:value="trainStation.namePinyin" disabled/>
@@ -62,10 +63,11 @@ import {notification} from "ant-design-vue";
 import axios from "axios";
 import TrainSelectView from "@/components/train-select.vue";
 import {pinyin} from "pinyin-pro";
+import StationSelectView from "@/components/station-select.vue";
 
 export default defineComponent({
   name: "train-station-view",
-  components: {TrainSelectView},
+  components: {StationSelectView, TrainSelectView},
   setup() {
     // 全局的window，直接引用import './assets/js/enums';//引入enums.js，
     const visible = ref(false);
@@ -90,6 +92,9 @@ export default defineComponent({
       pageSize: 6,
     });
     let loading = ref(false);
+    let codeParam = ref({
+      trainCode: ""
+    });
     const columns = [
     {
       title: '车次编号',
@@ -194,7 +199,8 @@ export default defineComponent({
       axios.get("/business/admin/train-station/query-list", {
         params: {
           page: param.page,
-          size: param.size
+          size: param.size,
+          trainCode: codeParam.value.trainCode,
         }
       }).then((response) => {
         loading.value = false;
@@ -239,6 +245,7 @@ export default defineComponent({
       handleOk,
       onEdit,
       onDelete,
+      codeParam
     };
   },
 });
