@@ -218,38 +218,12 @@ export default defineComponent({
         size: pagination.pageSize
       });
     };
-    // ----------------- 车次下拉框 -----------------
-    const trains = ref([]);
 
-    /**
-     * 查询所有的车次，用于车次下拉框
-     */
-    const queryTrainCode = () =>{
-      axios.get("/business/admin/train/query-all").then((response)=>{
-        loading.value=false;
-        let data = response.data;
-        if(data.success){
-          // 如果得到了数据
-          //console.log(data.content);
-          trains.value=data.content;
-        }else {
-          notification.error({description:data.message});
-        }
-      })
-    };
-    /**
-     * 车次下拉框筛选
-     */
-    const filterTrainCodeOption = (input, option) => {
-      console.log(input, option);
-      return option.label.toUpperCase().indexOf(input.toUpperCase()) >= 0;
-    };
     onMounted(() => {
       handleQuery({
         page: 1,
         size: pagination.value.pageSize
       });
-      queryTrainCode();
     });
 
     return {
@@ -265,8 +239,6 @@ export default defineComponent({
       handleOk,
       onEdit,
       onDelete,
-      trains,
-      filterTrainCodeOption
     };
   },
 });
