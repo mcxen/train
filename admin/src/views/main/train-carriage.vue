@@ -1,7 +1,7 @@
 <template>
   <p>
     <a-space>
-      <train-select-view v-model="codeParam.trainCode" width="200px"/>
+      <train-select-view v-model="codeParam.trainCode" width="300px"/>
       <a-button type="primary" @click="handleQuery()">查找</a-button>
       <a-button type="primary" @click="onAdd">新增</a-button>
     </a-space>
@@ -49,15 +49,15 @@
           </a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item label="座位数">
-        <a-input v-model:value="trainCarriage.seatCount" />
-      </a-form-item>
+<!--      <a-form-item label="座位数">-->
+<!--        <a-input v-model:value="trainCarriage.seatCount" />-->
+<!--      </a-form-item>-->
       <a-form-item label="排数">
         <a-input v-model:value="trainCarriage.rowCount" />
       </a-form-item>
-      <a-form-item label="列数">
-        <a-input v-model:value="trainCarriage.colCount" />
-      </a-form-item>
+<!--      <a-form-item label="列数">-->
+<!--        <a-input v-model:value="trainCarriage.colCount" />-->
+<!--      </a-form-item>-->
     </a-form>
   </a-modal>
 </template>

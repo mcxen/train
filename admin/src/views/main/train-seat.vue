@@ -1,7 +1,7 @@
 <template>
   <p>
     <a-space>
-      <train-select-view v-model="codeParam.trainCode" width="200px"/>
+      <train-select-view v-model="codeParam.trainCode" width="300px"/>
       <a-button type="primary" @click="handleQuery()">查找</a-button>
     </a-space>
   </p>
