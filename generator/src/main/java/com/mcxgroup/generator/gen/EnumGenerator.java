@@ -1,14 +1,22 @@
 package com.mcxgroup.generator.gen;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.log.Log;
 import com.mcxgroup.business.enums.SeatColEnum;
 import com.mcxgroup.business.enums.SeatTypeEnum;
 import com.mcxgroup.business.enums.TrainTypeEnum;
 import com.mcxgroup.member.enums.PassengerTypeEnum;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author johnconstantine
  */
@@ -43,13 +51,25 @@ public class EnumGenerator {
         Method name = clazz.getMethod("name");
         Method getDesc = clazz.getMethod("getDesc");
         Method getCode = clazz.getMethod("getCode");
-
+        //循环获取所有的Field
+        ArrayList<Field> targetFields = new ArrayList<>();
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println("当前遍历的 field = " + field.getName());
+            // 如果字段是非私有的，或者字段的名称为"$VALUES"，则跳过当前循环，开始下一次循环
+            if (!Modifier.isPrivate(field.getModifiers())||"$VALUES".equals(field.getName())){
+                continue;
+            }
+            // 否则，将满足条件的字段添加到已创建的ArrayList中
+            targetFields.add(field);
+        }
         // 生成对象
         bufferObject.append(enumConst).append("={");
         for (int i = 0; i < objects.length; i++) {
             //拿到枚举的值，去拼接
             Object obj = objects[i];
-            bufferObject.append(name.invoke(obj)).append(":{code:\"").append(getCode.invoke(obj)).append("\", desc:\"").append(getDesc.invoke(obj)).append("\"}");
+            bufferObject.append(name.invoke(obj)).append(":");
+            formatJsonObj(bufferObject,targetFields,clazz,obj);
             if (i < objects.length - 1) {
                 bufferObject.append(",");
             }
@@ -60,14 +80,31 @@ public class EnumGenerator {
         bufferArray.append(enumConst).append("_ARRAY=[");
         for (int i = 0; i < objects.length; i++) {
             Object obj = objects[i];
-            bufferArray.append("{code:\"").append(getCode.invoke(obj)).append("\", desc:\"").append(getDesc.invoke(obj)).append("\"}");
+            formatJsonObj(bufferArray,targetFields,clazz,obj);
             if (i < objects.length - 1) {
                 bufferArray.append(",");
             }
         }
         bufferArray.append("];\r\n");
     }
-
+    /**
+     * 将一个枚举值转成JSON对象字符串
+     * 比如：SeatColEnum.YDZ_A("A", "A", "1")
+     * 转成：{code:"A",desc:"A",type:"1"}
+     */
+    private static void formatJsonObj(StringBuffer bufferObject, List<Field> targetFields, Class clazz, Object obj) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        bufferObject.append("{");
+        for (int j = 0; j < targetFields.size(); j++) {
+            Field field = targetFields.get(j);
+            String fieldName = field.getName();
+            String getMethod = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+            bufferObject.append(fieldName).append(":\"").append(clazz.getMethod(getMethod).invoke(obj)).append("\"");
+            if (j < targetFields.size() - 1) {
+                bufferObject.append(",");
+            }
+        }
+        bufferObject.append("}");
+    }
     /**
      * 写文件
      * @param stringBuffer
