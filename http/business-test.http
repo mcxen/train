@@ -12,5 +12,5 @@ Content-Type: application/json
   "namePy": "WH"
 }
 ### Generate Train Seat
-GET http://127.0.0.1:8081/business/admin/train/gen-seat/G1
+GET http://127.0.0.1:8081/business/admin/train/gen-seat/K122
 Content-Type: application/x-www-form-urlencoded
