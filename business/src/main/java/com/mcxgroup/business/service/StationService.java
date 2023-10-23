@@ -1,10 +1,13 @@
 package com.mcxgroup.business.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.common.exception.BusinessException;
+import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.business.domain.Station;
@@ -34,6 +37,13 @@ public class StationService {
         DateTime now = DateTime.now();
         Station station = BeanUtil.copyProperties(req, Station.class);
         if (ObjectUtil.isNull(station.getId())) {
+            StationExample example = new StationExample();
+            StationExample.Criteria criteria = example.createCriteria();
+            criteria.andNameEqualTo(req.getName());
+            List<Station> list = stationMapper.selectByExample(example);
+            if (CollUtil.isNotEmpty(list)){
+                throw new BusinessException(BusinessExceptionEnum.BUSINESS_STATION_NAME_UNIQUE);
+            }
             station.setId(SnowUtil.getSnowflakeNextId());
             station.setCreateTime(now);
             station.setUpdateTime(now);
