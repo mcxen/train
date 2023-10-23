@@ -1,11 +1,16 @@
 package com.mcxgroup.business.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.business.domain.TrainStation;
+import com.mcxgroup.business.domain.TrainStationExample;
 import com.mcxgroup.common.context.LoginMemberContext;
+import com.mcxgroup.common.exception.BusinessException;
+import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.business.domain.Train;
@@ -35,6 +40,10 @@ public class TrainService {
         DateTime now = DateTime.now();
         Train train = BeanUtil.copyProperties(req, Train.class);
         if (ObjectUtil.isNull(train.getId())) {
+            Train selectByUniqueCode = selectByUnique(req.getCode());
+            if (ObjectUtil.isNotEmpty(selectByUniqueCode)){
+                throw new BusinessException(BusinessExceptionEnum.BUSINESS_TRAIN_NAME_UNIQUE);
+            }
             train.setId(SnowUtil.getSnowflakeNextId());
             train.setCreateTime(now);
             train.setUpdateTime(now);
@@ -43,6 +52,17 @@ public class TrainService {
             train.setUpdateTime(now);
             trainMapper.updateByPrimaryKey(train);
         }
+    }
+
+    private Train selectByUnique(String code) {
+        TrainExample example = new TrainExample();
+        TrainExample.Criteria criteria = example.createCriteria();
+        criteria.andCodeEqualTo(code);
+        List<Train> list = trainMapper.selectByExample(example);
+        if (CollUtil.isNotEmpty(list)){
+            return  list.get(0);
+        }
+        return null;
     }
 
     public PageResp<TrainQueryResp> queryList(TrainQueryReq req) {

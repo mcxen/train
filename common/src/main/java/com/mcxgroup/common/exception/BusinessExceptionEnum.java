@@ -6,7 +6,12 @@ public enum BusinessExceptionEnum {
     MEMBER_MOBILE_EXIST("手机号已存在"),//相当于带参数的构造函数了，所以必须得创建带参数构造函数
     MEMBER_MOBILE_NOT_EXIST("手机号不存在，先获取验证码"),//相当于带参数的构造函数了，所以必须得创建带参数构造函数
     MEMBER_MOBILE_CODE_ERROR("验证码错误"),//相当于带参数的构造函数了，所以必须得创建带参数构造函数
-    BUSINESS_STATION_NAME_UNIQUE("车站已经存在");
+    BUSINESS_STATION_NAME_UNIQUE("车站已经存在"),
+    BUSINESS_TRAIN_NAME_UNIQUE("车次已经存在"),
+    BUSINESS_TRAIN_CARRIAGE_NAME_UNIQUE("当前车次的该车厢已经存在"),
+//    火车车站的唯一有两个
+    BUSINESS_TRAIN_STATION_INDEX_UNIQUE("当前车次的该站序已经存在"),
+    BUSINESS_TRAIN_STATION_NAME_UNIQUE("当前车次的该站名已经存在");
 
     private String desc;
 
