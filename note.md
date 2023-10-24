@@ -273,3 +273,9 @@ npm install -g @vue/cli
 
 - 实现自动生成
 - ![image-20231024160914597](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231024160914597.png)
+
+
+
+- 支持定时任务
+
+![截屏2023-10-24 17.03.59](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-24%2017.03.59.png)
