@@ -267,3 +267,9 @@ npm install -g @vue/cli
 
 <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231021214033780.png" alt="image-20231021214033780" style="zoom:50%;" />
 
+
+
+
+
+- 实现自动生成
+- ![image-20231024160914597](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231024160914597.png)
