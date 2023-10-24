@@ -2,3 +2,34 @@
 GET http://127.0.0.1:8000/batch/hello
 Content-Type: application/x-www-form-urlencoded
 
+
+### Batch Add
+POST http://localhost:8000/batch/admin/job/add
+Content-Type: application/json
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "desc": "Quartz Job"
+}
+
+### Batch 暂停Job
+POST http://localhost:8000/batch/admin/job/pause
+Content-Type: application/json
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default"
+}
+
+### Batch reschedule 重置
+POST http://localhost:8000/batch/admin/job/reschedule
+Content-Type: application/json
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+  "cronExpression": "*/1 * * * * ?",
+  "desc": "Quartz Job"
+}

@@ -34,6 +34,16 @@ Mapper生成器：
 
 
 
-Enum.js生成：
+### Enum.js生成：
 
 ![image-20231021173159353](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231021173159353.png)
+
+
+
+
+
+### 支持Quartz的Job的接口
+
+
+
+![截屏2023-10-24 20.38.21](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-24%2020.38.21.png)

@@ -1,3 +1,125 @@
+POST http://localhost:8000/batch/admin/job/pause
+Content-Type: application/json
+Content-Length: 77
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-10-24T203559.200.json
+
+###
+
+POST http://localhost:8000/batch/admin/job/pause
+Content-Type: application/json
+Content-Length: 78
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+}
+
+<> 2023-10-24T203552.400.json
+
+###
+
+POST http://localhost:8000/batch/admin/job/reschedule
+Content-Type: application/json
+Content-Length: 138
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+  "cronExpression": "*/1 * * * * ?",
+  "desc": "Quartz Job"
+}
+
+<> 2023-10-24T203508.200.json
+
+###
+
+POST http://localhost:8000/batch/admin/job/add
+Content-Type: application/json
+Content-Length: 138
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "desc": "Quartz Job"
+}
+
+<> 2023-10-24T195705.200.json
+
+###
+
+POST http://localhost:8000/batch/admin/job/add
+Content-Type: application/json
+Content-Length: 138
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "desc": "Quartz Job"
+}
+
+<> 2023-10-24T195702.500.json
+
+###
+
+POST http://localhost:8000/batch/admin/job/add
+Content-Type: application/json
+Content-Length: 138
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "desc": "Quartz Job"
+}
+
+<> 2023-10-24T195646.200.json
+
+###
+
+POST http://localhost:8000/batch/admin/job/add
+Content-Type: application/json
+Content-Length: 138
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.QuartzJob",
+  "jobGroupName": "default",
+  "cronExpression": "*/2 * * * * ?",
+  "desc": "Quartz Job"
+}
+
+<> 2023-10-24T195630.200.json
+
+###
+
 GET http://127.0.0.1:8000/batch/hello
 Content-Type: application/x-www-form-urlencoded
 Connection: Keep-Alive
@@ -538,100 +660,6 @@ User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-10-08T160714.500.html
-
-###
-
-POST http://127.0.0.1:8000/member/member/login
-Content-Type: application/json
-Content-Length: 45
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "mobile":"13088880000",
-  "code":"8888"
-}
-
-<> 2023-10-08T160711.200.json
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list?page=1&size=2
-Content-Type: application/json
-token: {{token}}
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T160704.500.html
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list?page=1&size=2
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTYyNTE0MjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjMzNzgyMCwiaWF0IjoxNjk2MjUxNDIwfQ.NtOTUxLMt7YUqPXyeCRADnFo9ZoMrKoNKBFeCVpxZi8
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-06T173818.200.json
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list?page=1&size=2
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTYyNTE0MjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjMzNzgyMCwiaWF0IjoxNjk2MjUxNDIwfQ.NtOTUxLMt7YUqPXyeCRADnFo9ZoMrKoNKBFeCVpxZi8
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-06T151543.200.json
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTYyNTE0MjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjMzNzgyMCwiaWF0IjoxNjk2MjUxNDIwfQ.NtOTUxLMt7YUqPXyeCRADnFo9ZoMrKoNKBFeCVpxZi8
-Content-Length: 18
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-"page=1";
-"size=2"
-
-<> 2023-10-06T151519.200.json
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTYyNTE0MjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjMzNzgyMCwiaWF0IjoxNjk2MjUxNDIwfQ.NtOTUxLMt7YUqPXyeCRADnFo9ZoMrKoNKBFeCVpxZi8
-Content-Length: 18
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-"page=1",
-"size=2"
-
-<> 2023-10-06T151517.200.json
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTYyNTE0MjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjMzNzgyMCwiaWF0IjoxNjk2MjUxNDIwfQ.NtOTUxLMt7YUqPXyeCRADnFo9ZoMrKoNKBFeCVpxZi8
-Content-Length: 17
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-"page=1"
-"size=2"
-
-<> 2023-10-06T151514.200.json
 
 ###
 
