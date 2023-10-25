@@ -1,7 +1,9 @@
 <template>
   <p>
     <a-space>
-      <a-button type="primary" @click="handleQuery()">刷新</a-button>
+      <train-select-view v-model="codeParam.code" width="300px"/>
+      <a-date-picker v-model:value="codeParam.date" valueFormat="YYYY-MM-DD" placeholder="请选择日期" />
+      <a-button type="primary" @click="handleQuery()">查找</a-button>
       <a-button type="primary" @click="onAdd">新增</a-button>
     </a-space>
   </p>
@@ -96,6 +98,10 @@ export default defineComponent({
       endTime: undefined,
       createTime: undefined,
       updateTime: undefined,
+    });
+    let codeParam = ref({
+      code: null,
+      date:null
     });
     const dailyTrains = ref([]);
     // 分页的三个属性名是固定的，不能更改，是vue的ref的固定的
@@ -210,7 +216,9 @@ export default defineComponent({
       axios.get("/business/admin/daily-train/query-list", {
         params: {
           page: param.page,
-          size: param.size
+          size: param.size,
+          code: codeParam.value.code,
+          date:codeParam.value.date
         }
       }).then((response) => {
         loading.value = false;
@@ -265,7 +273,8 @@ export default defineComponent({
       handleOk,
       onEdit,
       onDelete,
-      onChangeCode
+      onChangeCode,
+      codeParam
     };
   },
 });
