@@ -238,6 +238,7 @@ export default defineComponent({
     const onChangeCode = (train) => {
       console.log("车次下拉组件选择：", train);
       let t = Tool.copy(train);
+      //原来是t.id = null 这样的话会有两个数据
       delete t.id;
       // 用assign可以合并
       dailyTrain.value = Object.assign(dailyTrain.value, t);
