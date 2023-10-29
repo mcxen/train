@@ -47,11 +47,22 @@ public class DailyTrainStationService {
 
     public PageResp<DailyTrainStationQueryResp> queryList(DailyTrainStationQueryReq req) {
         DailyTrainStationExample example = new DailyTrainStationExample();
-        example.setOrderByClause("id desc");
+        example.setOrderByClause("date desc,train_code asc,`index` asc");
         DailyTrainStationExample.Criteria criteria = example.createCriteria();
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
         PageHelper.startPage(req.getPage(), req.getSize());
+        if (ObjectUtil.isNotEmpty(req.getDate())){
+            //如果trainCode有传进来的树枝就按照传进来的查询，没有的话就不加这个条件
+            criteria.andDateEqualTo(req.getDate());
+//            System.out.println("req.getTrainCode() = " + req.getTrainCode());
+        }
+
+        if (ObjectUtil.isNotEmpty(req.getTrainCode())){
+            //如果trainCode有传进来的树枝就按照传进来的查询，没有的话就不加这个条件
+            criteria.andTrainCodeEqualTo(req.getTrainCode());
+//            System.out.println("req.getTrainCode() = " + req.getTrainCode());
+        }
         List<DailyTrainStation> dailyTrainStationList = dailyTrainStationMapper.selectByExample(example);
 
         PageInfo<DailyTrainStation> pageInfo = new PageInfo<>(dailyTrainStationList);
