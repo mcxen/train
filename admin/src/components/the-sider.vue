@@ -74,6 +74,21 @@
                 <user-outlined/> &nbsp; 每日车次管理
               </router-link>
             </a-menu-item>
+            <a-menu-item key="/business/daily-train-station">
+              <router-link to="/business/daily-train-station">
+                <user-outlined/> &nbsp; 每日车次车站
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="/business/daily-train-carriage">
+              <router-link to="/business/daily-train-carriage">
+                <user-outlined/> &nbsp; 每日车厢车站
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="/business/daily-train-seat">
+              <router-link to="/business/daily-train-seat">
+                <user-outlined/> &nbsp; 每日车座车站
+              </router-link>
+            </a-menu-item>
           </a-sub-menu>
         </a-menu>
     </a-layout-sider>
