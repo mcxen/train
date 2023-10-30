@@ -1,7 +1,9 @@
 <template>
   <p>
     <a-space>
-      <a-button type="primary" @click="handleQuery()">刷新</a-button>
+      <train-select-view v-model="codeParam.trainCode" width="300px"/>
+      <a-date-picker v-model:value="codeParam.date" valueFormat="YYYY-MM-DD" placeholder="请选择日期" />
+      <a-button type="primary" @click="handleQuery()">查找</a-button>
       <a-button type="primary" @click="onAdd">新增</a-button>
     </a-space>
   </p>
@@ -39,7 +41,7 @@
         <a-date-picker v-model:value="dailyTrainCarriage.date" valueFormat="YYYY-MM-DD" placeholder="请选择日期" />
       </a-form-item>
       <a-form-item label="车次编号">
-        <a-input v-model:value="dailyTrainCarriage.trainCode" />
+        <train-select-view v-model:value="dailyTrainCarriage.trainCode" @change="onChangeCode"/>
       </a-form-item>
       <a-form-item label="箱序">
         <a-input v-model:value="dailyTrainCarriage.index" />
@@ -51,15 +53,15 @@
           </a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item label="座位数">
-        <a-input v-model:value="dailyTrainCarriage.seatCount" />
-      </a-form-item>
+<!--      <a-form-item label="座位数">-->
+<!--        <a-input v-model:value="dailyTrainCarriage.seatCount" />-->
+<!--      </a-form-item>-->
       <a-form-item label="排数">
         <a-input v-model:value="dailyTrainCarriage.rowCount" />
       </a-form-item>
-      <a-form-item label="列数">
-        <a-input v-model:value="dailyTrainCarriage.colCount" />
-      </a-form-item>
+<!--      <a-form-item label="列数">-->
+<!--        <a-input v-model:value="dailyTrainCarriage.colCount" />-->
+<!--      </a-form-item>-->
     </a-form>
   </a-modal>
 </template>
@@ -68,9 +70,11 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import {notification} from "ant-design-vue";
 import axios from "axios";
+import TrainSelectView from "@/components/train-select.vue";
 
 export default defineComponent({
   name: "daily-train-carriage-view",
+  components: {TrainSelectView},
   setup() {
     // 全局的window，直接引用import './assets/js/enums';//引入enums.js，
     const SEAT_TYPE_ARRAY = window.SEAT_TYPE_ARRAY;
@@ -95,6 +99,10 @@ export default defineComponent({
       pageSize: 6,
     });
     let loading = ref(false);
+    let codeParam = ref({
+      trainCode: null,
+      date:null
+    });
     const columns = [
     {
       title: '日期',
@@ -190,7 +198,9 @@ export default defineComponent({
       axios.get("/business/admin/daily-train-carriage/query-list", {
         params: {
           page: param.page,
-          size: param.size
+          size: param.size,
+          trainCode: codeParam.value.trainCode,
+          date:codeParam.value.date
         }
       }).then((response) => {
         loading.value = false;
@@ -215,6 +225,14 @@ export default defineComponent({
       });
     };
 
+    const onChangeCode = (train) => {
+      console.log("车次下拉组件选择：", train);
+      let t = Tool.copy(train);
+      //原来是t.id = null 这样的话会有两个数据
+      delete t.id;
+      // 用assign可以合并
+      dailyTrainCarriage.value = Object.assign(dailyTrainCarriage.value, t);
+    };
     onMounted(() => {
       handleQuery({
         page: 1,
@@ -235,7 +253,9 @@ export default defineComponent({
       onAdd,
       handleOk,
       onEdit,
-      onDelete
+      onDelete,
+      codeParam,
+      onChangeCode
     };
   },
 });
