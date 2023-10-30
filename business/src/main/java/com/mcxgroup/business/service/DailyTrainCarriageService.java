@@ -51,7 +51,7 @@ public class DailyTrainCarriageService {
 
     public PageResp<DailyTrainCarriageQueryResp> queryList(DailyTrainCarriageQueryReq req) {
         DailyTrainCarriageExample example = new DailyTrainCarriageExample();
-        example.setOrderByClause("id desc");
+        example.setOrderByClause("date desc,train_code,asc,carriage_index asc,carriage_seat_index asc");
         DailyTrainCarriageExample.Criteria criteria = example.createCriteria();
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
