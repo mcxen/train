@@ -17,7 +17,7 @@ import java.util.*;
  * @author McXen Cool
  */
 public class ServerGenerator {
-    static boolean readOnly = false;//表示这个界面是不是只读的界面
+    static boolean readOnly = true;//表示这个界面是不是只读的界面
     static String vuePath = "admin/src/views/main/";
     static String serverPath = "[module]/src/main/java/com/mcxgroup/[module]/";
     static String pomPath = "generator/pom.xml";
