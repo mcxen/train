@@ -2,7 +2,7 @@
 GET http://127.0.0.1:8000/batch/hello
 Content-Type: application/x-www-form-urlencoded
 
-### Hello Business
+### query Business
 GET http://127.0.0.1:8000/batch/admin/job/query
 Content-Type: application/x-www-form-urlencoded
 

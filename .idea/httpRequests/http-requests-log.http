@@ -4,6 +4,26 @@ Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
+<> 2023-10-31T203833.200.txt
+
+###
+
+GET http://127.0.0.1:8000/batch/hello
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-10-31T203801.200.txt
+
+###
+
+GET http://127.0.0.1:8000/batch/hello
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
 <> 2023-10-25T195612.500.json
 
 ###
@@ -620,35 +640,6 @@ User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-10-08T161308.500.html
-
-###
-
-POST http://127.0.0.1:8080/member/passenger/save
-Content-Type: application/json
-token: {{token}}
-Content-Length: 69
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name":"passengerOne",
-  "idCard":"3231123123123",
-  "type":"1"
-}
-
-<> 2023-10-08T161215.500.html
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list?page=1&size=2
-Content-Type: application/json
-token: {{token}}
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T160928.500.html
 
 ###
 
