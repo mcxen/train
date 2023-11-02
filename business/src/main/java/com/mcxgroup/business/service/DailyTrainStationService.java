@@ -85,7 +85,7 @@ public class DailyTrainStationService {
         dailyTrainStationMapper.deleteByPrimaryKey(id);
     }
     public void genDaily(Date date,String trainCode) {
-        LOG.info("生成日期【{}】车次【{}】的信息开始", DateUtil.formatDate(date), trainCode);
+        LOG.info("生成每日车次车站，日期【{}】车次【{}】的信息开始", DateUtil.formatDate(date), trainCode);
         //删除车次的信息
         // 删除该车次已有的数据
         // 删除该车次已有的数据
@@ -110,5 +110,7 @@ public class DailyTrainStationService {
             dailyTrainStation.setDate(date);
             dailyTrainStationMapper.insert(dailyTrainStation);
         }
+        LOG.info("生成每日车次车站，日期【{}】车次【{}】的信息结束", DateUtil.formatDate(date), trainCode);
+
     }
 }
