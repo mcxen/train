@@ -80,6 +80,14 @@ public class TrainStationService {
         }
         return null;
     }
+    public List<TrainStation>  selectByTrainCode(String trainCode) {
+        TrainStationExample example = new TrainStationExample();
+        TrainStationExample.Criteria criteria = example.createCriteria();
+        example.setOrderByClause("`index` asc");
+        criteria.andTrainCodeEqualTo(trainCode);
+        List<TrainStation> list = trainStationMapper.selectByExample(example);
+        return list;
+    }
 
     public PageResp<TrainStationQueryResp> queryList(TrainStationQueryReq req) {
         TrainStationExample example = new TrainStationExample();

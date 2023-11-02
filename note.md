@@ -279,3 +279,55 @@ npm install -g @vue/cli
 - 支持定时任务
 
 ![截屏2023-10-24 17.03.59](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-24%2017.03.59.png)
+
+
+
+
+
+## BUG集合：
+
+### 无法创建Bean - 原因往往在最后一个Caused by
+
+```sh
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.mcxgroup.batch.feign.BusinessFeign': FactoryBean threw exception on object creation
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:154)
+```
+
+
+
+![截屏2023-11-02 18.56.28](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-02%2018.56.28.png)
+
+
+
+我滴Fuck
+
+代码正常运行时，重启后报Error creating bean with name错误，一直找不到原因；查看网上信息说是注解扫描问题， 并没有修改代码。
+
+后来发现一句话：造成该报错无非这几个原因：**扫描不到包、导包导错、注解没加或加错，类型、类名不正确**等；
+
+**排查：查看报错所有日志的Caused by，原因往往在最后一个Caused by。**
+
+重点是上面加粗字，排查后发现错误为Feign PathVariable annotation was empty on param 0,
+
+
+原因是在使用FeignClient时，对@PathVariable没有给出默认名字
+应该是：
+
+```java
+@PathVariable("name") String s
+```
+
+但是没有给出默认name：
+
+```java
+@PathVariable() String s
+```
+
+解决方式：开启参数保留
+idea为例
+Settings->Java Compiler
+在Additonal command line parameters添加-parameters
+
+
+
+![截屏2023-11-02 19.07.48](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-02%2019.07.48.png)

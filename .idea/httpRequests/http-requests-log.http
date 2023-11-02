@@ -1,3 +1,131 @@
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 81
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-11-02T191321.200.json
+
+###
+
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 81
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-11-02T191304.200.json
+
+###
+
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 81
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-11-02T191223.200.json
+
+###
+
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 81
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-11-02T191121.200.json
+
+###
+
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 81
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-11-02T191103.200.json
+
+###
+
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 81
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-11-02T190144.200.json
+
+###
+
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 81
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
+
+<> 2023-11-02T185411.200.json
+
+###
+
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
+Content-Length: 82
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default",
+}
+
+<> 2023-11-02T185400.400.json
+
+###
+
 GET http://127.0.0.1:8000/batch/hello
 Content-Type: application/x-www-form-urlencoded
 Connection: Keep-Alive
@@ -575,99 +703,6 @@ User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-10-08T165312.404.json
-
-###
-
-DELETE http://localhost:8000/member/passenger/delete/1710931936203116544
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTUwODcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5Njg0MTQ4NywiaWF0IjoxNjk2NzU1MDg3fQ.H7GyQ_FGjAHxG3PJ0MBhYvt7HF6xPakM_doCRvZr9zE
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T165255.404.json
-
-###
-
-DELETE http://localhost:8000/member/passenger/delete/1710228968692649984
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTUwODcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5Njg0MTQ4NywiaWF0IjoxNjk2NzU1MDg3fQ.H7GyQ_FGjAHxG3PJ0MBhYvt7HF6xPakM_doCRvZr9zE
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T165213.404.json
-
-###
-
-DELETE http://127.0.0.1:8000/member/passenger/delete/1710228968692649984
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTUwODcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5Njg0MTQ4NywiaWF0IjoxNjk2NzU1MDg3fQ.H7GyQ_FGjAHxG3PJ0MBhYvt7HF6xPakM_doCRvZr9zE
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T165130.404.json
-
-###
-
-POST http://127.0.0.1:8000/member/member/login
-Content-Type: application/json
-Content-Length: 45
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "mobile":"13088880000",
-  "code":"8888"
-}
-
-<> 2023-10-08T165127.200.json
-
-###
-
-DELETE http://127.0.0.1:8000/member/passenger/delete/1710228968692649984
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTMwNTcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjgzOTQ1NywiaWF0IjoxNjk2NzUzMDU3fQ.24doR0y0qXEBvwDmyeVJD6ukzSBNlREdC1bA3OgpemI
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T164915.404.json
-
-###
-
-DELETE http://127.0.0.1:8080/member/passenger/delete/1710228968692649984
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTMwNTcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjgzOTQ1NywiaWF0IjoxNjk2NzUzMDU3fQ.24doR0y0qXEBvwDmyeVJD6ukzSBNlREdC1bA3OgpemI
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T164854.404.json
-
-###
-
-GET http://127.0.0.1:8080/member/passenger/query-list?page=1&size=2
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTMwNTcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjgzOTQ1NywiaWF0IjoxNjk2NzUzMDU3fQ.24doR0y0qXEBvwDmyeVJD6ukzSBNlREdC1bA3OgpemI
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T164848.200.json
-
-###
-
-DELETE http://127.0.0.1:8080/member/passenger/delete/1710228677838639104
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTMwNTcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5NjgzOTQ1NywiaWF0IjoxNjk2NzUzMDU3fQ.24doR0y0qXEBvwDmyeVJD6ukzSBNlREdC1bA3OgpemI
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T164836.404.json
 
 ###
 

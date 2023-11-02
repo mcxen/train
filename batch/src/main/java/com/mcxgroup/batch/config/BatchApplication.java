@@ -10,7 +10,7 @@ import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @ComponentScan("com.mcxgroup")
-//Scan不加的扫描不到隔壁目录的TestController
+//Scan不加的扫描不到隔壁目录的TestControllerå
 @MapperScan("com.mcxgroup.*.mapper")
 @EnableFeignClients("com.mcxgroup.batch.feign")
 //@Configuration

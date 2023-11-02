@@ -6,7 +6,14 @@ Content-Type: application/x-www-form-urlencoded
 GET http://127.0.0.1:8000/batch/admin/job/query
 Content-Type: application/x-www-form-urlencoded
 
+### Batch RUN
+POST http://localhost:8082/batch/admin/job/run
+Content-Type: application/json
 
+{
+  "name": "com.mcxgroup.batch.job.DailyTrainJob",
+  "jobGroupName": "default"
+}
 
 ### Batch Add
 POST http://localhost:8000/batch/admin/job/add
