@@ -1,10 +1,13 @@
 package com.mcxgroup.business.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.business.domain.Train;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
@@ -15,22 +18,28 @@ import com.mcxgroup.business.req.DailyTrainQueryReq;
 import com.mcxgroup.business.req.DailyTrainSaveReq;
 import com.mcxgroup.business.resp.DailyTrainQueryResp;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author johnconstantine
  */
 @Service
+@Slf4j
 public class DailyTrainService {
     private static final Logger LOG = LoggerFactory.getLogger(DailyTrainService.class);
 
     @Resource
     private DailyTrainMapper dailyTrainMapper;
 
+    @Resource
+    private TrainService trainService;
     public void save(DailyTrainSaveReq req) {
         DateTime now = DateTime.now();
         DailyTrain dailyTrain = BeanUtil.copyProperties(req, DailyTrain.class);
@@ -80,5 +89,41 @@ public class DailyTrainService {
 
     public void delete(Long id) {
         dailyTrainMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 生成指定日期的车次的数据
+     * @param date
+     */
+    public void genDaily(Date date) {
+        List<Train> trainList = trainService.selectAll();//所有的车次
+        if (CollUtil.isEmpty(trainList)){
+            log.info("所有车次数据为空");
+            return;
+        }
+        for (Train train : trainList) {
+            genDailyTrain(date,train);
+        }
+    }
+    @Transactional
+    public void genDailyTrain(Date date, Train train) {
+        LOG.info("生成日期【{}】车次【{}】的信息开始", DateUtil.formatDate(date), train.getCode());
+        // 删除该车次已有的数据
+        DailyTrainExample dailyTrainExample = new DailyTrainExample();
+        dailyTrainExample.createCriteria()
+                .andDateEqualTo(date)
+                .andCodeEqualTo(train.getCode());
+        dailyTrainMapper.deleteByExample(dailyTrainExample);
+
+        // 生成该车次的数据
+        DateTime now = DateTime.now();
+        DailyTrain dailyTrain = BeanUtil.copyProperties(train, DailyTrain.class);
+        dailyTrain.setId(SnowUtil.getSnowflakeNextId());
+        dailyTrain.setCreateTime(now);
+        dailyTrain.setUpdateTime(now);
+        dailyTrain.setDate(date);
+        dailyTrainMapper.insert(dailyTrain);
+
+        LOG.info("生成日期【{}】车次【{}】的信息结束", DateUtil.formatDate(date), train.getCode());
     }
 }
