@@ -77,6 +77,18 @@ public class TrainSeatService {
         pageResp.setList(list);
         return pageResp;
     }
+    public List<TrainSeat> selectByTrainCode(String trainCode){
+        /**
+         * 对于一些简单的SQL查询，可以直接使用Example来构造查询条件；
+         * 而对于一些相对复杂的查询，则需要使用Criteria进行细粒度的约束设置。
+         */
+        TrainSeatExample example = new TrainSeatExample();
+        TrainSeatExample.Criteria criteria = example.createCriteria();
+        example.setOrderByClause("`id` asc");
+        criteria.andTrainCodeEqualTo(trainCode);
+        List<TrainSeat> list = trainSeatMapper.selectByExample(example);
+        return list;
+    }
 
     public void delete(Long id) {
         trainSeatMapper.deleteByPrimaryKey(id);
