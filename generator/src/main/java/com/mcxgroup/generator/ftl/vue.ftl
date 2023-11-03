@@ -187,12 +187,14 @@ export default defineComponent({
       });
     };
 
-    const handleTableChange = (pagination) => {
+    const handleTableChange = (page) => {
+      // page是局部的变量，pagination是响应式的变量
       //增加点击的事件
       // console.log("看看自带的分页参数都有啥：" + pagination);
+      pagination.value.pageSize=page.pageSize;
       handleQuery({
-        page: pagination.current,
-        size: pagination.pageSize
+        page: page.current,
+        size: page.pageSize
       });
     };
 
