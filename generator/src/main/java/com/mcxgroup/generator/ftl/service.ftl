@@ -22,7 +22,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
+ * @project Train
  */
 @Service
 public class ${Domain}Service {

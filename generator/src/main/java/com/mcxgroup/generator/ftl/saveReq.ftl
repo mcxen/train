@@ -13,6 +13,11 @@ import java.math.BigDecimal;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/**
+* @author MCXEN
+* @project Train
+*/
+
 public class ${Domain}SaveReq {
 
     <#list fieldList as field>

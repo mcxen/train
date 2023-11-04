@@ -12,6 +12,11 @@ import java.math.BigDecimal;
 </#if>
 </#list>
 
+/**
+* @author MCXEN
+* @project Train
+*/
+
 public class ${Domain}QueryResp {
 
     <#list fieldList as field>

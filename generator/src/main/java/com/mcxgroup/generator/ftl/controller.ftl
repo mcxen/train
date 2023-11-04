@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+* @author MCXEN
+* @project Train
+*/
+
 @RestController
 @RequestMapping("/${do_main}")
 public class ${Domain}Controller {
