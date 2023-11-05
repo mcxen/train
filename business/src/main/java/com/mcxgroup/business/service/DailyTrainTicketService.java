@@ -4,11 +4,14 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.EnumUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mcxgroup.business.domain.*;
+import com.mcxgroup.business.enums.SeatTypeEnum;
+import com.mcxgroup.business.enums.TrainTypeEnum;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
@@ -22,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +40,8 @@ public class DailyTrainTicketService {
     private DailyTrainTicketMapper dailyTrainTicketMapper;
     @Resource
     private TrainStationService trainStationService;
-
+    @Resource
+    private DailyTrainSeatService dailyTrainSeatService;
     public void save(DailyTrainTicketSaveReq req) {
         DateTime now = DateTime.now();
         DailyTrainTicket dailyTrainTicket = BeanUtil.copyProperties(req, DailyTrainTicket.class);
@@ -79,7 +84,7 @@ public class DailyTrainTicketService {
         dailyTrainTicketMapper.deleteByPrimaryKey(id);
     }
 
-    public void genDaily(Date date, String trainCode) {
+    public void genDaily(DailyTrain dailyTrain,Date date, String trainCode) {
         String taskName = "'车票'";
         LOG.info("生成每日车次车厢，日期【{}】车次【{}】的{}信息开始", DateUtil.formatDate(date), trainCode,taskName);
         //删除车票
@@ -100,8 +105,10 @@ public class DailyTrainTicketService {
         for (int i = 0; i < stationList.size(); i++) {
             //得到出发的站
             TrainStation start = stationList.get(i);
+            BigDecimal sumKm = BigDecimal.ZERO;
             for (int j = i+1; j < stationList.size(); j++) {
                 TrainStation trainStationEnd = stationList.get(j);
+                sumKm = sumKm.add(trainStationEnd.getKm());
                 DailyTrainTicket dailyTrainTicket = new DailyTrainTicket();
                 dailyTrainTicket.setId(SnowUtil.getSnowflakeNextId());
                 dailyTrainTicket.setDate(date);
@@ -116,14 +123,26 @@ public class DailyTrainTicketService {
                 dailyTrainTicket.setEndPinyin(trainStationEnd.getNamePinyin());
                 dailyTrainTicket.setEndTime(trainStationEnd.getInTime());
                 dailyTrainTicket.setEndIndex(trainStationEnd.getIndex());
-                dailyTrainTicket.setYdz(0);
-                dailyTrainTicket.setYdzPrice(BigDecimal.ZERO);
-                dailyTrainTicket.setEdz(0);
-                dailyTrainTicket.setEdzPrice(BigDecimal.ZERO);
-                dailyTrainTicket.setRw(0);
-                dailyTrainTicket.setRwPrice(BigDecimal.ZERO);
-                dailyTrainTicket.setYw(0);
-                dailyTrainTicket.setYwPrice(BigDecimal.ZERO);
+                String dailyTrainType = dailyTrain.getType();
+                /**
+                 * 可以For循环遍历枚举类型，然后确定价格倍率
+                 * getCode 是 TrainTypeEnum 枚举中的另一个方法，用于获取火车类型的代码。
+                 * dailyTrainType 是一个变量，表示每日选择的火车类型。
+                 * 该行代码的作用是从 TrainTypeEnum 枚举中获取指定火车类型（dailyTrainType）的价格倍率（priceRate）
+                 */
+                BigDecimal typePrice = EnumUtil.getFieldBy(TrainTypeEnum::getPriceRate, TrainTypeEnum::getCode, dailyTrainType);
+                BigDecimal YDZPrice = sumKm.multiply(SeatTypeEnum.YDZ.getPrice()).multiply(typePrice).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal EDZPrice = sumKm.multiply(SeatTypeEnum.EDZ.getPrice()).multiply(typePrice).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal RWPrice = sumKm.multiply(SeatTypeEnum.RW.getPrice()).multiply(typePrice).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal YWPrice = sumKm.multiply(SeatTypeEnum.YW.getPrice()).multiply(typePrice).setScale(2, RoundingMode.HALF_UP);
+                dailyTrainTicket.setYdz(dailyTrainSeatService.countSeat(date,trainCode, SeatTypeEnum.YDZ.getCode()));
+                dailyTrainTicket.setYdzPrice(YDZPrice);
+                dailyTrainTicket.setEdz(dailyTrainSeatService.countSeat(date,trainCode, SeatTypeEnum.EDZ.getCode()));
+                dailyTrainTicket.setEdzPrice(EDZPrice);
+                dailyTrainTicket.setRw(dailyTrainSeatService.countSeat(date,trainCode, SeatTypeEnum.RW.getCode()));
+                dailyTrainTicket.setRwPrice(RWPrice);
+                dailyTrainTicket.setYw(dailyTrainSeatService.countSeat(date,trainCode, SeatTypeEnum.YW.getCode()));
+                dailyTrainTicket.setYwPrice(YWPrice);
                 dailyTrainTicket.setCreateTime(now);
                 dailyTrainTicket.setUpdateTime(now);
                 //保存到数据库

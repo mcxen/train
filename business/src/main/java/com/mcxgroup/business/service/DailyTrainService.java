@@ -132,7 +132,7 @@ public class DailyTrainService {
         dailyTrainStationService.genDaily(date,train.getCode());//车站数据
         dailyTrainCarriageService.genDaily(date,train.getCode());//车厢数据
         dailyTrainSeatService.genDaily(date,train.getCode());//座位数据
-        dailyTrainTicketService.genDaily(date,train.getCode());//车票
+        dailyTrainTicketService.genDaily(dailyTrain,date,train.getCode());//车票
         LOG.info("生成日期【{}】车次【{}】的信息结束", DateUtil.formatDate(date), train.getCode());
     }
 }
