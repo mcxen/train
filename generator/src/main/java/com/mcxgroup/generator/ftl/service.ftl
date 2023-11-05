@@ -53,14 +53,12 @@ public class ${Domain}Service {
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
         PageHelper.startPage(req.getPage(), req.getSize());
+        //获取查询结果：
         List<${Domain}> ${domain}List = ${domain}Mapper.selectByExample(example);
-
         PageInfo<${Domain}> pageInfo = new PageInfo<>(${domain}List);
         LOG.info("总行数：{}", pageInfo.getTotal());
         LOG.info("总页数：{}", pageInfo.getPages());
-
         List<${Domain}QueryResp> list = BeanUtil.copyToList(${domain}List, ${Domain}QueryResp.class);
-
         PageResp<${Domain}QueryResp> pageResp = new PageResp<>();
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(list);
