@@ -203,6 +203,8 @@ export default defineComponent({
           size: pagination.value.pageSize
         };
       }
+      //保存查询的参数
+      SessionStorage.set(SESSION_TICKET_PARAMS,codeParam.value);
       loading.value = true;
       axios.get("/business/daily-train-ticket/query-list", {
         params: {
@@ -230,7 +232,7 @@ export default defineComponent({
     const toOrder = (record)=>{
       // 点击预定-》copy到一个本地变量-》session存储-》路由转发到order页面
       dailyTrainTicket.value = Tool.copy(record);
-      SessionStorage.set("dailyTrainTicket",dailyTrainTicket.value);
+      SessionStorage.set(SESSION_ORDER,dailyTrainTicket.value);
       router.push("/order")
     }
     const handleTableChange = (page) => {
@@ -249,11 +251,19 @@ export default defineComponent({
       return dayjs('00:00:00', 'HH:mm:ss').second(diff).format('HH:mm:ss');
     };
     onMounted(() => {
+      //{}"是常用技巧，可以避免空指针异常
+      codeParam.value=SessionStorage.get(SESSION_TICKET_PARAMS)||{};
       /**
        * handleQuery({
        *         page: 1,
        *         size: pagination.value.pageSize
        *       });
+       * if (Tool.isNotEmpty(codeParam.value)){
+       *         handleQuery({
+       *           page: 1,
+       *           size: pagination.value.pageSize
+       *         });
+       *       }
        * 如果你要加入所有条件才能查询，就在初始的时候把这里屏蔽了。
        */
       handleQuery({

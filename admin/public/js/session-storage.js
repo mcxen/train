@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-undef
+
 SessionStorage = {
     get: function (key) {
         var v = sessionStorage.getItem(key);
