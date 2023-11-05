@@ -148,90 +148,48 @@ export default defineComponent({
       title: '历时',
       dataIndex: 'duration',
     },
-    // {
-    //   title: '出发站',
-    //   dataIndex: 'start',
-    //   key: 'start',
-    // },
-    // {
-    //   title: '出发站拼音',
-    //   dataIndex: 'startPinyin',
-    //   key: 'startPinyin',
-    // },
-    // {
-    //   title: '出发时间',
-    //   dataIndex: 'startTime',
-    //   key: 'startTime',
-    // },
-    // {
-    //   title: '出发站序',
-    //   dataIndex: 'startIndex',
-    //   key: 'startIndex',
-    // },
-    // {
-    //   title: '到达站',
-    //   dataIndex: 'end',
-    //   key: 'end',
-    // },
-    // {
-    //   title: '到达站拼音',
-    //   dataIndex: 'endPinyin',
-    //   key: 'endPinyin',
-    // },
-    // {
-    //   title: '到站时间',
-    //   dataIndex: 'endTime',
-    //   key: 'endTime',
-    // },
-    // {
-    //   title: '到站站序',
-    //   dataIndex: 'endIndex',
-    //   key: 'endIndex',
-    // },
+
     {
       title: '一等座余票',
       dataIndex: 'ydz',
       key: 'ydz',
     },
-    // {
-    //   title: '一等座票价',
-    //   dataIndex: 'ydzPrice',
-    //   key: 'ydzPrice',
-    // },
+
     {
       title: '二等座余票',
       dataIndex: 'edz',
       key: 'edz',
     },
-    // {
-    //   title: '二等座票价',
-    //   dataIndex: 'edzPrice',
-    //   key: 'edzPrice',
-    // },
+
     {
       title: '软卧余票',
       dataIndex: 'rw',
       key: 'rw',
     },
-    // {
-    //   title: '软卧票价',
-    //   dataIndex: 'rwPrice',
-    //   key: 'rwPrice',
-    // },
     {
       title: '硬卧余票',
       dataIndex: 'yw',
       key: 'yw',
     },
-    // {
-    //   title: '硬卧票价',
-    //   dataIndex: 'ywPrice',
-    //   key: 'ywPrice',
-    // },
     ];
 
 //如果没有初值的话就增加一个初始的参数首页为1页
     const handleQuery = (param) => {
+      /**
+       * 如果你要加入所有条件才能查询，就在初始的时候把这里解除屏蔽。
+       */
+      // if (Tool.isEmpty(codeParam.value.date)){
+      //   notification.error({description: "请输入日期"});
+      //   return;
+      // }
+      // if (Tool.isEmpty(codeParam.value.start)){
+      //   notification.error({description: "请输入出发地"});
+      //   return;
+      // }
+      // if (Tool.isEmpty(codeParam.value.end)){
+      //   notification.error({description: "请输入目的地"});
+      //   return;
+      // }
       if (!param) {
         param = {
           page: 1,
@@ -278,6 +236,13 @@ export default defineComponent({
       return dayjs('00:00:00', 'HH:mm:ss').second(diff).format('HH:mm:ss');
     };
     onMounted(() => {
+      /**
+       * handleQuery({
+       *         page: 1,
+       *         size: pagination.value.pageSize
+       *       });
+       * 如果你要加入所有条件才能查询，就在初始的时候把这里屏蔽了。
+       */
       handleQuery({
         page: 1,
         size: pagination.value.pageSize

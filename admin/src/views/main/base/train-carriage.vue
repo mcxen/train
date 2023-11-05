@@ -91,7 +91,7 @@ export default defineComponent({
     const pagination = ref({
       total: 0,
       current: 1,
-      pageSize: 6,
+      pageSize: 10,
     });
     let loading = ref(false);
     let codeParam = ref({
