@@ -16,6 +16,8 @@
            :loading="loading">
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
+<!--        operation部分是预留的需要的案件-->
+        <a-button type="primary" @click = "toOrder(record)">预定</a-button>
       </template>
       <template v-else-if="column.dataIndex === 'station'">
         {{record.start}}<br/>
@@ -81,6 +83,7 @@ import axios from "axios";
 import StationSelectView from "@/components/station-select.vue";
 import dayjs from "dayjs";
 import TrainSelectView from "@/components/train-select.vue";
+import router from "@/router";
 
 export default defineComponent({
   name: "ticket-view",
@@ -171,6 +174,10 @@ export default defineComponent({
       dataIndex: 'yw',
       key: 'yw',
     },
+      {
+        title: '操作',
+        dataIndex: 'operation',
+      },
     ];
 
 //如果没有初值的话就增加一个初始的参数首页为1页
@@ -220,6 +227,12 @@ export default defineComponent({
       });
     };
 
+    const toOrder = (record)=>{
+      // 点击预定-》copy到一个本地变量-》session存储-》路由转发到order页面
+      dailyTrainTicket.value = Tool.copy(record);
+      SessionStorage.set("dailyTrainTicket",dailyTrainTicket.value);
+      router.push("/order")
+    }
     const handleTableChange = (page) => {
       // page是局部的变量，pagination是响应式的变量
       //增加点击的事件
@@ -259,7 +272,8 @@ export default defineComponent({
       handleQuery,
       loading,
       codeParam,
-      calDuration
+      calDuration,
+      toOrder
     };
   },
 });
