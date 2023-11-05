@@ -1,10 +1,12 @@
 <template>
   <p>
     <a-space>
-      <a-date-picker v-model:value="params.date" valueFormat="YYYY-MM-DD" :disabled-date="disabledDate" placeholder="请选择日期"></a-date-picker>
-      <station-select-view v-model="params.start" width="200px"></station-select-view>
-      <station-select-view v-model="params.end" width="200px"></station-select-view>
+      <train-select-view v-model="codeParam.trainCode" width="200px"/>
+      <a-date-picker v-model:value="codeParam.date" valueFormat="YYYY-MM-DD" placeholder="请选择日期" />
+      <station-select-view v-model="codeParam.start" width="200px"/>
+      <station-select-view v-model="codeParam.end" width="200px"/>
       <a-button type="primary" @click="handleQuery()">查找</a-button>
+      
     </a-space>
   </p>
   <a-table :dataSource="dailyTrainTickets"
@@ -14,23 +16,6 @@
            :loading="loading">
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
-        <a-space>
-          <a-button type="primary" @click="toOrder(record)" :disabled="isExpire(record)">{{isExpire(record) ? "过期" : "预订"}}</a-button>
-          <router-link :to="{
-            path: '/seat',
-            query: {
-              date: record.date,
-              trainCode: record.trainCode,
-              start: record.start,
-              startIndex: record.startIndex,
-              end: record.end,
-              endIndex: record.endIndex
-            }
-          }">
-            <a-button type="primary">座位销售图</a-button>
-          </router-link>
-          <a-button type="primary" @click="showStation(record)">途经车站</a-button>
-        </a-space>
       </template>
       <template v-else-if="column.dataIndex === 'station'">
         {{record.start}}<br/>
@@ -87,43 +72,21 @@
       </template>
     </template>
   </a-table>
-
-  <!-- 途经车站 -->
-  <a-modal style="top: 30px" v-model:visible="visible" :title="null" :footer="null" :closable="false">
-    <a-table :data-source="stations" :pagination="false">
-      <a-table-column key="index" title="站序" data-index="index" />
-      <a-table-column key="name" title="站名" data-index="name" />
-      <a-table-column key="inTime" title="进站时间" data-index="inTime">
-        <template #default="{ record }">
-          {{record.index === 0 ? '-' : record.inTime}}
-        </template>
-      </a-table-column>
-      <a-table-column key="outTime" title="出站时间" data-index="outTime">
-        <template #default="{ record }">
-          {{record.index === (stations.length - 1) ? '-' : record.outTime}}
-        </template>
-      </a-table-column>
-      <a-table-column key="stopTime" title="停站时长" data-index="stopTime">
-        <template #default="{ record }">
-          {{record.index === 0 || record.index === (stations.length - 1) ? '-' : record.stopTime}}
-        </template>
-      </a-table-column>
-    </a-table>
-  </a-modal>
 </template>
 
 <script>
 import { defineComponent, ref, onMounted } from 'vue';
 import {notification} from "ant-design-vue";
 import axios from "axios";
-import StationSelectView from "@/components/station-select";
+import StationSelectView from "@/components/station-select.vue";
 import dayjs from "dayjs";
-import router from "@/router";
+import TrainSelectView from "@/components/train-select.vue";
 
 export default defineComponent({
   name: "ticket-view",
-  components: {StationSelectView},
+  components: {TrainSelectView, StationSelectView},
   setup() {
+    // 全局的window，直接引用import './assets/js/enums';//引入enums.js，
     const visible = ref(false);
     let dailyTrainTicket = ref({
       id: undefined,
@@ -149,15 +112,25 @@ export default defineComponent({
       updateTime: undefined,
     });
     const dailyTrainTickets = ref([]);
-    // 分页的三个属性名是固定的
+    // 分页的三个属性名是固定的，不能更改，是vue的ref的固定的
     const pagination = ref({
       total: 0,
       current: 1,
-      pageSize: 10,
+      pageSize: 6,
+    });
+    let codeParam = ref({
+      trainCode: null,
+      date:null,
+      start:null,
+      end:null
     });
     let loading = ref(false);
-    const params = ref({});
     const columns = [
+    {
+      title: '日期',
+      dataIndex: 'date',
+      key: 'date',
+    },
     {
       title: '车次编号',
       dataIndex: 'trainCode',
@@ -175,65 +148,105 @@ export default defineComponent({
       title: '历时',
       dataIndex: 'duration',
     },
+    // {
+    //   title: '出发站',
+    //   dataIndex: 'start',
+    //   key: 'start',
+    // },
+    // {
+    //   title: '出发站拼音',
+    //   dataIndex: 'startPinyin',
+    //   key: 'startPinyin',
+    // },
+    // {
+    //   title: '出发时间',
+    //   dataIndex: 'startTime',
+    //   key: 'startTime',
+    // },
+    // {
+    //   title: '出发站序',
+    //   dataIndex: 'startIndex',
+    //   key: 'startIndex',
+    // },
+    // {
+    //   title: '到达站',
+    //   dataIndex: 'end',
+    //   key: 'end',
+    // },
+    // {
+    //   title: '到达站拼音',
+    //   dataIndex: 'endPinyin',
+    //   key: 'endPinyin',
+    // },
+    // {
+    //   title: '到站时间',
+    //   dataIndex: 'endTime',
+    //   key: 'endTime',
+    // },
+    // {
+    //   title: '到站站序',
+    //   dataIndex: 'endIndex',
+    //   key: 'endIndex',
+    // },
     {
-      title: '一等座',
+      title: '一等座余票',
       dataIndex: 'ydz',
       key: 'ydz',
     },
+    // {
+    //   title: '一等座票价',
+    //   dataIndex: 'ydzPrice',
+    //   key: 'ydzPrice',
+    // },
     {
-      title: '二等座',
+      title: '二等座余票',
       dataIndex: 'edz',
       key: 'edz',
     },
+    // {
+    //   title: '二等座票价',
+    //   dataIndex: 'edzPrice',
+    //   key: 'edzPrice',
+    // },
     {
-      title: '软卧',
+      title: '软卧余票',
       dataIndex: 'rw',
       key: 'rw',
     },
+    // {
+    //   title: '软卧票价',
+    //   dataIndex: 'rwPrice',
+    //   key: 'rwPrice',
+    // },
     {
-      title: '硬卧',
+      title: '硬卧余票',
       dataIndex: 'yw',
       key: 'yw',
     },
-    {
-      title: '操作',
-      dataIndex: 'operation',
-    },
+    // {
+    //   title: '硬卧票价',
+    //   dataIndex: 'ywPrice',
+    //   key: 'ywPrice',
+    // },
     ];
 
-
+//如果没有初值的话就增加一个初始的参数首页为1页
     const handleQuery = (param) => {
-      if (Tool.isEmpty(params.value.date)) {
-        notification.error({description: "请输入日期"});
-        return;
-      }
-      if (Tool.isEmpty(params.value.start)) {
-        notification.error({description: "请输入出发地"});
-        return;
-      }
-      if (Tool.isEmpty(params.value.end)) {
-        notification.error({description: "请输入目的地"});
-        return;
-      }
       if (!param) {
         param = {
           page: 1,
           size: pagination.value.pageSize
         };
       }
-
-      // 保存查询参数
-      SessionStorage.set(SESSION_TICKET_PARAMS, params.value);
-
       loading.value = true;
       axios.get("/business/daily-train-ticket/query-list", {
         params: {
           page: param.page,
           size: param.size,
-          trainCode: params.value.trainCode,
-          date: params.value.date,
-          start: params.value.start,
-          end: params.value.end
+          trainCode:codeParam.value.trainCode,
+          date:codeParam.value.date,
+          start:codeParam.value.start,
+          end:codeParam.value.end
         }
       }).then((response) => {
         loading.value = false;
@@ -250,71 +263,25 @@ export default defineComponent({
     };
 
     const handleTableChange = (page) => {
-      // console.log("看看自带的分页参数都有啥：" + JSON.stringify(page));
-      pagination.value.pageSize = page.pageSize;
+      // page是局部的变量，pagination是响应式的变量
+      //增加点击的事件
+      // console.log("看看自带的分页参数都有啥：" + pagination);
+      pagination.value.pageSize=page.pageSize;
       handleQuery({
         page: page.current,
         size: page.pageSize
       });
     };
-
+    // 计算停站的时间长度。
     const calDuration = (startTime, endTime) => {
       let diff = dayjs(endTime, 'HH:mm:ss').diff(dayjs(startTime, 'HH:mm:ss'), 'seconds');
       return dayjs('00:00:00', 'HH:mm:ss').second(diff).format('HH:mm:ss');
     };
-
-    const toOrder = (record) => {
-      dailyTrainTicket.value = Tool.copy(record);
-      SessionStorage.set(SESSION_ORDER, dailyTrainTicket.value);
-      router.push("/order")
-    };
-
-    // ---------------------- 途经车站 ----------------------
-    const stations = ref([]);
-    const showStation = record => {
-      visible.value = true;
-      axios.get("/business/daily-train-station/query-by-train-code", {
-        params: {
-          date: record.date,
-          trainCode: record.trainCode
-        }
-      }).then((response) => {
-        let data = response.data;
-        if (data.success) {
-          stations.value = data.content;
-        } else {
-          notification.error({description: data.message});
-        }
-      });
-    };
-
-    // 不能选择今天以前及两周以后的日期
-    const disabledDate = current => {
-      return current && (current <= dayjs().add(-1, 'day') || current > dayjs().add(14, 'day'));
-    };
-
-    // 判断是否过期
-    const isExpire = (record) => {
-      // 标准时间：2000/01/01 00:00:00
-      let startDateTimeString = record.date.replace(/-/g, "/") + " " + record.startTime;
-      let startDateTime = new Date(startDateTimeString);
-
-      //当前时间
-      let now = new Date();
-
-      console.log(startDateTime)
-      return now.valueOf() >= startDateTime.valueOf();
-    };
-
     onMounted(() => {
-      //  "|| {}"是常用技巧，可以避免空指针异常
-      params.value = SessionStorage.get(SESSION_TICKET_PARAMS) || {};
-      if (Tool.isNotEmpty(params.value)) {
-        handleQuery({
-          page: 1,
-          size: pagination.value.pageSize
-        });
-      }
+      handleQuery({
+        page: 1,
+        size: pagination.value.pageSize
+      });
     });
 
     return {
@@ -326,13 +293,8 @@ export default defineComponent({
       handleTableChange,
       handleQuery,
       loading,
-      params,
-      calDuration,
-      toOrder,
-      showStation,
-      stations,
-      disabledDate,
-      isExpire
+      codeParam,
+      calDuration
     };
   },
 });
