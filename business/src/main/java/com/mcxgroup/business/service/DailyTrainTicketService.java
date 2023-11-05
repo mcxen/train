@@ -58,14 +58,17 @@ public class DailyTrainTicketService {
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());
         PageHelper.startPage(req.getPage(), req.getSize());
+        //确保加入的查询的条件生效
+        if (ObjectUtil.isNotEmpty(req.getDate())) criteria.andDateEqualTo(req.getDate());
+        if (ObjectUtil.isNotEmpty(req.getTrainCode())) criteria.andTrainCodeEqualTo(req.getTrainCode());
+        if (ObjectUtil.isNotEmpty(req.getStart())) criteria.andStartEqualTo(req.getStart());
+        if (ObjectUtil.isNotEmpty(req.getEnd())) criteria.andEndEqualTo(req.getEnd());
+        //查询结构：
         List<DailyTrainTicket> dailyTrainTicketList = dailyTrainTicketMapper.selectByExample(example);
-
         PageInfo<DailyTrainTicket> pageInfo = new PageInfo<>(dailyTrainTicketList);
         LOG.info("总行数：{}", pageInfo.getTotal());
         LOG.info("总页数：{}", pageInfo.getPages());
-
         List<DailyTrainTicketQueryResp> list = BeanUtil.copyToList(dailyTrainTicketList, DailyTrainTicketQueryResp.class);
-
         PageResp<DailyTrainTicketQueryResp> pageResp = new PageResp<>();
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(list);
