@@ -2,6 +2,7 @@ package com.mcxgroup.generator.gen;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
+import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
 import com.mcxgroup.business.enums.SeatColEnum;
 import com.mcxgroup.business.enums.SeatTypeEnum;
 import com.mcxgroup.business.enums.TrainTypeEnum;
@@ -18,11 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 public class EnumGenerator {
-//    static String path = "admin/src/assets/js/enums.js";
-    static String path = "web/src/assets/js/enums.js";
+    static String path = "admin/src/assets/js/enums.js";
+//    static String path = "web/src/assets/js/enums.js";
 
     public static void main(String[] args) {
         StringBuffer bufferObject = new StringBuffer();
@@ -33,6 +34,7 @@ public class EnumGenerator {
             toJson(TrainTypeEnum.class, bufferObject, bufferArray);//生成Train的EnumsJs，存到系统里面
             toJson(SeatTypeEnum.class, bufferObject, bufferArray);//生成座位的EnumsJs，存到系统里面
             toJson(SeatColEnum.class, bufferObject, bufferArray);//生成座位的EnumsJs，存到系统里面
+            toJson(ConfirmOrderStatusEnum.class, bufferObject, bufferArray);//生成座位的EnumsJs，存到系统里面
 
             StringBuffer buffer = bufferObject.append("\r\n").append(bufferArray);
             writeJs(buffer);
