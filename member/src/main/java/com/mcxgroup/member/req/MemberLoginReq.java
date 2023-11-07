@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 public class MemberLoginReq {
     @NotBlank(message = "【手机号】不可以为空")

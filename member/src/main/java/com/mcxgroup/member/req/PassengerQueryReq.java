@@ -4,7 +4,7 @@ package com.mcxgroup.member.req;
 import com.mcxgroup.common.req.PageReq;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 public class PassengerQueryReq extends PageReq {
     private Long memberId;

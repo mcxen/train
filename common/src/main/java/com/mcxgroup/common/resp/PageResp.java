@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 public class PageResp<T> implements Serializable {
 

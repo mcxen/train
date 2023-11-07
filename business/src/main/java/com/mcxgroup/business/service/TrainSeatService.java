@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 @Service
 public class TrainSeatService {

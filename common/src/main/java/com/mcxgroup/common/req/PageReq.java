@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 public class PageReq {
     @NotNull(message = "【页码】不能为空")

@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 @Service
 public class DailyTrainStationService {

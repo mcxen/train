@@ -3,7 +3,7 @@ package com.mcxgroup.member.req;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 public class MemberRegisterReq {
     @NotBlank(message = "【手机号】不可以为空")

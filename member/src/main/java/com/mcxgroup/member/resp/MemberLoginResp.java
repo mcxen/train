@@ -1,7 +1,7 @@
 package com.mcxgroup.member.resp;
 
 /**
- * @author johnconstantine
+ * @author MCXEN
  */
 public class MemberLoginResp {
     private Long id;
