@@ -6,6 +6,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.business.domain.DailyTrainTicket;
 import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
@@ -21,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +35,8 @@ public class ConfirmOrderService {
 
     @Resource
     private ConfirmOrderMapper confirmOrderMapper;
+    @Resource
+    private DailyTrainTicketService dailyTrainTicketService;
 
     public void save(ConfirmOrderDoReq req) {
         DateTime now = DateTime.now();
@@ -51,6 +55,10 @@ public class ConfirmOrderService {
         //省略业务校验
         //保存确认表格
         DateTime now = DateTime.now();
+        Date date = req.getDate();
+        String start = req.getStart();
+        String end = req.getEnd();
+        String trainCode = req.getTrainCode();
         ConfirmOrder confirmOrder = BeanUtil.copyProperties(req, ConfirmOrder.class);
         confirmOrder.setId(SnowUtil.getSnowflakeNextId());
         confirmOrder.setCreateTime(now);
@@ -60,7 +68,8 @@ public class ConfirmOrderService {
         confirmOrder.setTickets(JSON.toJSONString(req.getTickets()));
         confirmOrderMapper.insert(confirmOrder);
         //查询每日车票表
-
+        DailyTrainTicket ticket = dailyTrainTicketService.selectByUnique(date, trainCode, start, end);
+        LOG.info("查出来余票的记录：{}",ticket);
         //扣减余票记录，判断是否充足
 
         //选座
