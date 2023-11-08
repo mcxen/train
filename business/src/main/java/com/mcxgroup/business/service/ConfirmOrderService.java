@@ -3,8 +3,10 @@ package com.mcxgroup.business.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
@@ -12,7 +14,7 @@ import com.mcxgroup.business.domain.ConfirmOrder;
 import com.mcxgroup.business.domain.ConfirmOrderExample;
 import com.mcxgroup.business.mapper.ConfirmOrderMapper;
 import com.mcxgroup.business.req.ConfirmOrderQueryReq;
-import com.mcxgroup.business.req.ConfirmOrderSaveReq;
+import com.mcxgroup.business.req.ConfirmOrderDoReq;
 import com.mcxgroup.business.resp.ConfirmOrderQueryResp;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
@@ -32,7 +34,7 @@ public class ConfirmOrderService {
     @Resource
     private ConfirmOrderMapper confirmOrderMapper;
 
-    public void save(ConfirmOrderSaveReq req) {
+    public void save(ConfirmOrderDoReq req) {
         DateTime now = DateTime.now();
         ConfirmOrder confirmOrder = BeanUtil.copyProperties(req, ConfirmOrder.class);
         if (ObjectUtil.isNull(confirmOrder.getId())) {
@@ -45,7 +47,31 @@ public class ConfirmOrderService {
             confirmOrderMapper.updateByPrimaryKey(confirmOrder);
         }
     }
+    public void doConfirm(ConfirmOrderDoReq req) {
+        //省略业务校验
+        //保存确认表格
+        DateTime now = DateTime.now();
+        ConfirmOrder confirmOrder = BeanUtil.copyProperties(req, ConfirmOrder.class);
+        confirmOrder.setId(SnowUtil.getSnowflakeNextId());
+        confirmOrder.setCreateTime(now);
+        confirmOrder.setUpdateTime(now);
+        confirmOrder.setMemberId(LoginMemberContext.getId());
+        confirmOrder.setStatus(ConfirmOrderStatusEnum.INIT.getCode());
+        confirmOrder.setTickets(JSON.toJSONString(req.getTickets()));
+        confirmOrderMapper.insert(confirmOrder);
+        //查询每日车票表
 
+        //扣减余票记录，判断是否充足
+
+        //选座
+            //获取所有车的座位
+            //挑选符合条件的座位
+        // 选好之后处理
+            //修改售卖情况
+            //增加售票记录
+            //更新订单为成功
+
+    }
     public PageResp<ConfirmOrderQueryResp> queryList(ConfirmOrderQueryReq req) {
         ConfirmOrderExample example = new ConfirmOrderExample();
         example.setOrderByClause("id desc");
