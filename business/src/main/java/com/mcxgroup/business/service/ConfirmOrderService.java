@@ -2,13 +2,18 @@ package com.mcxgroup.business.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
+import cn.hutool.core.util.EnumUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mcxgroup.business.domain.DailyTrainTicket;
 import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
+import com.mcxgroup.business.enums.SeatTypeEnum;
+import com.mcxgroup.business.req.ConfirmOrderTicketReq;
 import com.mcxgroup.common.context.LoginMemberContext;
+import com.mcxgroup.common.exception.BusinessException;
+import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.business.domain.ConfirmOrder;
@@ -68,9 +73,11 @@ public class ConfirmOrderService {
         confirmOrder.setTickets(JSON.toJSONString(req.getTickets()));
         confirmOrderMapper.insert(confirmOrder);
         //查询每日车票表
-        DailyTrainTicket ticket = dailyTrainTicketService.selectByUnique(date, trainCode, start, end);
-        LOG.info("查出来余票的记录：{}",ticket);
+        DailyTrainTicket dailyTrainTicket = dailyTrainTicketService.selectByUnique(date, trainCode, start, end);
+        LOG.info("查出来余票的记录：{}",dailyTrainTicket);
+        //反射的性能不如直接switch
         //扣减余票记录，判断是否充足
+        reduceTicket(req, dailyTrainTicket);
 
         //选座
             //获取所有车的座位
@@ -81,6 +88,52 @@ public class ConfirmOrderService {
             //更新订单为成功
 
     }
+
+    private static void reduceTicket(ConfirmOrderDoReq req, DailyTrainTicket dailyTrainTicket) {
+        for (ConfirmOrderTicketReq ticketReq : req.getTickets()) {
+            //循环请求的ticket
+            String seatTypeCode = ticketReq.getSeatTypeCode();
+            SeatTypeEnum seatTypeEnum = EnumUtil.getBy(SeatTypeEnum::getCode, seatTypeCode);
+            switch (seatTypeEnum){
+                case YDZ -> {
+                    int countLeft = dailyTrainTicket.getYdz() - 1;
+                    if (countLeft<0){
+                        //异常
+                        throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_TICKET_COUNT_ERROR);
+                    }
+                    dailyTrainTicket.setYdz(countLeft);
+                }
+                case EDZ -> {
+                    int countLeft = dailyTrainTicket.getEdz() - 1;
+                    if (countLeft<0){
+                        //异常
+                        throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_TICKET_COUNT_ERROR);
+                    }
+                    dailyTrainTicket.setEdz(countLeft);
+
+                }
+                case RW -> {
+                    int countLeft = dailyTrainTicket.getRw() - 1;
+                    if (countLeft<0){
+                        //异常
+                        throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_TICKET_COUNT_ERROR);
+                    }
+                    dailyTrainTicket.setRw(countLeft);
+
+                }
+                case YW -> {
+                    int countLeft = dailyTrainTicket.getYw() - 1;
+                    if (countLeft<0){
+                        //异常
+                        throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_TICKET_COUNT_ERROR);
+                    }
+                    dailyTrainTicket.setYw(countLeft);
+
+                }
+            }
+        }
+    }
+
     public PageResp<ConfirmOrderQueryResp> queryList(ConfirmOrderQueryReq req) {
         ConfirmOrderExample example = new ConfirmOrderExample();
         example.setOrderByClause("id desc");
