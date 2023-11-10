@@ -4,11 +4,13 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.EnumUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mcxgroup.business.domain.DailyTrainTicket;
 import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
+import com.mcxgroup.business.enums.SeatColEnum;
 import com.mcxgroup.business.enums.SeatTypeEnum;
 import com.mcxgroup.business.req.ConfirmOrderTicketReq;
 import com.mcxgroup.common.context.LoginMemberContext;
@@ -27,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,7 +73,8 @@ public class ConfirmOrderService {
         confirmOrder.setUpdateTime(now);
         confirmOrder.setMemberId(LoginMemberContext.getId());
         confirmOrder.setStatus(ConfirmOrderStatusEnum.INIT.getCode());
-        confirmOrder.setTickets(JSON.toJSONString(req.getTickets()));
+        List<ConfirmOrderTicketReq> tickets = req.getTickets();
+        confirmOrder.setTickets(JSON.toJSONString(tickets));
         confirmOrderMapper.insert(confirmOrder);
         //查询每日车票表
         DailyTrainTicket dailyTrainTicket = dailyTrainTicketService.selectByUnique(date, trainCode, start, end);
@@ -78,7 +82,37 @@ public class ConfirmOrderService {
         //反射的性能不如直接switch
         //扣减余票记录，判断是否充足
         reduceTicket(req, dailyTrainTicket);
+        //计算偏移的值，
+        // 比如选择的是C1，D2，则偏移值是：[0.5]
+        // 比如选择的是A1,B1,C1，则偏移值是：[0,1,2]
+        ConfirmOrderTicketReq ticketReq0 = tickets.get(0);
+        if (StrUtil.isBlank(ticketReq0.getSeat())){
+            LOG.info("本次选座没有玄");
+        }else {
+            List<SeatColEnum> colEnumList = SeatColEnum.getColsByType(ticketReq0.getSeatTypeCode());
+            ArrayList<String> referSeatList = new ArrayList<>();
+            //referSeatList = {A1, C1, D1, F1, A2, C2, D2. F2}
+            for (int i = 1; i < 2; i++) {
+                for (SeatColEnum seatColEnum : colEnumList) {
+                    referSeatList.add(seatColEnum.getCode()+i);
+                }
+            }
+            LOG.info("本次选座选座包含的列为：{}",colEnumList.toString());
+            ArrayList<Integer> absoOffsetList = new ArrayList<>();
+            ArrayList<Integer> OffsetList = new ArrayList<>();
+            for (ConfirmOrderTicketReq ticketReq : tickets) {
+                int index = referSeatList.indexOf(ticketReq.getSeat());
+                absoOffsetList.add(index);
+            }
+            LOG.info("本次选座绝对偏移：{}",absoOffsetList);
+            for (Integer idx : absoOffsetList) {
+                idx-=absoOffsetList.get(0);//得到绝对的
+                OffsetList.add(idx);
+            }
+            LOG.info("本次选座相对的偏移：{}",OffsetList);
 
+            LOG.info("本次选座选座了");
+        }
         //选座
             //获取所有车的座位
             //挑选符合条件的座位
