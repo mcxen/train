@@ -8,7 +8,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mcxgroup.business.domain.DailyTrainTicket;
+import com.mcxgroup.business.domain.*;
 import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
 import com.mcxgroup.business.enums.SeatColEnum;
 import com.mcxgroup.business.enums.SeatTypeEnum;
@@ -18,8 +18,6 @@ import com.mcxgroup.common.exception.BusinessException;
 import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
-import com.mcxgroup.business.domain.ConfirmOrder;
-import com.mcxgroup.business.domain.ConfirmOrderExample;
 import com.mcxgroup.business.mapper.ConfirmOrderMapper;
 import com.mcxgroup.business.req.ConfirmOrderQueryReq;
 import com.mcxgroup.business.req.ConfirmOrderDoReq;
@@ -45,6 +43,10 @@ public class ConfirmOrderService {
     private ConfirmOrderMapper confirmOrderMapper;
     @Resource
     private DailyTrainTicketService dailyTrainTicketService;
+    @Resource
+    private DailyTrainCarriageService dailyTrainCarriageService;
+    @Resource
+    private DailyTrainSeatService dailyTrainSeatService;
 
     public void save(ConfirmOrderDoReq req) {
         DateTime now = DateTime.now();
@@ -87,6 +89,12 @@ public class ConfirmOrderService {
         // 比如选择的是A1,B1,C1，则偏移值是：[0,1,2]
         ConfirmOrderTicketReq ticketReq0 = tickets.get(0);
         if (StrUtil.isBlank(ticketReq0.getSeat())){
+            getSeat(date,
+                    trainCode,
+                    ticketReq0.getSeatTypeCode(),
+                    null,
+                    null
+            );
             LOG.info("本次选座没有玄");
         }else {
             List<SeatColEnum> colEnumList = SeatColEnum.getColsByType(ticketReq0.getSeatTypeCode());
@@ -110,11 +118,18 @@ public class ConfirmOrderService {
                 OffsetList.add(idx);
             }
             LOG.info("本次选座相对的偏移：{}",OffsetList);
+            //根据第0个座位查找座位,
+            getSeat(date,
+                    trainCode,
+                    ticketReq0.getSeatTypeCode(),
+                    ticketReq0.getSeat().split("")[0],//从A1得到A
+                    OffsetList
+            );
 
             LOG.info("本次选座选座了");
         }
         //选座
-            //获取所有车的座位
+            //一个一个车厢的获取所有车的座位
             //挑选符合条件的座位
         // 选好之后处理
             //修改售卖情况
@@ -122,7 +137,16 @@ public class ConfirmOrderService {
             //更新订单为成功
 
     }
-
+    private void getSeat(Date date,String trainCode,String seatType,String column, List<Integer> offsetList){
+        //一个一个车厢的获取所有车的座位
+        List<DailyTrainCarriage> dailyTrainCarriages = dailyTrainCarriageService.selectBySeatType(date, trainCode, seatType);
+        LOG.info("共查出{}个符合条件的车厢",dailyTrainCarriages.size());
+        for (DailyTrainCarriage carriage : dailyTrainCarriages) {
+            //每个车厢的座位的列表
+            List<DailyTrainSeat> seatList = dailyTrainSeatService.selectByCarriage(date, trainCode, carriage.getIndex());
+            LOG.info("车厢[{}]的座位数：{}",carriage.getIndex(),seatList.size());
+        }
+    }
     private static void reduceTicket(ConfirmOrderDoReq req, DailyTrainTicket dailyTrainTicket) {
         for (ConfirmOrderTicketReq ticketReq : req.getTickets()) {
             //循环请求的ticket

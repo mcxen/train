@@ -7,12 +7,10 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mcxgroup.business.domain.Train;
+import com.mcxgroup.business.domain.*;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
-import com.mcxgroup.business.domain.DailyTrain;
-import com.mcxgroup.business.domain.DailyTrainExample;
 import com.mcxgroup.business.mapper.DailyTrainMapper;
 import com.mcxgroup.business.req.DailyTrainQueryReq;
 import com.mcxgroup.business.req.DailyTrainSaveReq;
@@ -135,4 +133,5 @@ public class DailyTrainService {
         dailyTrainTicketService.genDaily(dailyTrain,date,train.getCode());//车票
         LOG.info("生成日期【{}】车次【{}】的信息结束", DateUtil.formatDate(date), train.getCode());
     }
+
 }
