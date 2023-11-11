@@ -3,6 +3,7 @@ package com.mcxgroup.business.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.EnumUtil;
+import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
@@ -93,7 +94,9 @@ public class ConfirmOrderService {
                     trainCode,
                     ticketReq0.getSeatTypeCode(),
                     null,
-                    null
+                    null,
+                    dailyTrainTicket.getStartIndex(),
+                    dailyTrainTicket.getEndIndex()
             );
             LOG.info("本次选座没有玄");
         }else {
@@ -123,7 +126,9 @@ public class ConfirmOrderService {
                     trainCode,
                     ticketReq0.getSeatTypeCode(),
                     ticketReq0.getSeat().split("")[0],//从A1得到A
-                    OffsetList
+                    OffsetList,
+                    dailyTrainTicket.getStartIndex(),
+                    dailyTrainTicket.getEndIndex()
             );
 
             LOG.info("本次选座选座了");
@@ -138,7 +143,7 @@ public class ConfirmOrderService {
             //更新订单为成功
 
     }
-    private void getSeat(Date date,String trainCode,String seatType,String column, List<Integer> offsetList){
+    private void getSeat(Date date,String trainCode,String seatType,String column, List<Integer> offsetList,Integer startIdx,Integer endIdx){
         //一个一个车厢的获取所有车的座位
         List<DailyTrainCarriage> dailyTrainCarriages = dailyTrainCarriageService.selectBySeatType(date, trainCode, seatType);
         LOG.info("共查出{}个符合条件的车厢",dailyTrainCarriages.size());
@@ -146,6 +151,54 @@ public class ConfirmOrderService {
             //每个车厢的座位的列表
             List<DailyTrainSeat> seatList = dailyTrainSeatService.selectByCarriage(date, trainCode, carriage.getIndex());
             LOG.info("车厢[{}]的座位数：{}",carriage.getIndex(),seatList.size());
+            for (DailyTrainSeat dailyTrainSeat : seatList) {
+                boolean isChooose = callSell(dailyTrainSeat, startIdx, endIdx);
+                if (isChooose){
+                    LOG.info("选中座位");
+                    return;
+                }else {
+                    LOG.info("未选中座位");
+                    continue;
+                }
+            }
+        }
+    }
+
+    /**
+     * 起始站是0，所以10001表示：第0~1卖出去了，第4~5卖出去了
+     * 计算某座位在区间内是否可卖
+     * 例：se11=10001 本次购买区间站1~4，则区间已售000
+     * 全部是0，表示这个区间可买；只要有1，就表示区间内已售过票
+     */
+    private boolean callSell(DailyTrainSeat dailyTrainSeat, Integer startIndex, Integer endIndex) {
+        // 00001, 00000
+        String sell = dailyTrainSeat.getSell();
+        //  000, 000
+        String sellPart = sell.substring(startIndex, endIndex);
+        if (Integer.parseInt(sellPart) > 0) {
+            LOG.info("座位{}在本次车站区间{}~{}已售过票，不可选中该座位", dailyTrainSeat.getCarriageSeatIndex(), startIndex, endIndex);
+            return false;
+        } else {
+            LOG.info("座位{}在本次车站区间{}~{}未售过票，可选中该座位", dailyTrainSeat.getCarriageSeatIndex(), startIndex, endIndex);
+            //  111,   111
+            String curSell = sellPart.replace('0', '1');
+            // 0111,  0111
+            curSell = StrUtil.fillBefore(curSell, '0', endIndex);
+            // 01110, 01110
+            curSell = StrUtil.fillAfter(curSell, '0', sell.length());
+
+            // 当前区间售票信息curSell 01110与库里的已售信息sell 00001按位与，即可得到该座位卖出此票后的售票详情
+            // 15(01111), 14(01110 = 01110|00000)
+            int newSellInt = NumberUtil.binaryToInt(curSell) | NumberUtil.binaryToInt(sell);
+            //  1111,  1110
+            String newSell = NumberUtil.getBinaryStr(newSellInt);
+            // 01111, 01110
+            newSell = StrUtil.fillBefore(newSell, '0', sell.length());
+            LOG.info("座位「{}」被选中，原售票信息：「{}」，车站区间：{}~{}，即：{}，最终售票信息：{}"
+                    , dailyTrainSeat.getCarriageSeatIndex(), sell, startIndex, endIndex, curSell, newSell);
+            dailyTrainSeat.setSell(newSell);
+            return true;
+
         }
     }
     private static void reduceTicket(ConfirmOrderDoReq req, DailyTrainTicket dailyTrainTicket) {
