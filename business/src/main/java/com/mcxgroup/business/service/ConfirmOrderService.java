@@ -50,6 +50,8 @@ public class ConfirmOrderService {
     private DailyTrainCarriageService dailyTrainCarriageService;
     @Resource
     private DailyTrainSeatService dailyTrainSeatService;
+    @Resource
+    private AfterConfirmOrderService afterConfirmOrderService;
 
     public void save(ConfirmOrderDoReq req) {
         DateTime now = DateTime.now();
@@ -87,29 +89,37 @@ public class ConfirmOrderService {
         //反射的性能不如直接switch
         //扣减余票记录，判断是否充足
         reduceTicket(req, dailyTrainTicket);
+        //最终购票记录
+        List<DailyTrainSeat> finalSeatList = new ArrayList<>();
         //计算偏移的值，
         // 比如选择的是C1，D2，则偏移值是：[0.5]
         // 比如选择的是A1,B1,C1，则偏移值是：[0,1,2]
         ConfirmOrderTicketReq ticketReq0 = tickets.get(0);
         if (StrUtil.isBlank(ticketReq0.getSeat())){
-            getSeat(date,
-                    trainCode,
-                    ticketReq0.getSeatTypeCode(),
-                    null,
-                    null,
-                    dailyTrainTicket.getStartIndex(),
-                    dailyTrainTicket.getEndIndex()
-            );
-            LOG.info("本次选座没有玄");
+            LOG.info("本次购票没有选座");
+            for (ConfirmOrderTicketReq ticket : tickets) {
+                //遍历传进来需要买票的参数
+                getSeat(finalSeatList,
+                        date,
+                        trainCode,
+                        ticket.getSeatTypeCode(),
+                        null,
+                        null,
+                        dailyTrainTicket.getStartIndex(),
+                        dailyTrainTicket.getEndIndex()
+                );
+            }
         }else {
+            LOG.info("本次购票有指定选座");
             List<SeatColEnum> colEnumList = SeatColEnum.getColsByType(ticketReq0.getSeatTypeCode());
             ArrayList<String> referSeatList = new ArrayList<>();
             //referSeatList = {A1, C1, D1, F1, A2, C2, D2. F2}
-            for (int i = 1; i < 2; i++) {
+            for (int i = 1; i <= 2; i++) {
                 for (SeatColEnum seatColEnum : colEnumList) {
                     referSeatList.add(seatColEnum.getCode()+i);
                 }
             }
+            LOG.info("用于作参照的两排座位：{}", referSeatList);
             LOG.info("本次选座选座包含的列为：{}",colEnumList.toString());
             ArrayList<Integer> absoOffsetList = new ArrayList<>();
             ArrayList<Integer> OffsetList = new ArrayList<>();
@@ -124,7 +134,8 @@ public class ConfirmOrderService {
             }
             LOG.info("本次选座相对的偏移：{}",OffsetList);
             //根据第0个座位查找座位,
-            getSeat(date,
+            getSeat(finalSeatList,
+                    date,
                     trainCode,
                     ticketReq0.getSeatTypeCode(),
                     ticketReq0.getSeat().split("")[0],//从A1得到A
@@ -133,23 +144,26 @@ public class ConfirmOrderService {
                     dailyTrainTicket.getEndIndex()
             );
 
-            LOG.info("本次选座成功选座了");
         }
-        //选座
-            //一个一个车厢的获取所有车的座位
-            //挑选符合条件的座位
-
+        LOG.info("本次选座最终选座列表：");
+        for (DailyTrainSeat seat : finalSeatList) {
+            LOG.info("车厢号：「{}」，座位号：「{}」",seat.getCarriageIndex(),seat.getCarriageSeatIndex());
+        }
+        //afterConfirmOrderService.afterDoConfirm(finalSeatList);
         // 选好之后处理
             //修改售卖情况
             //增加售票记录
             //更新订单为成功
 
     }
-    private void getSeat(Date date,String trainCode,String seatType,String column, List<Integer> offsetList,Integer startIdx,Integer endIdx){
+    private void getSeat(List<DailyTrainSeat> finalSeatList,Date date,String trainCode,String seatType,String column, List<Integer> offsetList,Integer startIdx,Integer endIdx){
+        List<DailyTrainSeat> getSeatList=new ArrayList<>();//选出一批座位
         //一个一个车厢的获取所有车的座位
         List<DailyTrainCarriage> dailyTrainCarriages = dailyTrainCarriageService.selectBySeatType(date, trainCode, seatType);
         LOG.info("共查出{}个符合条件的车厢",dailyTrainCarriages.size());
         for (DailyTrainCarriage carriage : dailyTrainCarriages) {
+            LOG.info("******开始从车厢{}选座******", carriage.getIndex());
+            getSeatList=new ArrayList<>();//重新开始一个车厢就开始重新保存座位列表
             //每个车厢的座位的列表
             List<DailyTrainSeat> seatList = dailyTrainSeatService.selectByCarriage(date, trainCode, carriage.getIndex());
             LOG.info("车厢[{}]的座位数：{}",carriage.getIndex(),seatList.size());
@@ -157,6 +171,18 @@ public class ConfirmOrderService {
                 DailyTrainSeat dailyTrainSeat=seatList.get(i);
                 Integer seatIndex = dailyTrainSeat.getCarriageSeatIndex();
                 String curColumn = dailyTrainSeat.getCol();
+                // 判断当前座位不能被选中过
+                boolean alreadyChooseFlag = false;
+                for (DailyTrainSeat seat : finalSeatList) {
+                    if (seat.getId().equals(dailyTrainSeat.getId())){
+                        alreadyChooseFlag=true;
+                        break;
+                    }
+                }
+                if (alreadyChooseFlag){
+                    LOG.info("座位{}被选中过，不能重复选中，继续判断下一个座位", seatIndex);
+                    continue;
+                }
                 //获取传进来的column，也就是乘客要选的，看看有无值
                 if (StrUtil.isBlank(column)){
                     LOG.info("乘客未指定座位-column为空");
@@ -169,6 +195,7 @@ public class ConfirmOrderService {
                 boolean isChooose = callSell(dailyTrainSeat, startIdx, endIdx);
                 if (isChooose){
                     LOG.info("选中座位");
+                    getSeatList.add(dailyTrainSeat);//加入临时的选中的座位
                 }else {
                     LOG.info("未选中座位");
                     continue;
@@ -192,7 +219,8 @@ public class ConfirmOrderService {
                         DailyTrainSeat nextSeat = seatList.get(nextIdx);
                         boolean isChoooseNext = callSell(nextSeat, startIdx, endIdx);
                         if (isChoooseNext){
-                            LOG.info("选中座位「{}」",nextSeat);
+                            LOG.info("选中座位「{}」",dailyTrainSeat);
+                            getSeatList.add(nextSeat);
                         }else {
                             LOG.info("无法选座位「{}」",nextSeat);
                             isGetAllSeat=false;
@@ -200,7 +228,12 @@ public class ConfirmOrderService {
                         }
                     }
                 }
-                if (!isGetAllSeat) continue;
+                if (!isGetAllSeat) {
+                    getSeatList = new ArrayList<>();
+                    continue;
+                }
+                //保存选好的座位
+                finalSeatList.addAll(getSeatList);
                 return;
             }
         }
