@@ -149,7 +149,7 @@ public class ConfirmOrderService {
         for (DailyTrainSeat seat : finalSeatList) {
             LOG.info("车厢号：「{}」，座位号：「{}」",seat.getCarriageIndex(),seat.getCarriageSeatIndex());
         }
-        //afterConfirmOrderService.afterDoConfirm(finalSeatList);
+        afterConfirmOrderService.afterDoConfirm(finalSeatList);
         // 选好之后处理
             //修改售卖情况
             //增加售票记录
