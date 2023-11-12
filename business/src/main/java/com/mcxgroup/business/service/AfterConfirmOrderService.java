@@ -7,6 +7,7 @@ import com.mcxgroup.business.mapper.cust.DailyTrainTicketMapperCust;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,24 +34,15 @@ public class AfterConfirmOrderService {
     @Resource
     private DailyTrainTicketMapperCust dailyTrainTicketMapperCust;
     @Transactional
-    public void afterDoConfirm(DailyTrainTicket dailyTrainTicket,List<DailyTrainSeat> finalSeatList) {
-        // 选好之后处理
-        //修改售卖情况
-        //增加售票记录
-        //更新订单为成功
-        for (DailyTrainSeat seat : finalSeatList) {
+    public void afterDoConfirm(DailyTrainTicket dailyTrainTicket,
+                               List<DailyTrainSeat> finalSeatList){
+        for (DailyTrainSeat dailyTrainSeat : finalSeatList){
             DailyTrainSeat seatForUpdate = new DailyTrainSeat();
-            seatForUpdate.setId(seat.getId());
-            seatForUpdate.setSell(seat.getSell());
+            seatForUpdate.setId(dailyTrainSeat.getId());
+            seatForUpdate.setSell(dailyTrainSeat.getSell());
             seatForUpdate.setUpdateTime(new Date());
-            // updateByPrimaryKeySelective: 这个方法会对传入的参数对象进行非空检查，
-            // 只有非空的属性才会被包含到UPDATE语句中，
-            // 也就是说，这个方法只会更新那些不为null的字段。
-            // 这样可以避免覆盖掉数据库中原有的值。
-            // updateByPrimaryKey: 这个方法则会更新所有字段，
-            // 不论其是否为null。如果某个字段的值为null，
-            // 那么在数据库中对应的值也会被更新为null。
             dailyTrainSeatMapper.updateByPrimaryKeySelective(seatForUpdate);
+
             // 计算这个站卖出去后，影响了哪些站的余票库存
             // 参照2-3节 如何保证不超卖、不少卖，还要能承受极高的并发 10:30左右
             // 影响的库存：本次选座之前没卖过票的，和本次购买的区间有交集的区间
@@ -65,40 +57,39 @@ public class AfterConfirmOrderService {
             // Integer maxStartIndex = endIndex - 1;
             // Integer minEndIndex = startIndex + 1;
             // Integer maxEndIndex = endIndex + 往后碰到的最后一个0;
-            Integer startIdx =dailyTrainTicket.getStartIndex();
-            Integer endIdx = dailyTrainTicket.getEndIndex();
-            char[] sellChar = seatForUpdate.getSell().toCharArray();
-            Integer maxStartIndex = endIdx-1;////最大的为0的位置
-            Integer minStartIndex = 0;//最小的开始为0的位置
-            Integer minEndIndex = endIdx-1;//最小结束影响区间
-            Integer maxEndIndex =seatForUpdate.getSell().length();;//最大结束影响区间
-            for (int i = startIdx-1; i >= 0; i--) {
-                char c = sellChar[i];
-                if (c=='1'){
-                    minStartIndex=i+1;
-                    break;//最小的开始为0的位置
+            Integer startIndex = dailyTrainTicket.getStartIndex();
+            Integer endIndex = dailyTrainTicket.getEndIndex();
+            char[] chars = seatForUpdate.getSell().toCharArray();
+            Integer maxStartIndex = endIndex - 1;
+            Integer minEndIndex = startIndex + 1;
+            Integer minStartIndex = 0;
+            for (int i = startIndex - 1; i >= 0; i--) {
+                char aChar = chars[i];
+                if (aChar == '1') {
+                    minStartIndex = i + 1;
+                    break;
                 }
             }
             LOG.info("影响出发站区间：" + minStartIndex + "-" + maxStartIndex);
-            for (int i = endIdx; i < seatForUpdate.getSell().length(); i++) {
-                char c = sellChar[i];
-                if (c=='1'){
-                    maxEndIndex=i;
+
+            Integer maxEndIndex = seatForUpdate.getSell().length();
+            for (int i = endIndex; i < seatForUpdate.getSell().length(); i++) {
+                char aChar = chars[i];
+                if (aChar == '1') {
+                    maxEndIndex = i;
                     break;
                 }
             }
             LOG.info("影响到达站区间：" + minEndIndex + "-" + maxEndIndex);
+
             dailyTrainTicketMapperCust.updateCountBySell(
-                    //根据每个最终的seat设置
-                    seat.getDate(),
-                    seat.getTrainCode(),
-                    seat.getSeatType(),
+                    dailyTrainSeat.getDate(),
+                    dailyTrainSeat.getTrainCode(),
+                    dailyTrainSeat.getSeatType(),
                     minStartIndex,
                     maxStartIndex,
                     minEndIndex,
-                    maxEndIndex
-            );
-
+                    maxEndIndex);
         }
     }
 }
