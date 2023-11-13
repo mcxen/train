@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @ClassName MemberFeign
- * @Description
+ * @Description 这里是相当于Get请求对应的内部的接口，然后通过json传递数据
  * @Author McXen@2023/11/13
  **/
 @FeignClient(name = "member",url = "127.0.0.1:8080")
