@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
@@ -13,6 +14,7 @@ import org.springframework.core.env.Environment;
 @MapperScan("com.mcxgroup.*.mapper")
 //@Configuration
 @Slf4j
+@EnableFeignClients("com.mcxgroup.business.feign")
 public class BusinessApplication {
 
     //主项目
