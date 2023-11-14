@@ -1,3 +1,23 @@
+GET http://localhost:8080/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-14T213828.200.json
+
+###
+
+GET http://localhost:8080/member/1
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-14T213810.200.json
+
+###
+
 POST http://localhost:8082/batch/admin/job/run
 Content-Type: application/json
 Content-Length: 81
@@ -687,27 +707,6 @@ User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-10-17T203036.200.txt
-
-###
-
-GET http://127.0.0.1:8081/business/hello
-Content-Type: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-17T203013.200.txt
-
-###
-
-DELETE http://localhost:8000/member/passenger/delete/1708858936981065728
-Content-Type: application/json
-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY3NTUwODcsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MDc3NDA2MTc2NjIxNDA0MTYsImV4cCI6MTY5Njg0MTQ4NywiaWF0IjoxNjk2NzU1MDg3fQ.H7GyQ_FGjAHxG3PJ0MBhYvt7HF6xPakM_doCRvZr9zE
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-08T165449.200.json
 
 ###
 
