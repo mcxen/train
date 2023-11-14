@@ -1,12 +1,9 @@
 package com.mcxgroup.member.req;
 
 import com.mcxgroup.common.req.PageReq;
+import lombok.Data;
 
+@Data
 public class TicketQueryReq extends PageReq {
-
-    @Override
-    public String toString() {
-        return "TicketQueryReq{" +
-                "} " + super.toString();
-    }
+    private Long memberId;
 }

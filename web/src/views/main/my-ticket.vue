@@ -2,7 +2,7 @@
   <p>
     <a-space>
       <a-button type="primary" @click="handleQuery()">刷新</a-button>
-
+      
     </a-space>
   </p>
   <a-table :dataSource="tickets"
@@ -13,9 +13,9 @@
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
       </template>
-      <template v-else-if="column.dataIndex === 'col'">
+      <template v-else-if="column.dataIndex === 'seatCol'">
         <span v-for="item in SEAT_COL_ARRAY" :key="item.code">
-          <span v-if="item.code === record.col && item.type === record.seatType">
+          <span v-if="item.code === record.seatCol&&item.type===record.seatType">
             {{item.desc}}
           </span>
         </span>
@@ -39,6 +39,7 @@ import axios from "axios";
 export default defineComponent({
   name: "ticket-view",
   setup() {
+    // 全局的window，直接引用import './assets/js/enums';//引入enums.js，
     const SEAT_COL_ARRAY = window.SEAT_COL_ARRAY;
     const SEAT_TYPE_ARRAY = window.SEAT_TYPE_ARRAY;
     const visible = ref(false);
@@ -47,25 +48,25 @@ export default defineComponent({
       memberId: undefined,
       passengerId: undefined,
       passengerName: undefined,
-      date: undefined,
+      trainDate: undefined,
       trainCode: undefined,
       carriageIndex: undefined,
-      row: undefined,
-      col: undefined,
-      start: undefined,
+      seatRow: undefined,
+      seatCol: undefined,
+      startStation: undefined,
       startTime: undefined,
-      end: undefined,
+      endStation: undefined,
       endTime: undefined,
       seatType: undefined,
       createTime: undefined,
       updateTime: undefined,
     });
     const tickets = ref([]);
-    // 分页的三个属性名是固定的
+    // 分页的三个属性名是固定的，不能更改，是vue的ref的固定的
     const pagination = ref({
       total: 0,
       current: 1,
-      pageSize: 10,
+      pageSize: 6,
     });
     let loading = ref(false);
     const columns = [
@@ -124,14 +125,9 @@ export default defineComponent({
       dataIndex: 'seatType',
       key: 'seatType',
     },
-    {
-      title: '出票时间',
-      dataIndex: 'createTime',
-      key: 'createTime',
-    },
     ];
 
-
+//如果没有初值的话就增加一个初始的参数首页为1页
     const handleQuery = (param) => {
       if (!param) {
         param = {
@@ -160,8 +156,10 @@ export default defineComponent({
     };
 
     const handleTableChange = (page) => {
-      // console.log("看看自带的分页参数都有啥：" + JSON.stringify(page));
-      pagination.value.pageSize = page.pageSize;
+      // page是局部的变量，pagination是响应式的变量
+      //增加点击的事件
+      // console.log("看看自带的分页参数都有啥：" + pagination);
+      pagination.value.pageSize=page.pageSize;
       handleQuery({
         page: page.current,
         size: page.pageSize
