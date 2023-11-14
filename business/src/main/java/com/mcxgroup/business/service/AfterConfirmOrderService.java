@@ -1,8 +1,11 @@
 package com.mcxgroup.business.service;
 
+import com.mcxgroup.business.domain.ConfirmOrder;
 import com.mcxgroup.business.domain.DailyTrainSeat;
 import com.mcxgroup.business.domain.DailyTrainTicket;
+import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
 import com.mcxgroup.business.feign.MemberFeign;
+import com.mcxgroup.business.mapper.ConfirmOrderMapper;
 import com.mcxgroup.business.mapper.DailyTrainSeatMapper;
 import com.mcxgroup.business.mapper.cust.DailyTrainTicketMapperCust;
 import com.mcxgroup.business.req.ConfirmOrderTicketReq;
@@ -28,8 +31,8 @@ import java.util.List;
 public class AfterConfirmOrderService {
     private static final Logger LOG = LoggerFactory.getLogger(ConfirmOrderService.class);
 
-//    @Resource
-//    private ConfirmOrderMapper confirmOrderMapper;
+    @Resource
+    private ConfirmOrderMapper confirmOrderMapper;
 //    @Resource
 //    private DailyTrainTicketService dailyTrainTicketService;
 //    @Resource
@@ -42,7 +45,7 @@ public class AfterConfirmOrderService {
     private MemberFeign memberFeign;
     @Transactional
     public void afterDoConfirm(DailyTrainTicket dailyTrainTicket,
-                               List<DailyTrainSeat> finalSeatList, List<ConfirmOrderTicketReq> tickets){
+                               List<DailyTrainSeat> finalSeatList, List<ConfirmOrderTicketReq> tickets, ConfirmOrder confirmOrder){
         for (int j = 0; j < finalSeatList.size(); j++) {
             DailyTrainSeat dailyTrainSeat = finalSeatList.get(j);
             DailyTrainSeat seatForUpdate = new DailyTrainSeat();
@@ -115,6 +118,13 @@ public class AfterConfirmOrderService {
             memberTicketReq.setSeatType(dailyTrainSeat.getSeatType());
             CommonResp<Object> commonResp = memberFeign.save(memberTicketReq);
             LOG.info("调用member接口，返回：{}", commonResp);
+
+            //更新订单状态为成功
+            ConfirmOrder confirmOrderForUpdate = new ConfirmOrder();
+            confirmOrderForUpdate.setId(confirmOrder.getId());
+            confirmOrderForUpdate.setUpdateTime(new Date());
+            confirmOrderForUpdate.setStatus(ConfirmOrderStatusEnum.SUCCESS.getCode());
+            confirmOrderMapper.updateByPrimaryKeySelective(confirmOrderForUpdate);//根据id更新部分的参数
         }
     }
 }

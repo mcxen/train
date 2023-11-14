@@ -68,6 +68,7 @@ public class ConfirmOrderService {
     }
     public void doConfirm(ConfirmOrderDoReq req) {
         //省略业务校验
+
         //保存确认表格
         DateTime now = DateTime.now();
         Date date = req.getDate();
@@ -79,10 +80,11 @@ public class ConfirmOrderService {
         confirmOrder.setCreateTime(now);
         confirmOrder.setUpdateTime(now);
         confirmOrder.setMemberId(LoginMemberContext.getId());
-        confirmOrder.setStatus(ConfirmOrderStatusEnum.INIT.getCode());
+        confirmOrder.setStatus(ConfirmOrderStatusEnum.INIT.getCode());//这里是初始化订单信息
         List<ConfirmOrderTicketReq> tickets = req.getTickets();
         confirmOrder.setTickets(JSON.toJSONString(tickets));
         confirmOrderMapper.insert(confirmOrder);
+
         //查询每日车票表
         DailyTrainTicket dailyTrainTicket = dailyTrainTicketService.selectByUnique(date, trainCode, start, end);
         LOG.info("查出来余票的记录：{}",dailyTrainTicket);
@@ -149,7 +151,7 @@ public class ConfirmOrderService {
         for (DailyTrainSeat seat : finalSeatList) {
             LOG.info("车厢号：「{}」，座位号：「{}」",seat.getCarriageIndex(),seat.getCarriageSeatIndex());
         }
-        afterConfirmOrderService.afterDoConfirm(dailyTrainTicket,finalSeatList,tickets);
+        afterConfirmOrderService.afterDoConfirm(dailyTrainTicket,finalSeatList,tickets,confirmOrder);
         // 选好之后处理
             //修改售卖情况
             //增加售票记录
