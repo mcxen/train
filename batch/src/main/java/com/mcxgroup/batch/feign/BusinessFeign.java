@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
-@FeignClient(name = "business", url = "http://127.0.0.1:8081/business")
+//@FeignClient(name = "business", url = "http://127.0.0.1:8081/business")
+@FeignClient(name = "business")
 public interface BusinessFeign {
 
-    @GetMapping("/hello")
+    @GetMapping("/business/hello")
     String hello();
 
-    @GetMapping("/admin/daily-train/gen-daily/{date}")
+    @GetMapping("/business/admin/daily-train/gen-daily/{date}")
     CommonResp<Object> genDaily(@PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date);
 }
