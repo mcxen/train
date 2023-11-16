@@ -282,6 +282,16 @@ npm install -g @vue/cli
 
 
 
+### 2023年11月16日
+
+#### 缓存
+
+- mybatis缓存
+
+需要实现序列化，对应的Train实体，这样才会开启二级缓存
+
+![image-20231116102223605](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231116102223605.png)
+
 
 
 ## BUG集合：
