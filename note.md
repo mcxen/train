@@ -294,6 +294,10 @@ npm install -g @vue/cli
 
 
 
+- mybatis是对持久层添加缓存，也可以springboot对api接口添加缓存
+
+
+
 ## BUG集合：
 
 ### 无法创建Bean - 原因往往在最后一个Caused by

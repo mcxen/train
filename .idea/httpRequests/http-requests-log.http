@@ -1,3 +1,153 @@
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=2&size=3&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110505.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=3&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110444.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=3&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110428.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=2&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110417.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110410.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110403.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110359.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110312.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=2&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T110255.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=2&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T105602.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T105241.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T105145.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T105140.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T105131.200.json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=6&trainCode=G520&end=齐齐哈尔北
+Content-Type: application/x-www-form-urlencoded
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-11-16T105126.200.json
+
+###
+
 GET http://127.0.0.1:8000/batch/hello
 Content-Type: application/x-www-form-urlencoded
 Connection: Keep-Alive
@@ -461,206 +611,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 }
 
 <> 2023-11-01T204547.200.json
-
-###
-
-GET http://127.0.0.1:8000/batch/hello
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-11-01T203025.500.json
-
-###
-
-GET http://127.0.0.1:8000/batch/hello
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-31T203833.200.txt
-
-###
-
-GET http://127.0.0.1:8000/batch/hello
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-31T203801.200.txt
-
-###
-
-GET http://127.0.0.1:8000/batch/hello
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-25T195612.500.json
-
-###
-
-GET http://127.0.0.1:8000/batch/hello
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-25T195610.500.json
-
-###
-
-POST http://localhost:8000/batch/admin/job/pause
-Content-Type: application/json
-Content-Length: 77
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.QuartzJob",
-  "jobGroupName": "default"
-}
-
-<> 2023-10-25T195601.500.json
-
-###
-
-POST http://localhost:8000/batch/admin/job/reschedule
-Content-Type: application/json
-Content-Length: 138
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.QuartzJob",
-  "jobGroupName": "default",
-  "cronExpression": "*/1 * * * * ?",
-  "desc": "Quartz Job"
-}
-
-<> 2023-10-25T195440.500.json
-
-###
-
-POST http://localhost:8000/batch/admin/job/add
-Content-Type: application/json
-Content-Length: 138
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.QuartzJob",
-  "jobGroupName": "default",
-  "cronExpression": "*/2 * * * * ?",
-  "desc": "Quartzw ob"
-}
-
-<> 2023-10-25T195431.500.json
-
-###
-
-POST http://localhost:8000/batch/admin/job/add
-Content-Type: application/json
-Content-Length: 138
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.QuartzJob",
-  "jobGroupName": "default",
-  "cronExpression": "*/2 * * * * ?",
-  "desc": "Quartz Job"
-}
-
-<> 2023-10-25T195251.500.json
-
-###
-
-GET http://127.0.0.1:8000/batch/admin/job/query
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-25T195246.500.json
-
-###
-
-GET http://127.0.0.1:8000/batch/admin/job/query
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-25T195225.500.json
-
-###
-
-GET http://127.0.0.1:8000/batch/admin/job/query
-Content-Type: application/x-www-form-urlencoded
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-25T195157.500.json
-
-###
-
-POST http://localhost:8000/batch/admin/job/pause
-Content-Type: application/json
-Content-Length: 77
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.QuartzJob",
-  "jobGroupName": "default"
-}
-
-<> 2023-10-24T203559.200.json
-
-###
-
-POST http://localhost:8000/batch/admin/job/pause
-Content-Type: application/json
-Content-Length: 78
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.QuartzJob",
-  "jobGroupName": "default",
-}
-
-<> 2023-10-24T203552.400.json
-
-###
-
-POST http://localhost:8000/batch/admin/job/reschedule
-Content-Type: application/json
-Content-Length: 138
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.QuartzJob",
-  "jobGroupName": "default",
-  "cronExpression": "*/1 * * * * ?",
-  "desc": "Quartz Job"
-}
-
-<> 2023-10-24T203508.200.json
 
 ###
 
