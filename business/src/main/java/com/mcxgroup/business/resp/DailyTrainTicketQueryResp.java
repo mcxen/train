@@ -2,12 +2,16 @@ package com.mcxgroup.business.resp;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import java.io.Serializable;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 
-public class DailyTrainTicketQueryResp {
-
+public class DailyTrainTicketQueryResp implements Serializable {
+//转存到redis后，可以通过>keys * 查看存储的结果：
+// 127.0.0.1:6379> keys *
+// 1) "train_cache_DailyTrainTicketService.queryList::DailyTrainTicketQueryReq(date=null, trainCode=G520, start=null, end=\xe9\xbd\x90\xe9\xbd\x90\xe5\x93\x88\xe5\xb0\x94\xe5\x8c\x97)"
     /**
      * id
      */
