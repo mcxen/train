@@ -151,7 +151,12 @@ public class ConfirmOrderService {
         for (DailyTrainSeat seat : finalSeatList) {
             LOG.info("车厢号：「{}」，座位号：「{}」",seat.getCarriageIndex(),seat.getCarriageSeatIndex());
         }
-        afterConfirmOrderService.afterDoConfirm(dailyTrainTicket,finalSeatList,tickets,confirmOrder);
+        try{
+            afterConfirmOrderService.afterDoConfirm(dailyTrainTicket,finalSeatList,tickets,confirmOrder);
+        }catch (Exception e){
+            LOG.error("保存购票记录失败",e);
+            throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_EXCEPTION);
+        }
         // 选好之后处理
             //修改售卖情况
             //增加售票记录
