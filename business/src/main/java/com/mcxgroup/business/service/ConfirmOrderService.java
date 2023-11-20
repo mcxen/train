@@ -28,11 +28,15 @@ import jakarta.annotation.Resource;
 import net.sf.jsqlparser.statement.select.Offset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author MCXEN
@@ -52,8 +56,10 @@ public class ConfirmOrderService {
     private DailyTrainSeatService dailyTrainSeatService;
     @Resource
     private AfterConfirmOrderService afterConfirmOrderService;
-
+    @Autowired//AutoWired是优先按照类去找
+    private StringRedisTemplate redisTemplate;
     public void save(ConfirmOrderDoReq req) {
+
         DateTime now = DateTime.now();
         ConfirmOrder confirmOrder = BeanUtil.copyProperties(req, ConfirmOrder.class);
         if (ObjectUtil.isNull(confirmOrder.getId())) {
@@ -67,6 +73,15 @@ public class ConfirmOrderService {
         }
     }
     public void doConfirm(ConfirmOrderDoReq req) {
+        String key = req.getDate()+"-"+req.getTrainCode();
+        Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(key, key, 5, TimeUnit.SECONDS);
+        if (setIfAbsent){
+            LOG.info("恭喜，抢到了锁");
+        }else {
+            LOG.info("遗憾，没有抢到锁，稍后重试");
+            throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_LOCK_FAIL);
+        }
+
         //省略业务校验
 
         //保存确认表格
@@ -156,6 +171,8 @@ public class ConfirmOrderService {
             //修改售卖情况
             //增加售票记录
             //更新订单为成功
+        LOG.info("购票流程结束，释放锁");
+        redisTemplate.delete(key);
 
     }
     private void getSeat(List<DailyTrainSeat> finalSeatList,Date date,String trainCode,String seatType,String column, List<Integer> offsetList,Integer startIdx,Integer endIdx){

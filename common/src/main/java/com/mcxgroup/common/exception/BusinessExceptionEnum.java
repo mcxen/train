@@ -12,7 +12,8 @@ public enum BusinessExceptionEnum {
 //    火车车站的唯一有两个
     BUSINESS_TRAIN_STATION_INDEX_UNIQUE("当前车次的该站序已经存在"),
     BUSINESS_TRAIN_STATION_NAME_UNIQUE("当前车次的该站名已经存在"),
-    CONFIRM_ORDER_TICKET_COUNT_ERROR("余票不足");
+    CONFIRM_ORDER_TICKET_COUNT_ERROR("余票不足"),
+    CONFIRM_ORDER_LOCK_FAIL("服务器忙，稍后重拾");
 
     private String desc;
 
