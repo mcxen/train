@@ -1,3 +1,54 @@
+POST http://localhost:8000/business/confirm-order/do
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MDA0NjM4NjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MjEwMjk4NjMwNjgwMTI1NDQsImV4cCI6MTcwMDU1MDI2MCwiaWF0IjoxNzAwNDYzODYwfQ.u4vHCaAFRyKhUDLZyp2Mi7BN9EB5w193Zz1b1IH5Ax8
+Content-Length: 325
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"dailyTrainTicketId":1723184611707719680,
+  "date":1702396800000,
+  "end":"齐齐哈尔北",
+  "start":"北京西",
+  "tickets":[{
+    "passengerId":1721137419832659968,
+    "passengerIdCard":"430381200012136022",
+    "passengerName":"陈贤文 ",
+    "passengerType":"1",
+    "seatTypeCode":"1"
+  }],
+  "trainCode":"G520"
+}
+
+<> 2023-11-20T151825.200.json
+
+###
+
+POST http://localhost:8000/business/confirm-order/do
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MDA0NjM4NjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MjEwMjk4NjMwNjgwMTI1NDQsImV4cCI6MTcwMDU1MDI2MCwiaWF0IjoxNzAwNDYzODYwfQ.u4vHCaAFRyKhUDLZyp2Mi7BN9EB5w193Zz1b1IH5Ax8
+token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MDA0NjM4NjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MjEwMjk4NjMwNjgwMTI1NDQsImV4cCI6MTcwMDU1MDI2MCwiaWF0IjoxNzAwNDYzODYwfQ.u4vHCaAFRyKhUDLZyp2Mi7BN9EB5w193Zz1b1IH5Ax8:
+Content-Length: 325
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{"dailyTrainTicketId":1723184611707719680,
+  "date":1702396800000,
+  "end":"齐齐哈尔北",
+  "start":"北京西",
+  "tickets":[{
+    "passengerId":1721137419832659968,
+    "passengerIdCard":"430381200012136022",
+    "passengerName":"陈贤文 ",
+    "passengerType":"1",
+    "seatTypeCode":"1"
+  }],
+  "trainCode":"G520"
+}
+
+###
+
 GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=2&size=3&trainCode=G520&end=齐齐哈尔北
 Content-Type: application/x-www-form-urlencoded
 Connection: Keep-Alive
@@ -553,38 +604,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 }
 
 <> 2023-11-01T210351.200.json
-
-###
-
-GET http://localhost:8000/batch/admin/job/run
-Content-Type: application/json
-Content-Length: 81
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.DailyTrainJob",
-  "jobGroupName": "default"
-}
-
-<> 2023-11-01T210336.200.json
-
-###
-
-GET http://localhost:8000/batch/admin/job/run
-Content-Type: application/json
-Content-Length: 81
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "name": "com.mcxgroup.batch.job.DailyTrainJob",
-  "jobGroupName": "default"
-}
-
-<> 2023-11-01T210053.200.json
 
 ###
 

@@ -1,0 +1,19 @@
+## 测试订单详情查询压力
+POST http://localhost:8000/business/confirm-order/do
+Content-Type: application/json
+token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MDA0NjM4NjAsIm1vYmlsZSI6IjEzMDg4ODgwMDAwIiwiaWQiOjE3MjEwMjk4NjMwNjgwMTI1NDQsImV4cCI6MTcwMDU1MDI2MCwiaWF0IjoxNzAwNDYzODYwfQ.u4vHCaAFRyKhUDLZyp2Mi7BN9EB5w193Zz1b1IH5Ax8
+
+
+{"dailyTrainTicketId":1723184611707719680,
+  "date":1702396800000,
+  "end":"齐齐哈尔北",
+  "start":"北京西",
+  "tickets":[{
+    "passengerId":1721137419832659968,
+    "passengerIdCard":"430381200012136022",
+    "passengerName":"陈贤文 ",
+    "passengerType":"1",
+    "seatTypeCode":"1"
+  }],
+  "trainCode":"G520"
+}
