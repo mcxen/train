@@ -19,6 +19,7 @@ public class MemberInterceptor implements HandlerInterceptor {
     //前置拦截器，获取header的token，然后保存到LocalThread.
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.info("MemberInterceptor is working ... ");
         String token = request.getHeader("token");
         if (StrUtil.isNotBlank(token)){
             log.info("拦截器获取登录的token：{}",token);
@@ -27,6 +28,7 @@ public class MemberInterceptor implements HandlerInterceptor {
             log.info("拦截器获取登录的JSONObject：{}",memberJson);
             LoginMemberContext.setMember(JSONUtil.toBean(memberJson, MemberLoginResp.class));
         }
+        log.info("MemberInterceptor closed .");
         return true;
     }
 }
