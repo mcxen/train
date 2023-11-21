@@ -7,6 +7,7 @@ import cn.hutool.core.util.EnumUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -77,6 +78,7 @@ public class ConfirmOrderService {
             confirmOrderMapper.updateByPrimaryKey(confirmOrder);
         }
     }
+    @SentinelResource("doConfirm")
     public void doConfirm(ConfirmOrderDoReq req) {
         String key = req.getDate()+"-"+req.getTrainCode();
 //        Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(key, key, 5, TimeUnit.SECONDS);
