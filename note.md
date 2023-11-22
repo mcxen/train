@@ -298,6 +298,18 @@ npm install -g @vue/cli
 
 
 
+#### sentinel限流
+
+走https://ghproxy.com/ 下载 sentinel release
+
+下载jar包
+
+```sh
+java -Dserver.port=18080 -Dcsp.sentinel.dashboard.server=localhost:18080 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.6.jar
+```
+
+
+
 ## BUG集合：
 
 ### 无法创建Bean - 原因往往在最后一个Caused by
