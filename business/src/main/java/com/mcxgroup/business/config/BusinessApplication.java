@@ -34,18 +34,18 @@ public class BusinessApplication {
         log.info("Buisiness模块启动成功");
         log.info("测试地址: \thttp://127.0.0.1:{}{}/hello", env.getProperty("server.port"), env.getProperty("server.servlet.context-path"));
         //
-        initFlowRules();
-        log.info("》》》》已经定义sentinel限流规则《《《");
+//        initFlowRules();
+//        log.info("》》》》已经定义sentinel限流规则《《《");
     }
 
-    //增加sentinel限制流量
-    private static void  initFlowRules(){
-        List<FlowRule> rules = new ArrayList<>();
-        FlowRule rule = new FlowRule();
-        rule.setResource("doConfirm");
-        rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
-        rule.setCount(1);
-        rules.add(rule);
-        FlowRuleManager.loadRules(rules);
-    }
+//    //手动增加sentinel限制流量
+//    private static void  initFlowRules(){
+//        List<FlowRule> rules = new ArrayList<>();
+//        FlowRule rule = new FlowRule();
+//        rule.setResource("doConfirm");
+//        rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
+//        rule.setCount(1);
+//        rules.add(rule);
+//        FlowRuleManager.loadRules(rules);
+//    }
 }

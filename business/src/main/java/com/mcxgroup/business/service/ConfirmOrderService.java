@@ -80,7 +80,7 @@ public class ConfirmOrderService {
         }
     }
 //    @SentinelResource("doConfirm")
-    @SentinelResource(value = "doConfirm",blockHandler = "doConfirmBlock")
+//    @SentinelResource(value = "doConfirm",blockHandler = "doConfirmBlock")
     public void doConfirm(ConfirmOrderDoReq req) {
         String key = req.getDate()+"-"+req.getTrainCode();
 //        Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(key, key, 5, TimeUnit.SECONDS);
