@@ -310,6 +310,81 @@ java -Dserver.port=18080 -Dcsp.sentinel.dashboard.server=localhost:18080 -Dproje
 
 
 
+#### Nacos搭配sentinel 实现本地保存配置
+
+添加依赖
+
+```xml
+<!--        增加sentinel和nacos的一起的配置-->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+```
+
+设置参数
+
+```properties
+# sentinel和nacos
+spring.cloud.sentinel.datasource.nacos.nacos.server-addr=localhost:8848
+spring.cloud.sentinel.datasource.nacos.nacos.namespace=train
+spring.cloud.sentinel.datasource.nacos.nacos.group-id=TRAIN_GROUP
+spring.cloud.sentinel.datasource.nacos.nacos.data-id=sentinel
+spring.cloud.sentinel.datasource.nacos.nacos.rule-type=flow
+
+```
+
+
+
+![截屏2023-11-22 11.10.42](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-22%2011.10.42.png)
+
+
+
+
+
+```json
+[{
+    "resource":"doConfirm",
+    "limitApp":"default",
+    "grade":1,
+    "count":100,
+    "strategy":0,
+    "controlBehavior":0,
+    "clusterMode":false
+},{
+    "resource":"confirmOrderDo",
+    "limitApp":"default",
+    "grade":1,
+    "count":4,
+    "strategy":0,
+    "controlBehavior":0,
+    "clusterMode":false
+}]
+
+```
+
+上面的配置就是对应：
+
+> ```sh
+>     "resource":"doConfirm",
+>     "limitApp":"default", 针对来源
+>     "grade":1, 0和1<>阈值类型，QPS还是线程数
+>     "count":100,阈值
+>     "strategy":0,流控模式
+>     "controlBehavior":0,流控效果
+>     "clusterMode":false
+> ```
+
+![image-20231122111246153](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231122111246153.png)
+
+
+
+效果：
+
+![截屏2023-11-22 11.15.54](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-22%2011.15.54.png)
+
+
+
 ## BUG集合：
 
 ### 无法创建Bean - 原因往往在最后一个Caused by
