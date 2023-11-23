@@ -464,3 +464,14 @@ public interface SkTokenMapperCust {
 }
 ```
 
+
+
+
+
+### 操作Redis，报：ERR value is not an integer or out of range
+
+主要是序列化问题引起的，如果之前使用的是RedisTemplate，改成StringRedis Template
+
+
+
+<img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231123214645827.png" alt="image-20231123214645827" style="zoom: 50%;" />
