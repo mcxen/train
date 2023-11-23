@@ -65,6 +65,8 @@ public class ConfirmOrderService {
 
     @Autowired
     private RedissonClient redissonClient;
+    @Resource
+    private SkTokenService skTokenService;
     public void save(ConfirmOrderDoReq req) {
 
         DateTime now = DateTime.now();
@@ -90,6 +92,14 @@ public class ConfirmOrderService {
 //            LOG.info("遗憾，没有抢到锁，稍后重试");
 //            throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_LOCK_FAIL);
 //        }
+        boolean validSkToken = skTokenService.validSkToken(req.getDate(), req.getTrainCode(),LoginMemberContext.getId());
+        if (validSkToken){
+            LOG.info(">>>>PASS>>>>令牌校验通过>>>>");
+        }else {
+            LOG.info("<<<<FAIL<<<遗憾，令牌校验不通过，余票不足");
+            throw new BusinessException(BusinessExceptionEnum.CONFIRM_SK_TOKEN_TICKET_COUNT_ERROR);
+        }
+
         //分布式锁，调用redisson
         RLock lock = null;
         try{

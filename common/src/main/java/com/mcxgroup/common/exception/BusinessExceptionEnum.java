@@ -13,6 +13,7 @@ public enum BusinessExceptionEnum {
     BUSINESS_TRAIN_STATION_INDEX_UNIQUE("当前车次的该站序已经存在"),
     BUSINESS_TRAIN_STATION_NAME_UNIQUE("当前车次的该站名已经存在"),
     CONFIRM_ORDER_TICKET_COUNT_ERROR("余票不足"),
+    CONFIRM_SK_TOKEN_TICKET_COUNT_ERROR("令牌不足，余票卖光"),
     CONFIRM_ORDER_FLOW_EXCEPTION("当前抢票人数过多，请稍后重试"),
     CONFIRM_ORDER_LOCK_FAIL("服务器忙，稍后重试");
 

@@ -432,3 +432,35 @@ Settings->Java Compiler
 
 
 ![截屏2023-11-02 19.07.48](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-02%2019.07.48.png)
+
+
+
+### 无法解析创建cust的mapper
+
+
+
+```sh
+eans.BeanInstantiationException: Failed to instantiate [org.apache.ibatis.session.SqlSessionFactory]: Factory method 'sqlSessionFactory' threw exception with message: Failed to parse mapping resource: 'file [/Users/mcxw/Downloads/train/business/target/classes/mapper/cust/SkTokenMapperCust.xml]'
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:648)
+	... 61 common frames omitted
+Caused by: java.io.IOException: Failed to parse mapping resource: 'file [/Users/mcxw/Downloads/train/business/target/classes/mapper/cust/SkTokenMapperCust.xml]'
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:615)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:492)
+	at org.mybatis.spring.SqlSessionFactoryBean.getObject(SqlSessionFactoryBean.java:635)
+```
+
+
+
+![截屏2023-11-23 11.30.48](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-23%2011.30.48.png)
+
+实际就是没有配置传进来的参数，
+
+得导入：`@Param("XX")`
+
+```java
+public interface SkTokenMapperCust {
+    int decrease(@Param("date")Date date, @Param("trainCode")String trainCode);
+}
+```
+
