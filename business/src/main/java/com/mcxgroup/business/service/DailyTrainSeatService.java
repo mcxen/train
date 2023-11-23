@@ -38,6 +38,7 @@ public class DailyTrainSeatService {
 
     @Resource
     TrainStationService trainStationService;
+
     public void save(DailyTrainSeatSaveReq req) {
         DateTime now = DateTime.now();
         DailyTrainSeat dailyTrainSeat = BeanUtil.copyProperties(req, DailyTrainSeat.class);
@@ -118,6 +119,9 @@ public class DailyTrainSeatService {
         }
         LOG.info("生成每日车次车厢，日期【{}】车次【{}】的信息结束", DateUtil.formatDate(date), trainCode);
 
+    }
+    public int countSeat(Date date, String trainCode) {
+        return countSeat(date, trainCode, null);
     }
     public int countSeat(Date date, String trainCode, String seatType) {
         DailyTrainSeatExample example = new DailyTrainSeatExample();
