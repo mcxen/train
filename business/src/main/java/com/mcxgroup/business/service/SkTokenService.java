@@ -8,6 +8,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mcxgroup.business.mapper.cust.SkTokenMapperCust;
 import com.mcxgroup.common.context.LoginMemberContext;
+import com.mcxgroup.common.exception.BusinessException;
+import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.business.domain.SkToken;
@@ -19,10 +21,12 @@ import com.mcxgroup.business.resp.SkTokenQueryResp;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author MCXEN
@@ -43,6 +47,8 @@ public class SkTokenService {
     @Resource
     private SkTokenMapperCust skTokenMapperCust;
 
+    @Resource
+    private RedisTemplate redisTemplate;
     /**
      * 初始化
      */
@@ -113,6 +119,17 @@ public class SkTokenService {
 
     public boolean validSkToken(Date date,String trainCode,Long memberId){
         LOG.info("会员「{}」获取日期「{}」车次「{}」的令牌开始",memberId,DateUtil.formatDate(date),trainCode);
+
+        //基于RedisTemplate的分布式锁来防止刷票
+        String key = DateUtil.formatDate(date)+"-"+trainCode+memberId;
+        Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(key, key, 2, TimeUnit.SECONDS);
+        if (Boolean.TRUE.equals(setIfAbsent)){
+            LOG.info("恭喜，在令牌校验防止刷票函数中抢到了锁");
+        }else {
+            LOG.info("遗憾，在令牌校验防止刷票函数没有抢到锁，稍后重试");
+            return false;
+        }
+
         //令牌约等于库存，令牌没有了，就不再卖票，不需要再进入购票主流程去判断库存，判断令牌肯定比判断库存快
         int updateCount = skTokenMapperCust.decrease(date, trainCode);
         if (updateCount>0){
