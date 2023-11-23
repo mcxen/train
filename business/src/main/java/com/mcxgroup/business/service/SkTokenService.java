@@ -6,10 +6,8 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mcxgroup.business.enums.RedisKeyPreEnum;
 import com.mcxgroup.business.mapper.cust.SkTokenMapperCust;
-import com.mcxgroup.common.context.LoginMemberContext;
-import com.mcxgroup.common.exception.BusinessException;
-import com.mcxgroup.common.exception.BusinessExceptionEnum;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
 import com.mcxgroup.business.domain.SkToken;
@@ -121,7 +119,7 @@ public class SkTokenService {
         LOG.info("会员「{}」获取日期「{}」车次「{}」的令牌开始",memberId,DateUtil.formatDate(date),trainCode);
 
         //基于RedisTemplate的分布式锁来防止刷票
-        String key = DateUtil.formatDate(date)+"-"+trainCode+memberId;
+        String key = RedisKeyPreEnum.SK_TOKEN+DateUtil.formatDate(date)+"-"+trainCode+memberId;
         Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(key, key, 2, TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(setIfAbsent)){
             LOG.info("恭喜，在令牌校验防止刷票函数中抢到了锁");
