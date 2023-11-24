@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mcxgroup.business.domain.*;
+import com.mcxgroup.business.dto.ConfirmOrderMQDto;
 import com.mcxgroup.business.enums.ConfirmOrderStatusEnum;
 import com.mcxgroup.business.enums.RocketMQTopicEnum;
 import com.mcxgroup.business.enums.SeatColEnum;
@@ -95,8 +96,11 @@ public class BeforeConfirmOrderService {
         confirmOrderMapper.insert(confirmOrder);
 
         // 发送MQ排队购票
-        req.setLogId(MDC.get("LOG_ID"));//从MDC中检索与键"LOG_ID"相关联的值
-        String reqJson = JSON.toJSONString(req);
+        ConfirmOrderMQDto confirmOrderMQDto = new ConfirmOrderMQDto();
+        confirmOrderMQDto.setDate(req.getDate());
+        confirmOrderMQDto.setTrainCode(req.getTrainCode());
+        confirmOrderMQDto.setLogId(MDC.get("LOG_ID"));//从MDC中检索与键"LOG_ID"相关联的值
+        String reqJson = JSON.toJSONString(confirmOrderMQDto);
         LOG.info("排队购票，发送mq开始，消息：{}", reqJson);
         rocketMQTemplate.convertAndSend(RocketMQTopicEnum.CONFIRM_ORDER.getCode(), reqJson);
         LOG.info("排队购票，发送mq结束");
