@@ -105,7 +105,8 @@ public class ConfirmOrderService {
             LOG.info("恭喜，抢到车次锁了！lockKey：{}", lockKey);
         } else {
             LOG.info("没抢到锁，有其它消费线程正在出票，不做任何处理");
-            throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_LOCK_FAIL);
+//            throw new BusinessException(BusinessExceptionEnum.CONFIRM_ORDER_LOCK_FAIL);
+            return;
         }
         try{
             while (true){
@@ -125,7 +126,17 @@ public class ConfirmOrderService {
                     LOG.info("本次处理{}条确认订单", list.size());
                 }
                 for (ConfirmOrder confirmOrder : list) {
-                    sell(confirmOrder);//一条一条卖
+                    try{
+                        sell(confirmOrder);//一条一条卖
+                    }catch (BusinessException e){
+                        if (e.getE().equals(BusinessExceptionEnum.CONFIRM_ORDER_TICKET_COUNT_ERROR)){
+                            LOG.info("本订单余票不足，继续售卖下一个订单");
+                            confirmOrder.setStatus(ConfirmOrderStatusEnum.EMPTY.getCode());
+                            updateStatus(confirmOrder);
+                        }else {
+                            throw e;
+                        }
+                    }
                 }
             }
         }finally {
