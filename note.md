@@ -475,3 +475,13 @@ public interface SkTokenMapperCust {
 
 
 <img src="https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231123214645827.png" alt="image-20231123214645827" style="zoom: 50%;" />
+
+
+
+### 在springboot 3整合 RocketMQ可能遇见的BUG
+
+> 实现RocketMQ发送，spring.factories功能在Spring Boot 3.0被移除，替代方案为
+>
+> META- INFO/spring/org.springframework. boot.autoconfigure. AutoConfiguration.imports
+
+![image-20231124155959153](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231124155959153.png)
