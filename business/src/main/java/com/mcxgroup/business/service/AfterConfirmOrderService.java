@@ -103,7 +103,8 @@ public class AfterConfirmOrderService {
                     maxEndIndex);
             // 调用会员服务接口，为会员增加一张车票
             MemberTicketReq memberTicketReq = new MemberTicketReq();
-            memberTicketReq.setMemberId(LoginMemberContext.getId());
+            //这个ID原来是从拦截器获得，但是拦截器只能拦截正常的接口，在这里是被MQ调用的，所以拿不到
+            memberTicketReq.setMemberId(confirmOrder.getId());
             memberTicketReq.setPassengerId(tickets.get(j).getPassengerId());
             memberTicketReq.setPassengerName(tickets.get(j).getPassengerName());
             memberTicketReq.setTrainDate(dailyTrainTicket.getDate());

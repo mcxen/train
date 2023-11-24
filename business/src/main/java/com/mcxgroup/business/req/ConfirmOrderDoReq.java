@@ -21,6 +21,8 @@ public class ConfirmOrderDoReq {
      */
     private Long memberId;
 
+    //日志跟踪
+    private String logId;
     /**
      * 日期
      */
