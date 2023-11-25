@@ -36,6 +36,7 @@ public class TicketService {
 
     public void save(MemberTicketReq req) {
         DateTime now = DateTime.now();
+        LOG.info("TicketService处遇到的req MemberId为：「{}」/ ",req.getMemberId());
         Ticket ticket = BeanUtil.copyProperties(req, Ticket.class);
         ticket.setId(SnowUtil.getSnowflakeNextId());
         ticket.setCreateTime(now);
@@ -50,6 +51,7 @@ public class TicketService {
 //        增加查询条件
         if (ObjUtil.isNotNull(req.getMemberId())){
             criteria.andMemberIdEqualTo(req.getMemberId());
+            LOG.info("查询MemberID：{}", req.getMemberId());
         }
         LOG.info("查询页码：{}", req.getPage());
         LOG.info("每页条数：{}", req.getSize());

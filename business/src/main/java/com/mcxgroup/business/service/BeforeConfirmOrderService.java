@@ -64,7 +64,7 @@ public class BeforeConfirmOrderService {
     private SkTokenService skTokenService;
 
     @SentinelResource(value = "beforeDoConfirm", blockHandler = "beforeDoConfirmBlock")
-    public void beforeDoConfirm(ConfirmOrderDoReq req) {
+    public Long beforeDoConfirm(ConfirmOrderDoReq req) {
         req.setMemberId(LoginMemberContext.getId());
         boolean validSkToken = skTokenService.validSkToken(req.getDate(), req.getTrainCode(),LoginMemberContext.getId());
         if (validSkToken){
@@ -85,6 +85,8 @@ public class BeforeConfirmOrderService {
         confirmOrder.setId(SnowUtil.getSnowflakeNextId());
         confirmOrder.setCreateTime(now);
         confirmOrder.setUpdateTime(now);
+        LOG.info("BeForeCoonfirm处遇到的confirmOrder MemberId为：「{}」/ ",confirmOrder.getMemberId());
+
         confirmOrder.setMemberId(req.getMemberId());
         confirmOrder.setDate(date);
         confirmOrder.setTrainCode(trainCode);
@@ -104,6 +106,7 @@ public class BeforeConfirmOrderService {
         LOG.info("排队购票，发送mq开始，消息：{}", reqJson);
         rocketMQTemplate.convertAndSend(RocketMQTopicEnum.CONFIRM_ORDER.getCode(), reqJson);
         LOG.info("排队购票，发送mq结束");
+        return confirmOrder.getId();//返回排队的订单ID
     }
     /**
      * 降级方法，需包含限流方法的所有参数和BlockException参数

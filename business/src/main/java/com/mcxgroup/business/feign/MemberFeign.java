@@ -2,6 +2,7 @@ package com.mcxgroup.business.feign;
 
 import com.mcxgroup.common.req.MemberTicketReq;
 import com.mcxgroup.common.resp.CommonResp;
+import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,5 +15,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "member",url = "127.0.0.1:8080")
 public interface MemberFeign {
     @GetMapping("/member/feign/ticket/save")
-    CommonResp<Object> save(@RequestBody MemberTicketReq req);
+    CommonResp<Object> save(@Valid @RequestBody MemberTicketReq req);
 }

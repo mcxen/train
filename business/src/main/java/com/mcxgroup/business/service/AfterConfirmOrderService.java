@@ -104,7 +104,8 @@ public class AfterConfirmOrderService {
             // 调用会员服务接口，为会员增加一张车票
             MemberTicketReq memberTicketReq = new MemberTicketReq();
             //这个ID原来是从拦截器获得，但是拦截器只能拦截正常的接口，在这里是被MQ调用的，所以拿不到
-            memberTicketReq.setMemberId(confirmOrder.getId());
+            memberTicketReq.setMemberId(confirmOrder.getMemberId());
+            LOG.info("AfterCoonfirm处遇到的confirmOrder MemberId为：「{}」/ ",confirmOrder.getMemberId());
             memberTicketReq.setPassengerId(tickets.get(j).getPassengerId());
             memberTicketReq.setPassengerName(tickets.get(j).getPassengerName());
             memberTicketReq.setTrainDate(dailyTrainTicket.getDate());
