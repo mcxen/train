@@ -107,6 +107,19 @@
     <br/>
     最终购票：{{tickets}}
   </a-modal>
+  <a-modal v-model:visible="lineModalVisible" title="排队购票" :footer="null" :maskClosable="false" :closable="false"
+           style="top: 50px; width: 400px">
+    <div class="book-line">
+      <div v-show="confirmOrderLineCount < 0">
+        <loading-outlined /> 系统正在处理中...
+      </div>
+      <div v-show="confirmOrderLineCount >= 0">
+        <loading-outlined /> 您前面还有{{confirmOrderLineCount}}位用户在购票，排队中，请稍候
+      </div>
+    </div>
+    <br/>
+    <a-button type="danger" @click="onCancelOrder">取消购票</a-button>
+  </a-modal>
 </template>
 
 <script>
@@ -161,6 +174,7 @@ export default defineComponent({
     //   seatTypeCode: "1",
     //   seat: "C1"
     // }
+    const lineModalVisible=ref(false);//最后显示进度条模态框
     const tickets = ref([]);
     // 勾选或去掉某个乘客时，在购票列表中加上或去掉一张表
     watch(() => passengerChecks.value, (newVal, oldVal)=>{
@@ -319,7 +333,9 @@ export default defineComponent({
       }).then((response) => {
         let data = response.data;
         if (data.success) {
-          notification.success({description: "下单成功！"});
+          // notification.success({description: "下单成功！"});
+          visible.value=false;//确认的框
+          lineModalVisible.value=true;
         } else {
           notification.error({description: data.message});
         }
@@ -332,6 +348,7 @@ export default defineComponent({
     });
     console.log("本车次提供的座位：", seatTypes)
     return {
+      lineModalVisible,
       handleOk,
       chooseSeatType,
       chooseSeatObj,
