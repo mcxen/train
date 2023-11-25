@@ -21,6 +21,7 @@ import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,8 @@ public class SkTokenService {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+    @Value("${spring.profiles.active}")
+    private String env;
     /**
      * 初始化
      */
@@ -121,16 +124,19 @@ public class SkTokenService {
     public boolean validSkToken(Date date,String trainCode,Long memberId){
         LOG.info("会员「{}」获取日期「{}」车次「{}」的令牌开始",memberId,DateUtil.formatDate(date),trainCode);
 
-        //基于RedisTemplate的分布式锁来防止刷票
-        String key = RedisKeyPreEnum.SK_TOKEN+"-"+DateUtil.formatDate(date)+"-"+trainCode+memberId;
-        Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(key, key, 1, TimeUnit.SECONDS);
-        if (Boolean.TRUE.equals(setIfAbsent)){
-            LOG.info("恭喜，在令牌校验防止刷票函数中抢到了锁");
-        }else {
-            LOG.info("遗憾，在令牌校验防止刷票函数没有抢到锁，稍后重试");
-            return false;
-        }
+        //非开发环境才开启
+        if (!env.equals("dev")){
+            //基于RedisTemplate的分布式锁来防止刷票
+            String key = RedisKeyPreEnum.SK_TOKEN+"-"+DateUtil.formatDate(date)+"-"+trainCode+memberId;
+            Boolean setIfAbsent = redisTemplate.opsForValue().setIfAbsent(key, key, 1, TimeUnit.SECONDS);
+            if (Boolean.TRUE.equals(setIfAbsent)){
+                LOG.info("恭喜，在令牌校验防止刷票函数中抢到了锁");
+            }else {
+                LOG.info("遗憾，在令牌校验防止刷票函数没有抢到锁，稍后重试");
+                return false;
+            }
 
+        }
         String skTokenCountKey = RedisKeyPreEnum.SK_TOKEN_COUNT+"-"+DateUtil.formatDate(date)+"-"+trainCode;
         Object skTokenCount = redisTemplate.opsForValue().get(skTokenCountKey);
         if (skTokenCount!=null){
