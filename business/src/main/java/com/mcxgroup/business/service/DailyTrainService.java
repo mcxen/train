@@ -16,7 +16,7 @@ import com.mcxgroup.business.req.DailyTrainQueryReq;
 import com.mcxgroup.business.req.DailyTrainSaveReq;
 import com.mcxgroup.business.resp.DailyTrainQueryResp;
 import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@Slf4j
 public class DailyTrainService {
     private static final Logger LOG = LoggerFactory.getLogger(DailyTrainService.class);
 
@@ -104,7 +103,7 @@ public class DailyTrainService {
     public void genDaily(Date date) {
         List<Train> trainList = trainService.selectAll();//所有的车次
         if (CollUtil.isEmpty(trainList)){
-            log.info("所有车次数据为空");
+            LOG.info("所有车次数据为空");
             return;
         }
         for (Train train : trainList) {

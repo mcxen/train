@@ -15,14 +15,17 @@ import com.mcxgroup.member.req.MemberRegisterReq;
 import com.mcxgroup.member.req.MemberSendCodeReq;
 import com.mcxgroup.member.resp.MemberLoginResp;
 import jakarta.annotation.Resource;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service
 public class MemberService {
+    private static final Logger LOG = LoggerFactory.getLogger(MemberService.class);
+
     @Resource
     private MemberMapper memberMapper;
     public int count(){
@@ -51,7 +54,7 @@ public class MemberService {
         Member members = selectByMobile(mobile);
 
         if (ObjectUtil.isNull(members)){
-            log.info("该手机号未注册");
+            LOG.info("该手机号未注册");
             //如果不存在的就插入新的用户
             Member member = new Member();
             //导入雪花算法
@@ -60,12 +63,12 @@ public class MemberService {
             memberMapper.insert(member);
 
         }else {
-            log.info("手机号存在");
+            LOG.info("手机号存在");
         }
         //生产验证码
 //        String code = RandomUtil.randomString(4);
         String code = "8888";
-        log.info("生成手机验证码：{}",code);
+        LOG.info("生成手机验证码：{}",code);
         //保存短信记录 手机号，验证码，有效期 5分钟 是否已使用，业务类型，发送时间，使用时间
 
         //对接

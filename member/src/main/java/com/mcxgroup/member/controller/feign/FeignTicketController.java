@@ -4,7 +4,9 @@ import com.mcxgroup.common.req.MemberTicketReq;
 import com.mcxgroup.common.resp.CommonResp;
 import com.mcxgroup.member.service.TicketService;
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequestMapping("/feign/ticket")
-@Slf4j
 public class FeignTicketController {
+    private static final Logger LOG = LoggerFactory.getLogger(FeignTicketController.class);
+
     @Autowired
     private TicketService ticketService;
     @PostMapping("/save")
     public CommonResp<Object> save(@Valid @RequestBody MemberTicketReq memberTicketReq){
-        log.info("FeignTicketController处遇到的memberTicketReq MemberId为：「{}」/ ",memberTicketReq.getMemberId());
+        LOG.info("FeignTicketController处遇到的memberTicketReq MemberId为：「{}」/ ",memberTicketReq.getMemberId());
         ticketService.save(memberTicketReq);
         return new CommonResp<>();
     }

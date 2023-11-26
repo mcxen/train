@@ -1,7 +1,8 @@
 package com.mcxgroup.batch.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -14,8 +15,8 @@ import org.springframework.core.env.Environment;
 @MapperScan("com.mcxgroup.*.mapper")
 @EnableFeignClients("com.mcxgroup.batch.feign")
 //@Configuration
-@Slf4j
 public class BatchApplication {
+    private static final Logger LOG = LoggerFactory.getLogger(BatchApplication.class);
 
     //主项目
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class BatchApplication {
 //        SpringApplication.run(MemberApplication.class, args);
         SpringApplication app = new SpringApplication(BatchApplication.class);
         Environment env = app.run(args).getEnvironment();
-        log.info("Batch Application模块启动成功");
-        log.info("测试地址: \thttp://127.0.0.1:{}{}/hello", env.getProperty("server.port"), env.getProperty("server.servlet.context-path"));
+        LOG.info("Batch Application模块启动成功");
+        LOG.info("测试地址: \thttp://127.0.0.1:{}{}/hello", env.getProperty("server.port"), env.getProperty("server.servlet.context-path"));
     }
 }
