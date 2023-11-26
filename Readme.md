@@ -2,6 +2,28 @@
 
 2023年9月22日开始施工💡
 
+## 快速启动
+
+- 启动Redis
+
+```sh
+redis-server /opt/homebrew/etc/redis.conf
+```
+
+
+
+- 单机模式启动Nacos
+
+```sh
+cd /Users/mcxw/Downloads/nacos/bin
+sh startup.sh -m standalone
+```
+
+DASHBOARD:http://127.0.0.1:8848/nacos/#/
+
+USER:nacos PWD: nacos
+
+
 
 ## 用途
 

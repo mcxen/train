@@ -35,9 +35,11 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -86,7 +88,10 @@ public class ConfirmOrderService {
     }
 //    @SentinelResource("doConfirm")
 //    @SentinelResource(value = "doConfirm",blockHandler = "doConfirmBlock")
+    @Async
     public void doConfirm(ConfirmOrderMQDto dto) {
+        MDC.put("LOG_ID",dto.getLogId());
+        LOG.info("开启异步的出票：「{}」",dto);
 //        //分布式锁，调用redisson
 //        RLock lock = null;
 //        LOG.info("------Redisson 自带的看门狗 -------");
