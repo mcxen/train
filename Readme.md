@@ -78,3 +78,8 @@ Mapper生成器：
 
 ![截屏2023-11-23 15.06.15](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-23%2015.06.15.png)
 
+### 配置中心Nacos统一管理配置
+
+使用nacos管理生产和开发环境的数据库连接等配置
+
+![截屏2023-11-26 15.46.10](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-26%2015.46.10.png)

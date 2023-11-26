@@ -9,8 +9,68 @@ import lombok.Data;
  * @Description
  * @Author McXen@2023/11/7
  **/
-@Data
+
 public class ConfirmOrderTicketReq {
+    @Override
+    public String toString() {
+        return "ConfirmOrderTicketReq{" +
+                "passengerId=" + passengerId +
+                ", passengerType='" + passengerType + '\'' +
+                ", passengerName='" + passengerName + '\'' +
+                ", passengerIdCard='" + passengerIdCard + '\'' +
+                ", seatTypeCode='" + seatTypeCode + '\'' +
+                ", seat='" + seat + '\'' +
+                '}';
+    }
+
+    public Long getPassengerId() {
+        return passengerId;
+    }
+
+    public void setPassengerId(Long passengerId) {
+        this.passengerId = passengerId;
+    }
+
+    public String getPassengerType() {
+        return passengerType;
+    }
+
+    public void setPassengerType(String passengerType) {
+        this.passengerType = passengerType;
+    }
+
+    public String getPassengerName() {
+        return passengerName;
+    }
+
+    public void setPassengerName(String passengerName) {
+        this.passengerName = passengerName;
+    }
+
+    public String getPassengerIdCard() {
+        return passengerIdCard;
+    }
+
+    public void setPassengerIdCard(String passengerIdCard) {
+        this.passengerIdCard = passengerIdCard;
+    }
+
+    public String getSeatTypeCode() {
+        return seatTypeCode;
+    }
+
+    public void setSeatTypeCode(String seatTypeCode) {
+        this.seatTypeCode = seatTypeCode;
+    }
+
+    public String getSeat() {
+        return seat;
+    }
+
+    public void setSeat(String seat) {
+        this.seat = seat;
+    }
+
     /**
      * 乘客ID
      */
