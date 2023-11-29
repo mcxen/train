@@ -67,6 +67,9 @@ public class BeforeConfirmOrderService {
 
     @SentinelResource(value = "beforeDoConfirm", blockHandler = "beforeDoConfirmBlock")
     public Long beforeDoConfirm(ConfirmOrderDoReq req) {
+        Long id=null;
+        for (int i = 0; i < req.getLineNumber(); i++) {
+
         req.setMemberId(LoginMemberContext.getId());
         boolean validSkToken = skTokenService.validSkToken(req.getDate(), req.getTrainCode(),LoginMemberContext.getId());
         if (validSkToken){
@@ -109,7 +112,9 @@ public class BeforeConfirmOrderService {
 //        rocketMQTemplate.convertAndSend(RocketMQTopicEnum.CONFIRM_ORDER.getCode(), reqJson);
 //        LOG.info("排队购票，发送mq结束");
         confirmOrderService.doConfirm(confirmOrderMQDto);//这个是同步的
-        return confirmOrder.getId();//返回排队的订单ID
+            id=confirmOrder.getId();
+        }
+        return id;
     }
     /**
      * 降级方法，需包含限流方法的所有参数和BlockException参数

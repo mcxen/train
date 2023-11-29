@@ -48,6 +48,8 @@ public class ConfirmOrderDoReq {
     @NotBlank(message = "【到达站】不能为空")
     private String end;
 
+    //加入排队人数，体验排队功能
+    private int lineNumber;
     /**
      * 余票ID
      */
@@ -69,9 +71,18 @@ public class ConfirmOrderDoReq {
                 ", trainCode='" + trainCode + '\'' +
                 ", start='" + start + '\'' +
                 ", end='" + end + '\'' +
+                ", lineNumber=" + lineNumber +
                 ", dailyTrainTicketId=" + dailyTrainTicketId +
                 ", tickets=" + tickets +
                 '}';
+    }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
     }
 
     public Long getMemberId() {

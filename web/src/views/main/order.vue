@@ -103,6 +103,11 @@
         </div>
         <div style="color: #999999">提示：您可以选择{{tickets.length}}个座位</div>
       </div>
+      <br>
+      <div style="color: darkorange">
+        可以体验多人购票
+        <a-input-number v-model:value="lineNumber" :min="0" :max="20"/>
+      </div>
     </div>
     <br/>
     最终购票：{{tickets}}
@@ -333,6 +338,7 @@ export default defineComponent({
         start: dailyTrainTicket.start,
         end: dailyTrainTicket.end,
         tickets: tickets.value,
+        lineNumber:lineNumber.value,
       }).then((response) => {
         let data = response.data;
         if (data.success) {
@@ -410,6 +416,7 @@ export default defineComponent({
     });
     console.log("本车次提供的座位：", seatTypes)
     return {
+      lineNumber,
       onCancelOrder,
       confirmOrderId,
       confirmOrderLineCount,
