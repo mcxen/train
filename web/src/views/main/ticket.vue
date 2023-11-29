@@ -17,7 +17,10 @@
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
 <!--        operation部分是预留的需要的案件-->
-        <a-button type="primary" @click = "toOrder(record)">预定</a-button>
+        <a-space>
+          <a-button type="primary" @click = "toOrder(record)">预定</a-button>
+          <a-button type="primary" @click = "showStation(record)">途径车站</a-button>
+        </a-space>
       </template>
       <template v-else-if="column.dataIndex === 'station'">
         {{record.start}}<br/>
@@ -74,6 +77,28 @@
       </template>
     </template>
   </a-table>
+  <!-- 途经车站 -->
+  <a-modal style="top: 30px" v-model:visible="visible" :title="null" :footer="null" :closable="false">
+    <a-table :data-source="stations" :pagination="false">
+      <a-table-column key="index" title="站序" data-index="index" />
+      <a-table-column key="name" title="站名" data-index="name" />
+      <a-table-column key="inTime" title="进站时间" data-index="inTime">
+        <template #default="{ record }">
+          {{record.index === 0 ? '-' : record.inTime}}
+        </template>
+      </a-table-column>
+      <a-table-column key="outTime" title="出站时间" data-index="outTime">
+        <template #default="{ record }">
+          {{record.index === (stations.length - 1) ? '-' : record.outTime}}
+        </template>
+      </a-table-column>
+      <a-table-column key="stopTime" title="停站时长" data-index="stopTime">
+        <template #default="{ record }">
+          {{record.index === 0 || record.index === (stations.length - 1) ? '-' : record.stopTime}}
+        </template>
+      </a-table-column>
+    </a-table>
+  </a-modal>
 </template>
 
 <script>
@@ -245,6 +270,24 @@ export default defineComponent({
         size: page.pageSize
       });
     };
+    // ---------------------- 途经车站 ----------------------
+    const stations = ref([]);
+    const showStation = record => {
+      visible.value = true;
+      axios.get("/business/daily-train-station/query-by-train-code", {
+        params: {
+          date: record.date,
+          trainCode: record.trainCode
+        }
+      }).then((response) => {
+        let data = response.data;
+        if (data.success) {
+          stations.value = data.content;
+        } else {
+          notification.error({description: data.message});
+        }
+      });
+    };
     // 计算停站的时间长度。
     const calDuration = (startTime, endTime) => {
       let diff = dayjs(endTime, 'HH:mm:ss').diff(dayjs(startTime, 'HH:mm:ss'), 'seconds');
@@ -273,6 +316,8 @@ export default defineComponent({
     });
 
     return {
+      stations,
+      showStation,
       dailyTrainTicket,
       visible,
       dailyTrainTickets,

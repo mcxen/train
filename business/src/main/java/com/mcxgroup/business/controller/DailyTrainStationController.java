@@ -1,9 +1,7 @@
 package com.mcxgroup.business.controller;
 
+import com.mcxgroup.business.req.DailyTrainStationQueryAllReq;
 import com.mcxgroup.common.resp.CommonResp;
-import com.mcxgroup.common.resp.PageResp;
-import com.mcxgroup.business.req.DailyTrainStationQueryReq;
-import com.mcxgroup.business.req.DailyTrainStationSaveReq;
 import com.mcxgroup.business.resp.DailyTrainStationQueryResp;
 import com.mcxgroup.business.service.DailyTrainStationService;
 import jakarta.annotation.Resource;
@@ -18,21 +16,10 @@ public class DailyTrainStationController {
     @Resource
     private DailyTrainStationService dailyTrainStationService;
 
-    @PostMapping("/save")
-    public CommonResp<Object> save(@Valid @RequestBody DailyTrainStationSaveReq req) {
-        dailyTrainStationService.save(req);
-        return new CommonResp<>();
-    }
-
-    @GetMapping("/query-list")
-    public CommonResp<PageResp<DailyTrainStationQueryResp>> queryResps(@Valid DailyTrainStationQueryReq req) {
-        PageResp<DailyTrainStationQueryResp> list = dailyTrainStationService.queryList(req);
+    @GetMapping("/query-by-train-code")
+    public CommonResp<List<DailyTrainStationQueryResp>> queryByTrain(@Valid DailyTrainStationQueryAllReq req) {
+        List<DailyTrainStationQueryResp> list = dailyTrainStationService.queryByTrain(req.getDate(), req.getTrainCode());
         return new CommonResp<>(list);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public CommonResp<Object> delete(@PathVariable Long id) {
-        dailyTrainStationService.delete(id);
-        return new CommonResp<>();
-    }
 }

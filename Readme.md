@@ -70,6 +70,8 @@ Mapper生成器：
 
 ![截屏2023-10-24 20.38.21](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-10-24%2020.38.21.png)
 
+
+
 ## 功能
 
 ### 基于令牌的快速库存判断
@@ -83,3 +85,7 @@ Mapper生成器：
 使用nacos管理生产和开发环境的数据库连接等配置
 
 ![截屏2023-11-26 15.46.10](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-26%2015.46.10.png)
+
+### 支持显示途径车站
+
+![截屏2023-11-29 20.41.55](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-29%2020.41.55.png)

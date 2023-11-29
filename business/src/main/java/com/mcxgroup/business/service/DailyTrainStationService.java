@@ -8,6 +8,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mcxgroup.business.domain.*;
+import com.mcxgroup.business.req.DailyTrainStationQueryAllReq;
 import com.mcxgroup.common.context.LoginMemberContext;
 import com.mcxgroup.common.resp.PageResp;
 import com.mcxgroup.common.util.SnowUtil;
@@ -121,5 +122,15 @@ public class DailyTrainStationService {
         example.createCriteria().andDateEqualTo(date).andTrainCodeEqualTo(trainCode);
         long stationCount = dailyTrainStationMapper.countByExample(example);
         return stationCount;
+    }
+    /**
+     * 按车次日期查询车站列表，用于界面显示一列车经过的车站
+     */
+    public List<DailyTrainStationQueryResp> queryByTrain(Date date, String trainCode) {
+        DailyTrainStationExample dailyTrainStationExample = new DailyTrainStationExample();
+        dailyTrainStationExample.setOrderByClause("`index` asc");
+        dailyTrainStationExample.createCriteria().andDateEqualTo(date).andTrainCodeEqualTo(trainCode);
+        List<DailyTrainStation> list = dailyTrainStationMapper.selectByExample(dailyTrainStationExample);
+        return BeanUtil.copyToList(list, DailyTrainStationQueryResp.class);
     }
 }

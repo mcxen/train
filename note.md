@@ -485,3 +485,10 @@ public interface SkTokenMapperCust {
 > META- INFO/spring/org.springframework. boot.autoconfigure. AutoConfiguration.imports
 
 ![image-20231124155959153](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/image-20231124155959153.png)
+
+
+
+### 报错：页码不能为空，检查是不是继承了pageResp类
+
+![截屏2023-11-29 20.39.46](https://fastly.jsdelivr.net/gh/52chen/imagebed2023@main/uPic/%E6%88%AA%E5%B1%8F2023-11-29%2020.39.46.png)
+
