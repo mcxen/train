@@ -385,6 +385,24 @@ export default defineComponent({
       }, 500);//每500ms查询后端接口，实现查询等待显示
     };
 
+    const onCancelOrder=()=>{
+      axios.get("/business/confirm-order/cancel/" + confirmOrderId.value).then((response) => {
+        let data = response.data;
+        if (data.success) {
+          let result = data.content;
+          if (result===1){
+            notification.success({description: "取消购票成功！"});
+            lineModalVisible.value = false;
+            //取消成功时，不用再轮询排队结果
+            clearInterval(queryLineCountInterval);
+          }else{
+            notification.error({description: "取消购票失败！"});
+          }
+        } else {
+          notification.error({description: data.message});
+        }
+      });
+    }
     // 在组件挂载后执行
     onMounted(() => {
       // 调用handleQueryPassenger函数，发送查询乘客信息的请求
@@ -392,6 +410,7 @@ export default defineComponent({
     });
     console.log("本车次提供的座位：", seatTypes)
     return {
+      onCancelOrder,
       confirmOrderId,
       confirmOrderLineCount,
       lineModalVisible,

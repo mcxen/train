@@ -40,4 +40,10 @@ public class ConfirmOrderController {
         int count = confirmOrderService.queryLineCount(id);
         return new CommonResp<>(count);//返回接口ID
     }
+
+    @GetMapping("/cancel/{id}")
+    public CommonResp<Integer> cancel(@PathVariable Long id) {
+        int count = confirmOrderService.cancel(id);
+        return new CommonResp<>(count);//返回接口ID
+    }
 }
